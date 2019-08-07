@@ -1,8 +1,16 @@
-## all the scale factors for efficiency will be saved here, with a function to provide the number which will be used as weight in the analysis 
+## all the scale factors for efficiency will be saved here, with a function to provide the number which will be used as weight in the analysis
 
-## user need not know all details, just make sure the rootfiles used for the SF are correct, before using them blindly. 
+## user need not know all details, just make sure the rootfiles used for the SF are correct, before using them blindly.
 
-## the code to extract and numbers is validated but the rootfile must be checked time to time with POG recomendation 
+## the code to extract and numbers is validated but the rootfile must be checked time to time with POG recomendation
 
-## add all the .root files in the directory data and in the readme, mention the links from where the SFs rootfile were downloaded. 
+## add all the .root files in the directory data and in the readme, mention the links from where the SFs rootfile were downloaded.
 
+Electron SF:
+https://twiki.cern.ch/twiki/bin/viewauth/CMS/EgammaIDRecipesRun2#80X_series_80X_Scale_factors_for
+
+Muon SF:
+https://twiki.cern.ch/twiki/bin/viewauth/CMS/MuonReferenceEffs2016LegacyRereco
+
+Photon:
+https://twiki.cern.ch/twiki/bin/viewauth/CMS/EgammaIDRecipesRun2#80X_series_80X_Scale_factors_AN1
