@@ -1,0 +1,8 @@
+## all the scale factors for efficiency will be saved here, with a function to provide the number which will be used as weight in the analysis 
+
+## user need not know all details, just make sure the rootfiles used for the SF are correct, before using them blindly. 
+
+## the code to extract and numbers is validated but the rootfile must be checked time to time with POG recomendation 
+
+## add all the .root files in the directory data and in the readme, mention the links from where the SFs rootfile were downloaded. 
+
