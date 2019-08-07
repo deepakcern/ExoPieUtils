@@ -1,0 +1,7 @@
+## All the utilities and common code which might be used for different packages will be saved here. 
+
+## For installation do
+
+git clone git@github.com:ExoPie/ExoPieUtils.git
+
+## Details about the functions inside each of the utilities
