@@ -1,4 +1,15 @@
 import os
+
+def CheckFilter(filterName, filterResult,filtercompare):
+    ifilter_=0
+    filter1 = False
+    for ifilter in filterName:
+        filter1 = (ifilter.find(filtercompare) != -1)  & (bool(filterResult[ifilter_]) == True)
+        if filter1: break
+        ifilter_ = ifilter_ + 1
+    return filter1
+
+
 def getGenPt(sample,nGenPar, genParId, genMomParId, genParSt,genParP4):
     pt=0.0
     #################

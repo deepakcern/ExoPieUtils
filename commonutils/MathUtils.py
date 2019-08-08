@@ -4,7 +4,7 @@ import optparse
 
 import numpy
 import pandas
-
+import math
 from root_pandas import read_root
 from pandas import  DataFrame
 from pandas import Series 
@@ -15,6 +15,21 @@ def makep4(px, py,pz,e):
     p4=TLorentzVector(0.,0.,0.,0.)
     p4.SetPxPyPzE(px, py,pz,e)
     return p4
+
+
+
+def ep_arctan(x,y):
+    corr=0
+    if (x>0 and y>=0) or (x>0 and y<0):
+        corr=0
+    elif x<0 and y>=0:
+        corr=math.pi
+    elif x<0 and y<0:
+        corr=-math.pi
+    if x!=0.:
+        return math.atan(y/x)+corr
+    else:
+        return math.pi/2+corr
 
 def getPtEtaPhiP(px, py, pz, e):
     p_ = DataFrame()
@@ -105,14 +120,6 @@ def getPtEtaPhiPFast(px_, py_, pz_, e_):
 
 
 
-def logical_AND(all_booleans):
-    return (len(all_booleans) == all_booleans.count(True))
-
-
-def logical_OR(all_booleans):
-    return  (all_booleans.count(True) > 0)
-
-
 def Phi_mpi_pi(x):
     kPI = 3.14159265358979323846
     kTWOPI = 2 * kPI
@@ -132,6 +139,23 @@ def Delta_R(eta1, eta2, phi1,phi2):
     DR = TMath.Sqrt ( deltaeta**2 + deltaphi**2 )
     return DR 
 
+## this function is not needed, just keeping for backward compatibility, 
+## p4 already have a function DeltaR 
+
+def DeltaR(p4_1, p4_2):
+    eta1 = p4_1.Eta()
+    eta2 = p4_2.Eta()
+    eta = eta1 - eta2
+    eta_2 = eta * eta
+
+    phi1 = p4_1.Phi()
+    phi2 = p4_2.Phi()
+    phi = Phi_mpi_pi(phi1-phi2)
+    phi_2 = phi * phi
+
+    return math.sqrt(eta_2 + phi_2)
+
+
 
 def MT(Pt, met, dphi):
     return TMath.Sqrt( 2 * Pt * met * (1.0 - TMath.Cos(dphi)) )
@@ -142,34 +166,19 @@ def getMT(Pt, met, phi1, phi2):
     dphi = DeltaPhi(phi1, phi2)
     return TMath.Sqrt( 2 * Pt * met * (1.0 - TMath.Cos(dphi)) )
 
+def Phi_mpi_pi(x):
+    kPI = 3.14159265358979323846
+    kTWOPI = 2 * kPI
 
-def logical_AND_List2(a, b):
-    return (numpy.array(a) & numpy.array(b))
-
-
-def logical_AND_List3(a, b, c):
-    return   ( logical_AND_List2( logical_AND_List2(a,b), c) )
-
-
-def logical_AND_List4(a, b, c, d):
-    return logical_AND_List2 (   logical_AND_List2(a,b) , logical_AND_List2(c,d) )
-
-def logical_AND_List5(a, b, c, d, e):
-    return logical_AND_List2( logical_AND_List3(a, b, c), logical_AND_List2(d, e)  )
-
-def logical_AND_List6(a, b, c, d, e, f):
-    return logical_AND_List2( logical_AND_List3(a, b, c), logical_AND_List3(d, e, f)  )
-
-def logical_AND_List7(a, b, c, d, e, f, g):
-    return logical_AND_List3( logical_AND_List3(a, b, c), logical_AND_List3(d, e, f), g  )
+    while (x >= kPI): x = x - kTWOPI;
+    while (x < -kPI): x = x + kTWOPI;
+    return x;
 
 
-def WhereIsTrue(testList_, nCut_=0):
-    pass_index=[]
-    if len(testList_)>=nCut_:
-        pass_index = numpy.where(testList_)[0]
-    return pass_index
-
-
+def InvMass(px1,py1,pz1,pe1,px2,py2,pz2,pe2):
+    p1 = TLorentzVector(px1, py1, pz1, pe1)
+    p2 = TLorentzVector(px2, py2, pz2, pe2)
+    inv_mass = (p1+p2).M()
+    return inv_mass
 
 
