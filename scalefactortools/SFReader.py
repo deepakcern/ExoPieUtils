@@ -35,7 +35,7 @@ def getElelooseIDSF(pt,eta):
 
 
 def getEleTightIDSF(pt,eta):
-    matrix = np.loadtxt(SfF.eleTightIDSF_EGamma_SF2D)
+    matrix = np.matrix(SfF.eleTightIDSF_EGamma_SF2D)
 
     pT_range=[10.0, 20.0, 35.0, 50.0, 90.0, 150.0, 500.0]
     Eta_range=[-2.5, -2.0, -1.566, -1.444, -0.8, 0.0, 0.8, 1.444, 1.566, 2.0, 2.5]
@@ -52,7 +52,7 @@ def getEleTightIDSF(pt,eta):
 
 
 def getEleRecoLowSF(pt,eta):
-    matrix = np.loadtxt("SFs/EGM2D_BtoH_low_RecoSF_Legacy2016.txt")
+    matrix = np.matrix("SFs/EGM2D_BtoH_low_RecoSF_Legacy2016.txt")
     Eta_range =  [-2.5, -2.0, -1.566, -1.444, -1.0, 0.0, 1.0, 1.444, 1.566, 2.0, 2.5]
     pT_range =  [10.0, 20.0]
     if pt > pT_range[-1]:pt = pT_range[-1]-1.0
