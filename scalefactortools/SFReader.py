@@ -81,7 +81,6 @@ def getEleRecoHighSF(pt,eta):
     binyj=sorted([i for i, j in enumerate(Eta_range) if j<=eta])[-1]
     # print ([j for i, j in enumerate(Eta_range) if j<=eta][-1])
 
-
     return matrix[binyj,binxi]
 
 def getMuTrigRunBCDEF_SF(pt,eta):
@@ -115,6 +114,12 @@ def getMuTrigRunGH_SF(pt,eta):
 
     return matrix[binyj,binxi]
 
+def getMuTrig_SF(pt,eta):
+    lumi_BCDEF=19.69;lumi_GH=16.22;lumi_tot=35.91
+    bcdef_weight = lumi_BCDEF*getMuTrigRunBCDEF_SF(pt,eta)
+    gh_weight = lumi_GH*getMuTrigRunGH_SF(pt,eta)
+    weight = (bcdef_weight + gh_weight)/lumi_tot
+    return weight
 
 def getMulooseRunBCDEF_IDSF(pt,eta):
     matrix = np.matrix(SfF.muonLooseIDSFs_EfficienciesAndSF_BCDEF)
@@ -131,23 +136,6 @@ def getMulooseRunBCDEF_IDSF(pt,eta):
 
     return matrix[binyj,binxi]
 
-
-def getMuTightRunBCDEF_IDSF(pt,eta):
-    matrix = np.matrix(SfF.muonTightIDSFs_EfficienciesAndSF_BCDEF)
-    pT_range=[10.0, 20.0, 35.0, 50.0, 90.0, 150.0, 500.0]
-    Eta_range=[-2.5, -2.0, -1.566, -1.444, -0.8, 0.0, 0.8, 1.444, 1.566, 2.0, 2.5]
-    if pt > pT_range[-1]:pt = pT_range[-1]-1.0
-
-    if eta >= Eta_range[-1]:eta = Eta_range[-2]
-    if eta <= Eta_range[0]:eta = Eta_range[1]
-
-    binxi=sorted([i for i, j in enumerate(pT_range) if j<=pt])[-1]
-    binyj=sorted([i for i, j in enumerate(Eta_range) if j<=eta])[-1]
-    # print ([j for i, j in enumerate(Eta_range) if j<=eta][-1])
-
-    return matrix[binyj,binxi]
-
-
 def getMulooseGH_IDSF(pt,eta):
     matrix = np.matrix(SfF.muonLooseIDSFs_EfficienciesAndSF_GH)
     Eta_range =  [-2.5, -2.0, -1.566, -1.444, -1.0, 0.0, 1.0, 1.444, 1.566, 2.0, 2.5]
@@ -161,6 +149,27 @@ def getMulooseGH_IDSF(pt,eta):
     binyj=sorted([i for i, j in enumerate(Eta_range) if j<=eta])[-1]
     # print ([j for i, j in enumerate(Eta_range) if j<=eta][-1])
 
+    return matrix[binyj,binxi]
+
+def getMuloose_IDSF(pt,eta):
+    lumi_BCDEF=19.69;lumi_GH=16.22;lumi_tot=35.91
+    bcdef_weight = lumi_BCDEF*getMulooseRunBCDEF_IDSF(pt,eta)
+    gh_weight = lumi_GH*getMulooseGH_IDSF(pt,eta)
+    weight = (bcdef_weight + gh_weight)/lumi_tot
+    return weight
+
+def getMuTightRunBCDEF_IDSF(pt,eta):
+    matrix = np.matrix(SfF.muonTightIDSFs_EfficienciesAndSF_BCDEF)
+    pT_range=[10.0, 20.0, 35.0, 50.0, 90.0, 150.0, 500.0]
+    Eta_range=[-2.5, -2.0, -1.566, -1.444, -0.8, 0.0, 0.8, 1.444, 1.566, 2.0, 2.5]
+    if pt > pT_range[-1]:pt = pT_range[-1]-1.0
+
+    if eta >= Eta_range[-1]:eta = Eta_range[-2]
+    if eta <= Eta_range[0]:eta = Eta_range[1]
+
+    binxi=sorted([i for i, j in enumerate(pT_range) if j<=pt])[-1]
+    binyj=sorted([i for i, j in enumerate(Eta_range) if j<=eta])[-1]
+    # print ([j for i, j in enumerate(Eta_range) if j<=eta][-1])
 
     return matrix[binyj,binxi]
 
@@ -180,6 +189,13 @@ def getMuTightGH_IDSF(pt,eta):
 
     return matrix[binyj,binxi]
 
+def getMuTight_IDSF(pt,eta):
+    lumi_BCDEF=19.69;lumi_GH=16.22;lumi_tot=35.91
+    bcdef_weight = lumi_BCDEF*getMuTightRunBCDEF_IDSF(pt,eta)
+    gh_weight = lumi_GH*getMuTightGH_IDSF(pt,eta)
+    weight = (bcdef_weight + gh_weight)/lumi_tot
+    return weight
+
 def getMulooseBCDEF_lowpT_IDSF(pt,eta):
     matrix = np.matrix(SfF.muonLooseIDSFs_EfficienciesAndSF_lowpt_BCDEF)
     Eta_range =  [0.0, 0.9, 1.2, 2.1, 2.4]
@@ -195,7 +211,7 @@ def getMulooseBCDEF_lowpT_IDSF(pt,eta):
 
     return matrix[binxi,binyj]
 
-def getMuTightGH_lowpT_IDSF(pt,eta):
+def getMuLooseGH_lowpT_IDSF(pt,eta):
     matrix = np.matrix(SfF.muonLooseIDSFs_EfficienciesAndSF_lowpt_GH)
     Eta_range =  [0.0, 0.9, 1.2, 2.1, 2.4]
     pT_range =  [2.0, 2.5, 2.75, 3.0, 3.25, 3.5, 3.75, 4.0, 4.5, 5.0, 6.0, 8.0, 10.0, 15.0, 20.0, 30.0, 40.0]
@@ -210,6 +226,13 @@ def getMuTightGH_lowpT_IDSF(pt,eta):
     # print ([j for i, j in enumerate(Eta_range) if j<=eta][-1])
 
     return matrix[binxi,binyj]
+
+def getMuLoose_lowpT_IDSF(pt,eta):
+    lumi_BCDEF=19.69;lumi_GH=16.22;lumi_tot=35.91
+    bcdef_weight = lumi_BCDEF*getMulooseBCDEF_lowpT_IDSF(pt,eta)
+    gh_weight = lumi_GH*getMuLooseGH_lowpT_IDSF(pt,eta)
+    weight = (bcdef_weight + gh_weight)/lumi_tot
+    return weight
 
 def getMulooseRunBCDEF_ISOSF(pt,eta):
     matrix = np.matrix(SfF.muonLooseIsoSFs_EfficienciesAndSF_BCDEF)
@@ -226,6 +249,27 @@ def getMulooseRunBCDEF_ISOSF(pt,eta):
 
     return matrix[binyj,binxi]
 
+def getMulooseGH_ISOSF(pt,eta):
+    matrix = np.matrix(SfF.muonLooseIsoSFs_EfficienciesAndSF_GH)
+    Eta_range =  [-2.5, -2.0, -1.566, -1.444, -1.0, 0.0, 1.0, 1.444, 1.566, 2.0, 2.5]
+    pT_range =  [10.0, 20.0]
+    if pt > pT_range[-1]:pt = pT_range[-1]-1.0
+
+    if eta >= Eta_range[-1]:eta = Eta_range[-2]
+    if eta <= Eta_range[0]:eta = Eta_range[1]
+
+    binxi=sorted([i for i, j in enumerate(pT_range) if j<=pt])[-1]
+    binyj=sorted([i for i, j in enumerate(Eta_range) if j<=eta])[-1]
+    # print ([j for i, j in enumerate(Eta_range) if j<=eta][-1])
+
+    return matrix[binyj,binxi]
+
+def getMuLoose_ISOSF(pt,eta):
+    lumi_BCDEF=19.69;lumi_GH=16.22;lumi_tot=35.91
+    bcdef_weight = lumi_BCDEF*getMulooseRunBCDEF_ISOSF(pt,eta)
+    gh_weight = lumi_GH*getMulooseGH_ISOSF(pt,eta)
+    weight = (bcdef_weight + gh_weight)/lumi_tot
+    return weight
 
 def getMuTightRunBCDEF_ISOSF(pt,eta):
     matrix = np.matrix(SfF.muonTightIsoSFs_EfficienciesAndSF_BCDEF)
@@ -242,23 +286,6 @@ def getMuTightRunBCDEF_ISOSF(pt,eta):
 
     return matrix[binyj,binxi]
 
-
-def getMulooseGH_ISOSF(pt,eta):
-    matrix = np.matrix(SfF.muonLooseIsoSFs_EfficienciesAndSF_GH)
-    Eta_range =  [-2.5, -2.0, -1.566, -1.444, -1.0, 0.0, 1.0, 1.444, 1.566, 2.0, 2.5]
-    pT_range =  [10.0, 20.0]
-    if pt > pT_range[-1]:pt = pT_range[-1]-1.0
-
-    if eta >= Eta_range[-1]:eta = Eta_range[-2]
-    if eta <= Eta_range[0]:eta = Eta_range[1]
-
-    binxi=sorted([i for i, j in enumerate(pT_range) if j<=pt])[-1]
-    binyj=sorted([i for i, j in enumerate(Eta_range) if j<=eta])[-1]
-    # print ([j for i, j in enumerate(Eta_range) if j<=eta][-1])
-
-    return matrix[binyj,binxi]
-
-
 def getMuTightGH_ISOSF(pt,eta):
     matrix = np.matrix(SfF.muonTightIsoSFs_EfficienciesAndSF_GH)
     Eta_range =  [-2.5, -2.0, -1.566, -1.444, -1.0, -0.5, 0.0, 0.5, 1.0, 1.444, 1.566, 2.0, 2.5]
@@ -274,6 +301,13 @@ def getMuTightGH_ISOSF(pt,eta):
     # print ([j for i, j in enumerate(Eta_range) if j<=eta][-1])
 
     return matrix[binyj,binxi]
+
+def getMuTight_ISOSF(pt,eta):
+    lumi_BCDEF=19.69;lumi_GH=16.22;lumi_tot=35.91
+    bcdef_weight = lumi_BCDEF*getMuTightRunBCDEF_ISOSF(pt,eta)
+    gh_weight = lumi_GH*getMuTightGH_ISOSF(pt,eta)
+    weight = (bcdef_weight + gh_weight)/lumi_tot
+    return weight
 
 def getMuTrackingSF(eta):
     eta = abs(eta)
