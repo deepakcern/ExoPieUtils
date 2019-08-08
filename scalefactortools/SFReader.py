@@ -52,7 +52,7 @@ def getEleTightIDSF(pt,eta):
 
 
 def getEleRecoLowSF(pt,eta):
-    matrix = np.matrix("SFs/EGM2D_BtoH_low_RecoSF_Legacy2016.txt")
+    matrix = np.matrix(SfF.eleRecoSF_EGamma_SF2D_ptlt_20)
     Eta_range =  [-2.5, -2.0, -1.566, -1.444, -1.0, 0.0, 1.0, 1.444, 1.566, 2.0, 2.5]
     pT_range =  [10.0, 20.0]
     if pt > pT_range[-1]:pt = pT_range[-1]-1.0
