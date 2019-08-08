@@ -137,12 +137,7 @@ for sf in sf_list:
                         pT_range.append(yhigh)
                         pT_rangeDone=True
                     else:pT_range.append(ylow)
-                if '_lowpt_' in sf_list_dict[sf]:
-                    value.append(sf.GetBinContent(binx,biny))
-                    print ('biny,binx ',sf.GetBinContent(biny,binx))
-                    print ('binx,biny ',sf.GetBinContent(binx,biny))
-                else:
-                    value.append(sf.GetBinContent(binx,biny))
+                value.append(sf.GetBinContent(binx,biny))
             values.append(value)
     print ('Eta_range = ', Eta_range)
     print ('pT_range = ', pT_range)
