@@ -1,4 +1,10 @@
 import os
+import sys 
+sys.path.append('../commonutils/')
+import MathUtils as mathutil
+#from MathUtils import *
+import BooleanUtils as boolutil
+
 
 debug_ = False
 
@@ -20,7 +26,7 @@ def jetcleaning(ak4_pt30_eta4p5_IDT, lep_looseID, ak4eta, lepeta, ak4phi, lepphi
         for ijet in range(len(ak4_pt30_eta4p5_IDT)):
             pass_ijet_ilep_ = []
             for ilep in range(len(lep_looseID)):
-                pass_ijet_ilep_.append(ak4_pt30_eta4p5_IDT[ijet] and lep_looseID[ilep] and (Delta_R(ak4eta[ijet], lepeta[ilep], ak4phi[ijet], lepphi[ilep]) > 0.4))
+                pass_ijet_ilep_.append(ak4_pt30_eta4p5_IDT[ijet] and lep_looseID[ilep] and (mathutil.Delta_R(ak4eta[ijet], lepeta[ilep], ak4phi[ijet], lepphi[ilep]) > 0.4))
             if debug_: print "-------- pass_ijet_ilep_ = ",pass_ijet_ilep_
                 # if the number of true is equal to length of vector then it is ok to keep this jet, otherwise this is not cleaned                                                                          
             jetCleanAgainstLep.append(len(boolutil.WhereIsTrue(pass_ijet_ilep_)) == len(pass_ijet_ilep_))
