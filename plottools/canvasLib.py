@@ -6,7 +6,7 @@ def style_():
     gROOT.SetBatch(1)
 
 
-def EPCanvas(logx=0, logy=0, lm=0.12, rm=0.06, tm=0.10, bm=0.11 ):
+def EPCanvas(logy=0, logx=0, lm=0.12, rm=0.06, tm=0.10, bm=0.11 ):
     
     style_()
     c = TCanvas("c","c",800, 800)
@@ -42,7 +42,7 @@ def EPCanvas2DLongXColz(logy=0, logx=0, lm=0.12, rm=0.16, tm=0.10, bm=0.11 ):
     
     return c
     
-def EPCanvasRatio(logx=0, logy=0, lm=0.12, rm=0.06, tm=0.10, bm=0.11):
+def EPCanvasRatio(logy=0, logx=0, lm=0.12, rm=0.06, tm=0.10, bm=0.11):
     style_()
     ## modify it as per needs 
     c = TCanvas("c","c",800, 800)
