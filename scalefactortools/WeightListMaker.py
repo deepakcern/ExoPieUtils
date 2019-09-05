@@ -9,10 +9,9 @@ import math
 
 ROOT.gROOT.SetBatch(True)
 
-#pileup2016file = TFile('pileUPinfo2016.root')
-#pileup2016file = TFile('PU_Reweight_2016.root')
-#pileup2016histo=pileup2016file.Get('hpileUPhist')
-#pileup2016histo=pileup2016file.Get('pileup')
+#pileup reweights
+pileup2016file = TFile('scalefactors/PU_Reweight_2016.root')
+pileup2016histo=pileup2016file.Get('pileup')
 
 #Electron Trigger reweights
 eleTrigReweightFile = TFile('scalefactors/electron_Trigger_eleTrig.root')
@@ -92,9 +91,9 @@ metTrigEff_secondfile = TFile('scalefactors/metTriggerEfficiency_recoil_monojet_
 metTrig_secondmethod = metTrigEff_secondfile.Get('hden_monojet_recoil_clone_passed')
 
 
-sf_list = [eleTrig_hEffEtaPt,eleRecoSF_EGamma_SF2D_ptgt_20,eleRecoSF_EGamma_SF2D_ptlt_20,eleLooseIDSF_EGamma_SF2D,eleTightIDSF_EGamma_SF2D,muonTrigSFs_EfficienciesAndSF_RunBtoF,muonTrigSFs_EfficienciesAndSF_Period4,muonLooseIDSFs_EfficienciesAndSF_BCDEF,muonLooseIDSFs_EfficienciesAndSF_GH,muonLooseIDSFs_EfficienciesAndSF_lowpt_BCDEF,muonLooseIDSFs_EfficienciesAndSF_lowpt_GH,muonTightIDSFs_EfficienciesAndSF_BCDEF,muonTightIDSFs_EfficienciesAndSF_GH,muonLooseIsoSFs_EfficienciesAndSF_BCDEF,muonLooseIsoSFs_EfficienciesAndSF_GH,muonTightIsoSFs_EfficienciesAndSF_BCDEF,muonTightIsoSFs_EfficienciesAndSF_GH,muonTrackingSFs_EfficienciesAndSF_BCDEFGH]
+sf_list = [pileup2016histo,eleTrig_hEffEtaPt,eleRecoSF_EGamma_SF2D_ptgt_20,eleRecoSF_EGamma_SF2D_ptlt_20,eleLooseIDSF_EGamma_SF2D,eleTightIDSF_EGamma_SF2D,muonTrigSFs_EfficienciesAndSF_RunBtoF,muonTrigSFs_EfficienciesAndSF_Period4,muonLooseIDSFs_EfficienciesAndSF_BCDEF,muonLooseIDSFs_EfficienciesAndSF_GH,muonLooseIDSFs_EfficienciesAndSF_lowpt_BCDEF,muonLooseIDSFs_EfficienciesAndSF_lowpt_GH,muonTightIDSFs_EfficienciesAndSF_BCDEF,muonTightIDSFs_EfficienciesAndSF_GH,muonLooseIsoSFs_EfficienciesAndSF_BCDEF,muonLooseIsoSFs_EfficienciesAndSF_GH,muonTightIsoSFs_EfficienciesAndSF_BCDEF,muonTightIsoSFs_EfficienciesAndSF_GH,muonTrackingSFs_EfficienciesAndSF_BCDEFGH]
 
-sf_list_dict = {eleTrig_hEffEtaPt:'eleTrig_hEffEtaPt',eleRecoSF_EGamma_SF2D_ptgt_20:'eleRecoSF_EGamma_SF2D_ptgt_20',eleRecoSF_EGamma_SF2D_ptlt_20:'eleRecoSF_EGamma_SF2D_ptlt_20',eleLooseIDSF_EGamma_SF2D:'eleLooseIDSF_EGamma_SF2D',eleTightIDSF_EGamma_SF2D:'eleTightIDSF_EGamma_SF2D',muonTrigSFs_EfficienciesAndSF_RunBtoF:'muonTrigSFs_EfficienciesAndSF_RunBtoF',muonTrigSFs_EfficienciesAndSF_Period4:'muonTrigSFs_EfficienciesAndSF_Period4',muonLooseIDSFs_EfficienciesAndSF_BCDEF:'muonLooseIDSFs_EfficienciesAndSF_BCDEF',muonLooseIDSFs_EfficienciesAndSF_GH:'muonLooseIDSFs_EfficienciesAndSF_GH',muonLooseIDSFs_EfficienciesAndSF_lowpt_BCDEF:'muonLooseIDSFs_EfficienciesAndSF_lowpt_BCDEF',muonLooseIDSFs_EfficienciesAndSF_lowpt_GH:'muonLooseIDSFs_EfficienciesAndSF_lowpt_GH',muonTightIDSFs_EfficienciesAndSF_BCDEF:'muonTightIDSFs_EfficienciesAndSF_BCDEF',muonTightIDSFs_EfficienciesAndSF_GH:'muonTightIDSFs_EfficienciesAndSF_GH',muonLooseIsoSFs_EfficienciesAndSF_BCDEF:'muonLooseIsoSFs_EfficienciesAndSF_BCDEF',muonLooseIsoSFs_EfficienciesAndSF_GH:'muonLooseIsoSFs_EfficienciesAndSF_GH',muonTightIsoSFs_EfficienciesAndSF_BCDEF:'muonTightIsoSFs_EfficienciesAndSF_BCDEF',muonTightIsoSFs_EfficienciesAndSF_GH:'muonTightIsoSFs_EfficienciesAndSF_GH',muonTrackingSFs_EfficienciesAndSF_BCDEFGH:'muonTrackingSFs_EfficienciesAndSF_BCDEFGH'}
+sf_list_dict = {pileup2016histo:'pileup2016histo',eleTrig_hEffEtaPt:'eleTrig_hEffEtaPt',eleRecoSF_EGamma_SF2D_ptgt_20:'eleRecoSF_EGamma_SF2D_ptgt_20',eleRecoSF_EGamma_SF2D_ptlt_20:'eleRecoSF_EGamma_SF2D_ptlt_20',eleLooseIDSF_EGamma_SF2D:'eleLooseIDSF_EGamma_SF2D',eleTightIDSF_EGamma_SF2D:'eleTightIDSF_EGamma_SF2D',muonTrigSFs_EfficienciesAndSF_RunBtoF:'muonTrigSFs_EfficienciesAndSF_RunBtoF',muonTrigSFs_EfficienciesAndSF_Period4:'muonTrigSFs_EfficienciesAndSF_Period4',muonLooseIDSFs_EfficienciesAndSF_BCDEF:'muonLooseIDSFs_EfficienciesAndSF_BCDEF',muonLooseIDSFs_EfficienciesAndSF_GH:'muonLooseIDSFs_EfficienciesAndSF_GH',muonLooseIDSFs_EfficienciesAndSF_lowpt_BCDEF:'muonLooseIDSFs_EfficienciesAndSF_lowpt_BCDEF',muonLooseIDSFs_EfficienciesAndSF_lowpt_GH:'muonLooseIDSFs_EfficienciesAndSF_lowpt_GH',muonTightIDSFs_EfficienciesAndSF_BCDEF:'muonTightIDSFs_EfficienciesAndSF_BCDEF',muonTightIDSFs_EfficienciesAndSF_GH:'muonTightIDSFs_EfficienciesAndSF_GH',muonLooseIsoSFs_EfficienciesAndSF_BCDEF:'muonLooseIsoSFs_EfficienciesAndSF_BCDEF',muonLooseIsoSFs_EfficienciesAndSF_GH:'muonLooseIsoSFs_EfficienciesAndSF_GH',muonTightIsoSFs_EfficienciesAndSF_BCDEF:'muonTightIsoSFs_EfficienciesAndSF_BCDEF',muonTightIsoSFs_EfficienciesAndSF_GH:'muonTightIsoSFs_EfficienciesAndSF_GH',muonTrackingSFs_EfficienciesAndSF_BCDEFGH:'muonTrackingSFs_EfficienciesAndSF_BCDEFGH'}
 
 
 f= open("SFFactory.py","w+")
@@ -116,6 +115,20 @@ for sf in sf_list:
                     Eta_rangeDone=True
                 else:
                     ptlist.append(sf.Eval(xlow))
+                    Eta_range.append(xlow)
+    elif 'pileup2016histo' in sf_list_dict[sf]:
+        for binx in range(1,sf.GetXaxis().GetNbins()+1):
+            xlow  = sf.GetXaxis().GetBinLowEdge(binx)
+            xhigh = sf.GetXaxis().GetBinUpEdge(binx)
+            if not Eta_rangeDone:
+                if binx == sf.GetXaxis().GetNbins():
+                    ptlist.append(sf.GetBinContent(sf.FindBin(xlow)))
+                    ptlist.append(sf.GetBinContent(sf.FindBin(xhigh)))
+                    Eta_range.append(xlow)
+                    Eta_range.append(xhigh)
+                    Eta_rangeDone=True
+                else:
+                    ptlist.append(sf.GetBinContent(sf.FindBin(xlow)))
                     Eta_range.append(xlow)
     else:
         for binx in range(1,sf.GetXaxis().GetNbins()+1):
@@ -142,8 +155,9 @@ for sf in sf_list:
     print ('Eta_range = ', Eta_range)
     print ('pT_range = ', pT_range)
     print (sf_list_dict[sf])
-    if 'muonTrackingSFs_EfficienciesAndSF_BCDEFGH' in sf_list_dict[sf]:
+    if 'muonTrackingSFs_EfficienciesAndSF_BCDEFGH' or 'pileup2016histo' in sf_list_dict[sf]:
         f.write(str(sf_list_dict[sf])+"="+str(ptlist))
+
     else:
         f.write(str(sf_list_dict[sf])+"="+str(values))
     f.write ('\n')
