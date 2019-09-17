@@ -28,7 +28,7 @@ def jetcleaning(ak4_pt30_eta4p5_IDT, lep_looseID, ak4eta, lepeta, ak4phi, lepphi
             if (len(lep_looseID)>0):
                 for ilep in range(len(lep_looseID)):
                     if (bool(lep_looseID[ilep])==False):continue
-                    pass_ijet_ilep_ = (ak4_pt30_eta4p5_IDT[ijet] and lep_looseID[ilep] and (mathutil.Delta_R(ak4eta[ijet], lepeta[ilep], ak4phi[ijet], lepphi[ilep]) > 0.4))
+                    pass_ijet_ilep_ = (ak4_pt30_eta4p5_IDT[ijet] and lep_looseID[ilep] and (mathutil.Delta_R(ak4eta[ijet], lepeta[ilep], ak4phi[ijet], lepphi[ilep]) > DRCut))
                     if not pass_ijet_ilep_ : break
             if debug_: print "-------- pass_ijet_ilep_ = ",pass_ijet_ilep_
             jetCleanAgainstLep.append(pass_ijet_ilep_)
