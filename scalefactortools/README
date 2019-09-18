@@ -17,8 +17,28 @@ Photon:
 https://twiki.cern.ch/twiki/bin/viewauth/CMS/EgammaIDRecipesRun2#80X_series_80X_Scale_factors_AN1
 
 
-For 2017 miniAODV2
+##To add a new scale factor for the analysis one should follow the following steps:
 
-For 2018 
- 
+In the *WeightListMaker.py file* :
 
+    1. Add the the root file in the data_era directory for example
+
+    2. Get the recommended histogram/graph using Get method
+
+    ************Example of step 1 and 2************
+    pileup2016file = TFile('data_2016/PU_Reweight_2016.root')
+    pileup2016histo=pileup2016file.Get('pileup')
+
+    3. Add the histogram/graph to sf_list and also accordingly in the dictionary named sf_list_dict
+
+    4. If it is 1D histogram/graph then add the string of the histogram name either with ```if 'muonTrackingSFs_EfficienciesAndSF_BCDEFGH' in sf_list_dict[sf]:``` or with ```elif 'pileup2016histo' or 'metTrig_firstmethod' or 'metTrig_secondmethod' in sf_list_dict[sf]:```  otherwise if 2d histogram then it will print x and y axis ranges and save the content anyway
+
+
+    5. The weights from each file are saved in SFFactory_201* file with proper name of the list
+
+In SFReader_201* file :
+
+    1. You have to copy the pt and/or eta range (or the range of the variable for which you have the scale factors) which is printed in the screen when you run WeightListMaker.py file to the SFReader file accordingly (have a look at the function already written there).
+
+In ana_weight.py file:
+    1. load the corresponding era file and load the functions by looking at the already written functions
