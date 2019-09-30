@@ -1,4 +1,5 @@
 import sys
+import ROOT as rt
 sys.path.append('../../ExoPieProducer/ExoPieAnalyzer/')
 
 from Year import era
@@ -90,7 +91,7 @@ def getFacDownZ(pt):
     return ewk.getFacDownW(pt)
 
 def getTopPtReWgt(pt1, pt2):
-    w1 = TMath.Exp(0.0615 - 0.0005*pt1);
-    w2 = TMath.Exp(0.0615 - 0.0005*pt2);
-    k2 = TMath.Sqrt(w1*w2)
+    w1 = rt.TMath.Exp(0.0615 - 0.0005*pt1);
+    w2 = rt.TMath.Exp(0.0615 - 0.0005*pt2);
+    k2 = rt.TMath.Sqrt(w1*w2)
     return k2
