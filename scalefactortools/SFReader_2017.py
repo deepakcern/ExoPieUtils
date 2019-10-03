@@ -182,7 +182,7 @@ def getMuTrackingSF(eta):
 
 
 def puweight(pu):
-    matrix = np.array(SfF.pileup2016histo)
+    matrix = np.array(SfF.pileup2017histo)
     PU_range =  SfF.pileup2017histo_X_range
     if pu >= PU_range[-1]:pu = PU_range[-2]
     if pu <= PU_range[0]:pu = PU_range[1]
