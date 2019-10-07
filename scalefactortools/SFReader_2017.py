@@ -107,7 +107,7 @@ def getMuloose_IDSF(pt,eta):
     binxi=sorted([i for i, j in enumerate(pT_range) if j<=pt])[-1]
     binyj=sorted([i for i, j in enumerate(Eta_range) if j<=eta])[-1]
 
-    return matrix[binyj,binxi]
+    return matrix[binxi,binyj]
 
 
 def getMuTight_IDSF(pt,eta):
@@ -122,7 +122,7 @@ def getMuTight_IDSF(pt,eta):
     binxi=sorted([i for i, j in enumerate(pT_range) if j<=pt])[-1]
     binyj=sorted([i for i, j in enumerate(Eta_range) if j<=eta])[-1]
 
-    return matrix[binyj,binxi]
+    return matrix[binxi,binyj]
 
 
 def getMuLoose_lowpT_IDSF(pt,eta):
@@ -152,10 +152,11 @@ def getMuLoose_ISOSF(pt,eta):
     binxi=sorted([i for i, j in enumerate(pT_range) if j<=pt])[-1]
     binyj=sorted([i for i, j in enumerate(Eta_range) if j<=eta])[-1]
 
-    return matrix[binyj,binxi]
+    return matrix[binxi,binyj]
 
 
 def getMuTight_ISOSF(pt,eta):
+    eta = abs(eta)
     matrix = np.matrix(SfF.muonTightIsoSFs_EfficienciesAndSF_BCDEF)
     Eta_range =  SfF.muonTightIsoSFs_EfficienciesAndSF_BCDEF_Y_range
     pT_range =  SfF.muonTightIsoSFs_EfficienciesAndSF_BCDEF_X_range
@@ -166,7 +167,7 @@ def getMuTight_ISOSF(pt,eta):
     binxi=sorted([i for i, j in enumerate(pT_range) if j<=pt])[-1]
     binyj=sorted([i for i, j in enumerate(Eta_range) if j<=eta])[-1]
 
-    return matrix[binyj,binxi]
+    return matrix[binxi,binyj]
 
 
 def getMuTrackingSF(eta):
