@@ -630,5 +630,3 @@ std::pair<float, float> BTagCalibrationStandaloneReader::min_max_pt(BTagEntry::J
 {
   return pimpl->min_max_pt(jf, eta, discr);
 }
-
-
