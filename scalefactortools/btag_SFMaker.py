@@ -36,16 +36,16 @@ def getBeff(pt,eta,flav):
         lighttag_eff = udsg_med_eff.GetBinContent(xbin,ybin)
         return lighttag_eff
 
-ROOT.gROOT.ProcessLine('.L btagSF_Files/BTagCalibrationStandalone.cpp+')
+ROOT.gROOT.ProcessLine('.L '+os.path.dirname(__file__)+'/btagSF_Files/BTagCalibrationStandalone.cpp+')
 if era=='2016':
-    calib1 = ROOT.BTagCalibrationStandalone('deepcsv', 'DeepCSV_Moriond17_B_H.csv')
-    tag_eff = ROOT.TFile('btagSF_Files/bTagEffs_2016.root')
+    calib1 = ROOT.BTagCalibrationStandalone('deepcsv', os.path.dirname(__file__)+'/btagSF_Files/DeepCSV_Moriond17_B_H.csv')
+    tag_eff = ROOT.TFile(os.path.dirname(__file__)+'/btagSF_Files/bTagEffs_2016.root')
 elif era=='2017':
-    calib1 = ROOT.BTagCalibrationStandalone('deepcsv', 'DeepCSV_94XSF_V4_B_F.csv')
-    tag_eff = ROOT.TFile('btagSF_Files/bTagEffs_2017.root')
+    calib1 = ROOT.BTagCalibrationStandalone('deepcsv', os.path.dirname(__file__)+'/btagSF_Files/DeepCSV_94XSF_V4_B_F.csv')
+    tag_eff = ROOT.TFile(os.path.dirname(__file__)+'/btagSF_Files/bTagEffs_2017.root')
 elif era=='2018':
-    calib1 = ROOT.BTagCalibrationStandalone('deepcsv', 'DeepCSV_102XSF_V1.csv')
-    tag_eff = ROOT.TFile('btagSF_Files/bTagEffs_2018.root')
+    calib1 = ROOT.BTagCalibrationStandalone('deepcsv', os.path.dirname(__file__)+'/btagSF_Files/DeepCSV_102XSF_V1.csv')
+    tag_eff = ROOT.TFile(os.path.dirname(__file__)+'/btagSF_Files/bTagEffs_2018.root')
 
 b_med_eff = tag_eff.Get('efficiency_b')
 c_med_eff = tag_eff.Get('efficiency_b')
