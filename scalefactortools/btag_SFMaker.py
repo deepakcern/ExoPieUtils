@@ -8,6 +8,7 @@ def weightbtag(reader, flav, pt, eta):
     sf_low = reader.eval_auto_bounds('down', flav, eta, pt)
     sf_up  = reader.eval_auto_bounds('up', flav, eta, pt)
     btagsf = [sf_c, sf_low, sf_up]
+    return btagsf
 
 def jetflav(flav):
     if flav == 5:
@@ -35,21 +36,24 @@ def getBeff(pt,eta,flav):
         lighttag_eff = udsg_med_eff.GetBinContent(xbin,ybin)
         return lighttag_eff
 
+ROOT.gROOT.ProcessLine('.L btagSF_Files/BTagCalibrationStandalone.cpp+')
 if era=='2016':
-    calib1 = ROOT.BTagCalibrationStandalone('deepcsv', 'btagSF_Files/2016/DeepCSV_Moriond17_B_H.csv')
-    tag_eff = TFile('btagSF_Files/2016/bTagEffs_2016.root')
+    calib1 = ROOT.BTagCalibrationStandalone('deepcsv', 'DeepCSV_Moriond17_B_H.csv')
+    tag_eff = ROOT.TFile('btagSF_Files/bTagEffs_2016.root')
 elif era=='2017':
-    calib1 = ROOT.BTagCalibrationStandalone('deepcsv', 'btagSF_Files/2017/DeepCSV_94XSF_V4_B_F.csv')
-    tag_eff = TFile('btagSF_Files/2017/bTagEffs_2017.root')
+    calib1 = ROOT.BTagCalibrationStandalone('deepcsv', 'DeepCSV_94XSF_V4_B_F.csv')
+    tag_eff = ROOT.TFile('btagSF_Files/bTagEffs_2017.root')
 elif era=='2018':
-    calib1 = ROOT.BTagCalibrationStandalone('deepcsv', 'btagSF_Files/2018/DeepCSV_102XSF_V1.csv')
-    tag_eff = TFile('btagSF_Files/2018/bTagEffs_2018.root')
+    calib1 = ROOT.BTagCalibrationStandalone('deepcsv', 'DeepCSV_102XSF_V1.csv')
+    tag_eff = ROOT.TFile('btagSF_Files/bTagEffs_2018.root')
 
 b_med_eff = tag_eff.Get('efficiency_b')
 c_med_eff = tag_eff.Get('efficiency_b')
 udsg_med_eff = tag_eff.Get('efficiency_light')
 
-ROOT.gROOT.ProcessLine('.L btagSF_Files/BTagCalibrationStandalone.cpp+')
+othersys = ROOT.std.vector('string')()
+othersys.push_back('down')
+othersys.push_back('up')
 reader1 = ROOT.BTagCalibrationStandaloneReader( 0, "central", othersys)
 reader1.load(calib1, 0,  "comb" )
 reader1.load(calib1, 1,  "comb" )
