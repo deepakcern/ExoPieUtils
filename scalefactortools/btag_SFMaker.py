@@ -92,8 +92,8 @@ def btag_weight(nJets,ptList,etalist,flavlist,depCSVlist):
     P_Data = 1.0
     btagweight = 1.0
     for i in range(nJets):
-        tag_eff = getBeff(ptList[i],etalist[i],flavlist[i])
-        nontag_eff = = getnonBeff(ptList[i],etalist[i],flavlist[i])
+        tag_eff    = getBeff(ptList[i],etalist[i],flavlist[i])
+        nontag_eff = getnonBeff(ptList[i],etalist[i],flavlist[i])
         if depCSVlist[i] >deepCSVMWP:
             P_MC *= tag_eff
         else:
