@@ -98,5 +98,5 @@ def getTopPtReWgt(pt1, pt2):
     k2 = rt.TMath.Sqrt(w1*w2)
     return k2
 
-def getBTagSF(nJets,ptList,etalist,flavlist):
-    return btagsf.btag_weight(nJets,ptList,etalist,flavlist)
+def getBTagSF(nJets,ptList,etalist,flavlist,depCSVlist):
+    return btagsf.btag_weight(nJets,ptList,etalist,flavlist,depCSVlist)
