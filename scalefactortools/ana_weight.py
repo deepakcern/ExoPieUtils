@@ -1,8 +1,10 @@
 import sys
 import ROOT as rt
+import btag_SFMaker as btagsf
 sys.path.append('../../ExoPieProducer/ExoPieAnalyzer/')
 
 from Year import era
+
 if era=='2016':
     import SFReader_2016 as SFR
     import EWKfactory_2016 as ewk
@@ -95,3 +97,6 @@ def getTopPtReWgt(pt1, pt2):
     w2 = rt.TMath.Exp(0.0615 - 0.0005*pt2);
     k2 = rt.TMath.Sqrt(w1*w2)
     return k2
+
+def getBTagSF(nJets,ptList,etalist,flavlist,depCSVlist):
+    return btagsf.btag_weight(nJets,ptList,etalist,flavlist,depCSVlist)
