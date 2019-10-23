@@ -36,23 +36,6 @@ def getBeff(pt,eta,flav):
         lighttag_eff = udsg_med_eff.GetBinContent(xbin,ybin)
         return lighttag_eff
 
-def getnonBeff(pt,eta,flav):
-    if flav == 5:
-        ybin = non_b_med_eff.GetXaxis().FindBin(eta)
-        xbin = non_b_med_eff.GetYaxis().FindBin(pt)
-        btag_eff = non_b_med_eff.GetBinContent(xbin,ybin)
-        return btag_eff
-    elif flav == 4:
-        ybin = non_c_med_eff.GetXaxis().FindBin(eta)
-        xbin = non_c_med_eff.GetYaxis().FindBin(pt)
-        ctag_eff = non_c_med_eff.GetBinContent(xbin,ybin)
-        return ctag_eff
-    elif flav!=4 and flav!=5:
-        ybin = non_udsg_med_eff.GetXaxis().FindBin(eta)
-        xbin = non_udsg_med_eff.GetYaxis().FindBin(pt)
-        lighttag_eff = non_udsg_med_eff.GetBinContent(xbin,ybin)
-        return lighttag_eff
-
 
 ROOT.gROOT.ProcessLine('.L '+os.path.dirname(__file__)+'/btagSF_Files/BTagCalibrationStandalone.cpp+')
 if era=='2016':
@@ -93,11 +76,10 @@ def btag_weight(nJets,ptList,etalist,flavlist,depCSVlist):
     btagweight = 1.0
     for i in range(nJets):
         tag_eff    = getBeff(ptList[i],etalist[i],flavlist[i])
-        nontag_eff = getnonBeff(ptList[i],etalist[i],flavlist[i])
         if depCSVlist[i] >deepCSVMWP:
             P_MC *= tag_eff
         else:
-            P_MC *= (1-nontag_eff)
+            P_MC *= (1-tag_eff)
         if era=='2016':
             reader1.eval_auto_bounds('central', 0, 2.4, 30.)
         else:
@@ -107,7 +89,7 @@ def btag_weight(nJets,ptList,etalist,flavlist,depCSVlist):
         if depCSVlist[i] > deepCSVMWP:
             P_Data *= (SF_jet[0] *tag_eff)
         else:
-            P_Data *= (1 - SF_jet[0] * nontag_eff)
+            P_Data *= (1 - SF_jet[0] * tag_eff)
     if P_MC > 0:
         btagweight = P_Data/P_MC
-        return btagweight
+    return btagweight
