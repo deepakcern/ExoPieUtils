@@ -200,7 +200,6 @@ def getMulooseBCDEF_lowpT_IDSF(pt,eta):
     binxi=sorted([i for i, j in enumerate(pT_range) if j<=pt])[-1]
     binyj=sorted([i for i, j in enumerate(Eta_range) if j<=eta])[-1]
 
-    print ('muonLooseIDSFs_EfficienciesAndSF_lowpt_BCDEF', matrix[binxi,binyj])
     return matrix[binxi,binyj]
 
 def getMuLooseGH_lowpT_IDSF(pt,eta):
@@ -231,6 +230,7 @@ def getMulooseRunBCDEF_ISOSF(pt,eta):
     Eta_range =  [-2.4, -2.3, -2.2, -2.1, -2.0, -1.7, -1.6, -1.5, -1.4, -1.2, -0.8, -0.5, -0.3, -0.2, 0.0, 0.2, 0.3, 0.5, 0.8, 1.2, 1.4, 1.5, 1.6, 1.7, 2.0, 2.1, 2.2, 2.3, 2.4]
     pT_range =  [20.0, 25.0, 30.0, 40.0, 50.0, 60.0, 120.0]
     if pt > pT_range[-1]:pt = pT_range[-1]-1.0
+    if pt > pT_range[0]:pt = pT_range[1]
     if eta >= Eta_range[-1]:eta = Eta_range[-2]
     if eta <= Eta_range[0]:eta = Eta_range[1]
 
@@ -245,6 +245,7 @@ def getMulooseGH_ISOSF(pt,eta):
     Eta_range =  [-2.4, -2.3, -2.2, -2.1, -2.0, -1.7, -1.6, -1.5, -1.4, -1.2, -0.8, -0.5, -0.3, -0.2, 0.0, 0.2, 0.3, 0.5, 0.8, 1.2, 1.4, 1.5, 1.6, 1.7, 2.0, 2.1, 2.2, 2.3, 2.4]
     pT_range =  [20.0, 25.0, 30.0, 40.0, 50.0, 60.0, 120.0]
     if pt > pT_range[-1]:pt = pT_range[-1]-1.0
+    if pt > pT_range[0]:pt = pT_range[1]
     if eta >= Eta_range[-1]:eta = Eta_range[-2]
     if eta <= Eta_range[0]:eta = Eta_range[1]
 
@@ -267,6 +268,7 @@ def getMuTightRunBCDEF_ISOSF(pt,eta):
     Eta_range =  [-2.4, -2.3, -2.2, -2.1, -2.0, -1.7, -1.6, -1.5, -1.4, -1.2, -0.8, -0.5, -0.3, -0.2, 0.0, 0.2, 0.3, 0.5, 0.8, 1.2, 1.4, 1.5, 1.6, 1.7, 2.0, 2.1, 2.2, 2.3, 2.4]
     pT_range =  [20.0, 25.0, 30.0, 40.0, 50.0, 60.0, 120.0]
     if pt > pT_range[-1]:pt = pT_range[-1]-1.0
+    if pt < pT_range[0]:pt = pT_range[1]
     if eta >= Eta_range[-1]:eta = Eta_range[-2]
     if eta <= Eta_range[0]:eta = Eta_range[1]
 
@@ -280,9 +282,8 @@ def getMuTightGH_ISOSF(pt,eta):
     matrix = np.matrix(SfF.muonTightIsoSFs_EfficienciesAndSF_GH)
     Eta_range =  [-2.4, -2.3, -2.2, -2.1, -2.0, -1.7, -1.6, -1.5, -1.4, -1.2, -0.8, -0.5, -0.3, -0.2, 0.0, 0.2, 0.3, 0.5, 0.8, 1.2, 1.4, 1.5, 1.6, 1.7, 2.0, 2.1, 2.2, 2.3, 2.4]
     pT_range =  [20.0, 25.0, 30.0, 40.0, 50.0, 60.0, 120.0]
-
     if pt > pT_range[-1]:pt = pT_range[-1]-1.0
-
+    if pt < pT_range[0]:pt = pT_range[1]
     if eta >= Eta_range[-1]:eta = Eta_range[-2]
     if eta <= Eta_range[0]:eta = Eta_range[1]
 
