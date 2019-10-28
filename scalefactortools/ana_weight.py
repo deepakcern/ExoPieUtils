@@ -37,7 +37,7 @@ def mu_weight(pt,eta,trig,ID='None'):
     if pt >30:            trig_w = SFR.getMuTrig_SF(pt,eta)
     if ID=="T" :          ID_ISO_w = SFR.getMuTight_ISOSF(pt,eta)*SFR.getMuTight_IDSF(pt,eta)
     if ID=="L" and pt>20:          ID_ISO_w = SFR.getMuLoose_ISOSF(pt,eta)*SFR.getMuloose_IDSF(pt,eta)
-    if pt<20 and ID=="L": ID_ISO_w = SFR.getMuLoose_lowpT_IDSF(pt,eta)*SFR.getMuLoose_ISOSF(pt,eta)
+    if pt<=20 and ID=="L": ID_ISO_w = SFR.getMuLoose_lowpT_IDSF(pt,eta)*SFR.getMuLoose_ISOSF(pt,eta)
     elif ID =='None':
         print ('Please select which ID muon you want(L or T)')
     tracking_w = SFR.getMuTrackingSF(eta)

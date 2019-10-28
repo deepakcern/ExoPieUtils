@@ -146,6 +146,7 @@ def getMuLoose_ISOSF(pt,eta):
     Eta_range =  SfF.muonLooseIsoSFs_EfficienciesAndSF_BCDEF_Y_range
     pT_range =  SfF.muonLooseIsoSFs_EfficienciesAndSF_BCDEF_X_range
     if pt > pT_range[-1]:pt = pT_range[-1]-1.0
+    if pt < pT_range[0]:pt = pT_range[1]
     if eta >= Eta_range[-1]:eta = Eta_range[-2]
     if eta <= Eta_range[0]:eta = Eta_range[1]
 
@@ -161,6 +162,7 @@ def getMuTight_ISOSF(pt,eta):
     Eta_range =  SfF.muonTightIsoSFs_EfficienciesAndSF_BCDEF_Y_range
     pT_range =  SfF.muonTightIsoSFs_EfficienciesAndSF_BCDEF_X_range
     if pt > pT_range[-1]:pt = pT_range[-1]-1.0
+    if pt < pT_range[0]:pt = pT_range[1]
     if eta >= Eta_range[-1]:eta = Eta_range[-2]
     if eta <= Eta_range[0]:eta = Eta_range[1]
 
