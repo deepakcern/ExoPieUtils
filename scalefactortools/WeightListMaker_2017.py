@@ -66,8 +66,10 @@ muonTrackingSFs_EfficienciesAndSF_BCDEFGH = muonTrackingSFsFile.Get('ratio_eff_a
 
 
 #MET Trigger reweights
-metTrigEff_zmmfile = TFile('data_2017/metTriggerEfficiency_zmm_recoil_monojet_TH1F_2016.root')
-metTrig_firstmethod = metTrigEff_zmmfile.Get('hden_monojet_recoil_clone_passed')
+# metTrigEff_zmmfile = TFile('data_2017/metTriggerEfficiency_zmm_recoil_monojet_TH1F_2016.root')
+# metTrig_firstmethod = metTrigEff_zmmfile.Get('hden_monojet_recoil_clone_passed')
+metTrigEff_zmmfile = TFile('data_2017/TriggerEff_MET2017.root')
+metTrig_firstmethod = metTrigEff_zmmfile.Get('trig_eff')
 
 metTrigEff_secondfile = TFile('data_2017/metTriggerEfficiency_recoil_monojet_TH1F_2016.root')
 metTrig_secondmethod = metTrigEff_secondfile.Get('hden_monojet_recoil_clone_passed')
@@ -84,7 +86,7 @@ for sf in sf_list:
     Eta_range=[];pT_range=[]
     Eta_rangeDone=False;pT_rangeDone=False
     values=[]
-    if sf_list_dict[sf]=='muonTrackingSFs_EfficienciesAndSF_BCDEFGH':
+    if sf_list_dict[sf]=='muonTrackingSFs_EfficienciesAndSF_BCDEFGH' or (sf_list_dict[sf]=='metTrig_firstmethod'):
         for binx in range(1,sf.GetXaxis().GetNbins()+1):
             xlow  = sf.GetXaxis().GetBinLowEdge(binx)
             xhigh = sf.GetXaxis().GetBinUpEdge(binx)
@@ -98,7 +100,7 @@ for sf in sf_list:
                 else:
                     ptlist.append(sf.Eval(xlow))
                     Eta_range.append(xlow)
-    elif (sf_list_dict[sf]=='pileup2017histo') or (sf_list_dict[sf]=='metTrig_firstmethod') or (sf_list_dict[sf]=='metTrig_secondmethod'):
+    elif (sf_list_dict[sf]=='pileup2017histo') or (sf_list_dict[sf]=='metTrig_secondmethod'):
         for binx in range(1,sf.GetXaxis().GetNbins()+1):
             xlow  = sf.GetXaxis().GetBinLowEdge(binx)
             xhigh = sf.GetXaxis().GetBinUpEdge(binx)
