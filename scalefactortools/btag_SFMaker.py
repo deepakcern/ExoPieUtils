@@ -53,6 +53,9 @@ elif era=='2017':
 elif era=='2018':
     calib1 = ROOT.BTagCalibrationStandalone('deepcsv', os.path.dirname(__file__)+'/btagSF_Files/DeepCSV_102XSF_V1.csv')
     tag_eff_file = ROOT.TFile(os.path.dirname(__file__)+'/btagSF_Files/bTagEffs_2018.root')
+    deepCSVLWP = 0.1241
+    deepCSVMWP = 0.4184
+    deepCSVTWP = 0.7527
 
 b_med_eff = tag_eff_file.Get('efficiency_b_pass')
 c_med_eff = tag_eff_file.Get('efficiency_c_pass')
