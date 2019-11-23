@@ -3,7 +3,9 @@ import os,sys
 sys.path.append('../../ExoPieProducer/ExoPieAnalyzer/')
 from Year import era
 
-def weightbtag(reader, flav, pt, eta):
+def weightbtag(reader, flav, pt, eta, era):
+    if era=='2016' and abs(eta) >= 2.4: eta = 2.3999999
+    if (era=='2017' or era=='2018')  and abs(eta) >= 2.5: eta = 2.4999999
     sf_c = reader.eval_auto_bounds('central', flav, eta, pt)
     sf_low = reader.eval_auto_bounds('down', flav, eta, pt)
     sf_up  = reader.eval_auto_bounds('up', flav, eta, pt)
@@ -83,12 +85,8 @@ def btag_weight(nJets,ptList,etalist,flavlist,depCSVlist):
             P_MC *= tag_eff
         else:
             P_MC *= (1-tag_eff)
-        if era=='2016':
-            reader1.eval_auto_bounds('central', 0, 2.4, 30.)
-        else:
-            reader1.eval_auto_bounds('central', 0, 2.5, 30.)
         SF_jet = []
-        SF_jet=weightbtag(reader1, jetflav(flavlist[i]), ptList[i], etalist[i])
+        SF_jet=weightbtag(reader1, jetflav(flavlist[i]), ptList[i], etalist[i],era)
         if depCSVlist[i] > deepCSVMWP:
             P_Data *= (SF_jet[0] *tag_eff)
         else:
