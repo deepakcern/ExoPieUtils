@@ -81,16 +81,16 @@ def getQCDZ(pt):
     return ewk.getQCDZ(pt)
 
 def getRenUpZ(pt):
-    return ewk.getRenUpW(pt)
+    return ewk.getRenUpZ(pt)
 
 def getRenDownZ(pt):
-    return ewk.getRenDownW(pt)
+    return ewk.getRenDownZ(pt)
 
 def getFacUpZ(pt):
-    return ewk.getFacUpW(pt)
+    return ewk.getFacUpZ(pt)
 
 def getFacDownZ(pt):
-    return ewk.getFacDownW(pt)
+    return ewk.getFacDownZ(pt)
 
 def getTopPtReWgt(pt1, pt2):
     w1 = rt.TMath.Exp(0.0615 - 0.0005*pt1);
