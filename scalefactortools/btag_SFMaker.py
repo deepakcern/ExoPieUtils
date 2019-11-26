@@ -3,7 +3,9 @@ import os,sys
 sys.path.append('../../ExoPieProducer/ExoPieAnalyzer/')
 from Year import era
 
-def weightbtag(reader, flav, pt, eta):
+def weightbtag(reader, flav, pt, eta, era):
+    if era=='2016' and abs(eta) >= 2.4: eta = 2.3999999
+    if (era=='2017' or era=='2018')  and abs(eta) >= 2.5: eta = 2.4999999
     sf_c = reader.eval_auto_bounds('central', flav, eta, pt)
     sf_low = reader.eval_auto_bounds('down', flav, eta, pt)
     sf_up  = reader.eval_auto_bounds('up', flav, eta, pt)
@@ -36,23 +38,6 @@ def getBeff(pt,eta,flav):
         lighttag_eff = udsg_med_eff.GetBinContent(xbin,ybin)
         return lighttag_eff
 
-def getnonBeff(pt,eta,flav):
-    if flav == 5:
-        ybin = non_b_med_eff.GetXaxis().FindBin(eta)
-        xbin = non_b_med_eff.GetYaxis().FindBin(pt)
-        btag_eff = non_b_med_eff.GetBinContent(xbin,ybin)
-        return btag_eff
-    elif flav == 4:
-        ybin = non_c_med_eff.GetXaxis().FindBin(eta)
-        xbin = non_c_med_eff.GetYaxis().FindBin(pt)
-        ctag_eff = non_c_med_eff.GetBinContent(xbin,ybin)
-        return ctag_eff
-    elif flav!=4 and flav!=5:
-        ybin = non_udsg_med_eff.GetXaxis().FindBin(eta)
-        xbin = non_udsg_med_eff.GetYaxis().FindBin(pt)
-        lighttag_eff = non_udsg_med_eff.GetBinContent(xbin,ybin)
-        return lighttag_eff
-
 
 ROOT.gROOT.ProcessLine('.L '+os.path.dirname(__file__)+'/btagSF_Files/BTagCalibrationStandalone.cpp+')
 if era=='2016':
@@ -70,6 +55,9 @@ elif era=='2017':
 elif era=='2018':
     calib1 = ROOT.BTagCalibrationStandalone('deepcsv', os.path.dirname(__file__)+'/btagSF_Files/DeepCSV_102XSF_V1.csv')
     tag_eff_file = ROOT.TFile(os.path.dirname(__file__)+'/btagSF_Files/bTagEffs_2018.root')
+    deepCSVLWP = 0.1241
+    deepCSVMWP = 0.4184
+    deepCSVTWP = 0.7527
 
 b_med_eff = tag_eff_file.Get('efficiency_b_pass')
 c_med_eff = tag_eff_file.Get('efficiency_c_pass')
@@ -93,21 +81,16 @@ def btag_weight(nJets,ptList,etalist,flavlist,depCSVlist):
     btagweight = 1.0
     for i in range(nJets):
         tag_eff    = getBeff(ptList[i],etalist[i],flavlist[i])
-        nontag_eff = getnonBeff(ptList[i],etalist[i],flavlist[i])
         if depCSVlist[i] >deepCSVMWP:
             P_MC *= tag_eff
         else:
-            P_MC *= (1-nontag_eff)
-        if era=='2016':
-            reader1.eval_auto_bounds('central', 0, 2.4, 30.)
-        else:
-            reader1.eval_auto_bounds('central', 0, 2.5, 30.)
+            P_MC *= (1-tag_eff)
         SF_jet = []
-        SF_jet=weightbtag(reader1, jetflav(flavlist[i]), ptList[i], etalist[i])
+        SF_jet=weightbtag(reader1, jetflav(flavlist[i]), ptList[i], etalist[i],era)
         if depCSVlist[i] > deepCSVMWP:
             P_Data *= (SF_jet[0] *tag_eff)
         else:
-            P_Data *= (1 - SF_jet[0] * nontag_eff)
+            P_Data *= (1 - SF_jet[0] * tag_eff)
     if P_MC > 0:
         btagweight = P_Data/P_MC
-        return btagweight
+    return btagweight
