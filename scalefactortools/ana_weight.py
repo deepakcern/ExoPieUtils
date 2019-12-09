@@ -41,8 +41,8 @@ def mutrig_weight(pt,eta):
 def mu_weight(pt,eta,ID='None'):
     ID_ISO_w=1.0; tracking_w = 1.0
     if ID=="T" :          ID_ISO_w = SFR.getMuTight_ISOSF(pt,eta)*SFR.getMuTight_IDSF(pt,eta)
-    if ID=="L" and pt>=20.0:          ID_ISO_w = SFR.getMuLoose_ISOSF(pt,eta)*SFR.getMuloose_IDSF(pt,eta)
-    if pt<20.0 and ID=="L": ID_ISO_w = SFR.getMuLoose_lowpT_IDSF(pt,eta)*SFR.getMuLoose_ISOSF(pt,eta)
+    if ID=="L" and pt>20.0:          ID_ISO_w = SFR.getMuLoose_ISOSF(pt,eta)*SFR.getMuloose_IDSF(pt,eta)
+    if pt<=20.0 and ID=="L": ID_ISO_w = SFR.getMuLoose_lowpT_IDSF(pt,eta)*SFR.getMuLoose_ISOSF(pt,eta)
     elif ID =='None':
         print ('Please select which ID muon you want(L or T)')
     if era=='2016':
