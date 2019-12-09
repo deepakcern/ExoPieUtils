@@ -45,7 +45,7 @@ def mu_weight(pt,eta,ID='None'):
     if pt<20.0 and ID=="L": ID_ISO_w = SFR.getMuLoose_lowpT_IDSF(pt,eta)*SFR.getMuLoose_ISOSF(pt,eta)
     elif ID =='None':
         print ('Please select which ID muon you want(L or T)')
-    if era=='2016'
+    if era=='2016':
         tracking_w = SFR.getMuTrackingSF(eta)
     weight = ID_ISO_w*tracking_w
     return weight
