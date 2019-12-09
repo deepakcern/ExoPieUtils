@@ -17,34 +17,37 @@ elif era=='2018':
 else:
     print("Please tell me which year\'s scale factors you would like to apply (2016,2017 or 2018)? ")
 
-def ele_weight(pt,eta,trig,ID='None'):
-    trig_w = 1.0; ID_w = 1.0; Reco_w = 1.0
+def eletrig_weight(pt,eta):
+    trig_w = 1.0
     if pt > 30. :  trig_w = SFR.getEleTrigSF(pt,eta)
-    if ID=="T" :   ID_w = SFR.getEleTrigSF(pt,eta)
+    return trig_w
+
+def ele_weight(pt,eta,trig,ID='None'):
+    ID_w = 1.0; Reco_w = 1.0
+    if ID=="T" :   ID_w = SFR.getEleTightIDSF(pt,eta)
     if ID=="L" :   ID_w = SFR.getElelooseIDSF(pt,eta)
-    if pt >= 20 :  Reco_w = SFR.getEleRecoLowSF(pt,eta)
-    elif pt < 20 : Reco_w = SFR.getEleRecoLowSF(pt,eta)
+    if pt >= 20.0 :  Reco_w = SFR.getEleRecoHighSF(pt,eta)
+    elif pt < 20.0 : Reco_w = SFR.getEleRecoLowSF(pt,eta)
     elif ID =='None':
         print ('Please select which ID electron you want(L or T)')
-    if  trig:
-        weight = trig_w*ID_w*Reco_w
-    else:
-        weight = ID_w*Reco_w
+    weight = ID_w*Reco_w
     return weight
 
+def mutrig_weight(pt,eta):
+    trig_w = 1.0;
+    if pt >30.0: trig_w = SFR.getMuTrig_SF(pt,eta)
+    return trig_w
+
 def mu_weight(pt,eta,trig,ID='None'):
-    trig_w = 1.0; ID_ISO_w=1.0
-    if pt >30:            trig_w = SFR.getMuTrig_SF(pt,eta)
+    ID_ISO_w=1.0; tracking_w = 1.0
     if ID=="T" :          ID_ISO_w = SFR.getMuTight_ISOSF(pt,eta)*SFR.getMuTight_IDSF(pt,eta)
-    if ID=="L" and pt>20:          ID_ISO_w = SFR.getMuLoose_ISOSF(pt,eta)*SFR.getMuloose_IDSF(pt,eta)
-    if pt<=20 and ID=="L": ID_ISO_w = SFR.getMuLoose_lowpT_IDSF(pt,eta)*SFR.getMuLoose_ISOSF(pt,eta)
+    if ID=="L" and pt>=20.0:          ID_ISO_w = SFR.getMuLoose_ISOSF(pt,eta)*SFR.getMuloose_IDSF(pt,eta)
+    if pt<20.0 and ID=="L": ID_ISO_w = SFR.getMuLoose_lowpT_IDSF(pt,eta)*SFR.getMuLoose_ISOSF(pt,eta)
     elif ID =='None':
         print ('Please select which ID muon you want(L or T)')
-    tracking_w = SFR.getMuTrackingSF(eta)
-    if  trig:
-        weight = trig_w*ID_ISO_w*tracking_w
-    else:
-        weight = ID_ISO_w*tracking_w
+    if era=='2016'
+        tracking_w = SFR.getMuTrackingSF(eta)
+    weight = ID_ISO_w*tracking_w
     return weight
 
 def getMETtrig_First(met):
