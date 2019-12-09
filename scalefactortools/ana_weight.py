@@ -22,7 +22,7 @@ def eletrig_weight(pt,eta):
     if pt > 30. :  trig_w = SFR.getEleTrigSF(pt,eta)
     return trig_w
 
-def ele_weight(pt,eta,trig,ID='None'):
+def ele_weight(pt,eta,ID='None'):
     ID_w = 1.0; Reco_w = 1.0
     if ID=="T" :   ID_w = SFR.getEleTightIDSF(pt,eta)
     if ID=="L" :   ID_w = SFR.getElelooseIDSF(pt,eta)
@@ -38,7 +38,7 @@ def mutrig_weight(pt,eta):
     if pt >30.0: trig_w = SFR.getMuTrig_SF(pt,eta)
     return trig_w
 
-def mu_weight(pt,eta,trig,ID='None'):
+def mu_weight(pt,eta,ID='None'):
     ID_ISO_w=1.0; tracking_w = 1.0
     if ID=="T" :          ID_ISO_w = SFR.getMuTight_ISOSF(pt,eta)*SFR.getMuTight_IDSF(pt,eta)
     if ID=="L" and pt>=20.0:          ID_ISO_w = SFR.getMuLoose_ISOSF(pt,eta)*SFR.getMuloose_IDSF(pt,eta)
