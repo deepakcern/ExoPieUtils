@@ -23,18 +23,18 @@ def jetflav(flav):
 
 def getBeff(pt,eta,flav):
     if flav == 5:
-        ybin = b_med_eff.GetXaxis().FindBin(eta)
-        xbin = b_med_eff.GetYaxis().FindBin(pt)
+        xbin = b_med_eff.GetXaxis().FindBin(eta)
+        ybin = b_med_eff.GetYaxis().FindBin(pt)
         btag_eff = b_med_eff.GetBinContent(xbin,ybin)
         return btag_eff
     elif flav == 4:
-        ybin = c_med_eff.GetXaxis().FindBin(eta)
-        xbin = c_med_eff.GetYaxis().FindBin(pt)
+        xbin = c_med_eff.GetXaxis().FindBin(eta)
+        ybin = c_med_eff.GetYaxis().FindBin(pt)
         ctag_eff = c_med_eff.GetBinContent(xbin,ybin)
         return ctag_eff
     elif flav!=4 and flav!=5:
-        ybin = udsg_med_eff.GetXaxis().FindBin(eta)
-        xbin = udsg_med_eff.GetYaxis().FindBin(pt)
+        xbin = udsg_med_eff.GetXaxis().FindBin(eta)
+        ybin = udsg_med_eff.GetYaxis().FindBin(pt)
         lighttag_eff = udsg_med_eff.GetBinContent(xbin,ybin)
         return lighttag_eff
 
