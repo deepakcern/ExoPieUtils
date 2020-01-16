@@ -1,14 +1,6 @@
 import numpy as np
 import sys
-sys.path.append('../../ExoPieProducer/ExoPieAnalyzer/')
-
-from Year import era
-if era=='2016':
-    import SFFactory_2016 as SfF
-elif era=='2017':
-    import SFFactory_2017 as SfF
-elif era=='2018':
-    import SFFactory_2018 as SfF
+import SFFactory_2017 as SfF
 
 def getEleTrigSF(pt,eta):
     matrix = np.matrix(SfF.eleTrig_hEffEtaPt)
@@ -197,16 +189,6 @@ def puweight(pu):
 def getMETtrig_First(met):
     matrix = np.array(SfF.metTrig_firstmethod)
     met_range =  SfF.metTrig_firstmethod_X_range
-    if met >= met_range[-1]:pu = met_range[-2]
-    if met <= met_range[0]:pu = met_range[1]
-
-    binyj=sorted([i for i, j in enumerate(met_range) if j<=met])[-1]
-    return matrix[binyj]
-
-
-def getMETtrig_Second(met):
-    matrix = np.array(SfF.metTrig_secondmethod)
-    met_range =  SfF.metTrig_secondmethod_X_range
     if met >= met_range[-1]:pu = met_range[-2]
     if met <= met_range[0]:pu = met_range[1]
 
