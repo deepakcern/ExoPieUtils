@@ -18,7 +18,7 @@ else:
     print("Please tell me which year\'s scale factors you would like to apply (2016,2017 or 2018)? ")
 
 def eletrig_weight(pt,eta):
-    trig_w = 1.0
+    trig_w = 1.0; trig_w_UP = 1.0; trig_w_DOWN = 1.0
     if pt > 30. :
         trig_w = SFR.getEleTrigSF(pt,eta)[0]
         trig_w_UP = SFR.getEleTrigSF(pt,eta)[1]
@@ -87,7 +87,6 @@ def mu_weight(pt,eta,ID='None'):
 
 def getMETtrig_First(met):
     return SFR.getMETtrig_First(met)
-
 
 def puweight(pu):
     return SFR.puweight(pu)
