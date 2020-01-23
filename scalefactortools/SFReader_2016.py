@@ -368,8 +368,8 @@ def getMuTight_ISOSF(pt,eta):
 def getMuTrackingSF(eta):
     eta = abs(eta)
     matrix = np.array(SfF.muonTrackingSFs_EfficienciesAndSF_BCDEFGH)
-    matrix_SystUp = np.matrix(SfF_SystUp.muonTrackingSFs_EfficienciesAndSF_BCDEFGH_SystUp)
-    matrix_SystDown = np.matrix(SfF_SystDown.muonTrackingSFs_EfficienciesAndSF_BCDEFGH_SystDown)
+    matrix_SystUp = np.array(SfF_SystUp.muonTrackingSFs_EfficienciesAndSF_BCDEFGH_SystUp)
+    matrix_SystDown = np.array(SfF_SystDown.muonTrackingSFs_EfficienciesAndSF_BCDEFGH_SystDown)
     Eta_range =  SfF.muonTrackingSFs_EfficienciesAndSF_BCDEFGH_X_range
     if eta >= Eta_range[-1]:eta = Eta_range[-2]
     if eta <= Eta_range[0]:eta = Eta_range[1]
@@ -381,8 +381,8 @@ def getMuTrackingSF(eta):
 
 def puweight(pu):
     matrix = np.array(SfF.pileup2016histo)
-    matrix_SystUp = np.matrix(SfF_SystUp.pileup2016histo_SystUp)
-    matrix_SystDown = np.matrix(SfF_SystDown.pileup2016histo_SystDown)
+    matrix_SystUp = np.array(SfF_SystUp.pileup2016histo_SystUp)
+    matrix_SystDown = np.array(SfF_SystDown.pileup2016histo_SystDown)
     PU_range =  SfF.pileup2016histo_X_range
     if pu >= PU_range[-1]:pu = PU_range[-2]
     if pu <= PU_range[0]:pu = PU_range[1]
@@ -393,8 +393,8 @@ def puweight(pu):
 
 def getMETtrig_First(met):
     matrix = np.array(SfF.metTrig_firstmethod)
-    matrix_SystUp = np.matrix(SfF_SystUp.metTrig_firstmethod_SystUp)
-    matrix_SystDown = np.matrix(SfF_SystDown.metTrig_firstmethod_SystDown)
+    matrix_SystUp = np.array(SfF_SystUp.metTrig_firstmethod_SystUp)
+    matrix_SystDown = np.array(SfF_SystDown.metTrig_firstmethod_SystDown)
     met_range =  SfF.metTrig_firstmethod_X_range
     if met >= met_range[-1]:pu = met_range[-2]
     if met <= met_range[0]:pu = met_range[1]
