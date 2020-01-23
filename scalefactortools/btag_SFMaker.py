@@ -78,7 +78,7 @@ reader1.load(calib1, 2,  "incl" )
 def btag_weight(nJets,ptList,etalist,flavlist,depCSVlist):
     P_MC = 1.0;
     P_Data = 1.0; P_Data_up = 1.0; P_Data_down = 1.0
-    btagweight = 1.0
+    btagweight = 1.0;btagweight_up=1.0;btagweight_down=1.0
     for i in range(nJets):
         tag_eff    = getBeff(ptList[i],etalist[i],flavlist[i])
         if depCSVlist[i] >deepCSVMWP:
