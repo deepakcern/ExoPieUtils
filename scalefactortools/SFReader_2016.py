@@ -305,12 +305,12 @@ def getMulooseGH_ISOSF(pt,eta):
 
 def getMuLoose_ISOSF(pt,eta):
     lumi_BCDEF=19.69;lumi_GH=16.22;lumi_tot=35.91
-    bcdef_weight = lumi_BCDEF*getMulooseRunBCDEF_ISOSF(pt,eta)
-    bcdef_weight_SystUp = lumi_BCDEF*getMulooseRunBCDEF_ISOSF(pt,eta)
-    bcdef_weight_SystDown = lumi_BCDEF*getMulooseRunBCDEF_ISOSF(pt,eta)
-    gh_weight = lumi_GH*getMulooseGH_ISOSF(pt,eta)
-    gh_weight_SystUp = lumi_GH*getMulooseGH_ISOSF(pt,eta)
-    gh_weight_SystDown = lumi_GH*getMulooseGH_ISOSF(pt,eta)
+    bcdef_weight = lumi_BCDEF*getMulooseRunBCDEF_ISOSF(pt,eta)[0]
+    bcdef_weight_SystUp = lumi_BCDEF*getMulooseRunBCDEF_ISOSF(pt,eta)[1]
+    bcdef_weight_SystDown = lumi_BCDEF*getMulooseRunBCDEF_ISOSF(pt,eta)[2]
+    gh_weight = lumi_GH*getMulooseGH_ISOSF(pt,eta)[0]
+    gh_weight_SystUp = lumi_GH*getMulooseGH_ISOSF(pt,eta)[1]
+    gh_weight_SystDown = lumi_GH*getMulooseGH_ISOSF(pt,eta)[2]
     weight = (bcdef_weight + gh_weight)/lumi_tot
     weight_SystUp = (bcdef_weight_SystUp + gh_weight_SystUp)/lumi_tot
     weight_SystDown = (bcdef_weight_SystDown + gh_weight_SystDown)/lumi_tot
