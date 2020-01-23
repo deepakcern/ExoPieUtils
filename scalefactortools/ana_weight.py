@@ -79,7 +79,7 @@ def mu_weight(pt,eta,ID='None'):
     elif ID =='None':
         print ('Please select which ID muon you want(L or T)')
     if era=='2016':
-        tracking_w = SFR.getMuTrackingSF(eta)
+        tracking_w,tracking_w_UP,tracking_w_DOWN = SFR.getMuTrackingSF(eta)
     weight = ID_ISO_w*tracking_w
     weight_UP = ID_ISO_w_UP*tracking_w_UP
     weight_DOWN = ID_ISO_w_DOWN*tracking_w_DOWN
