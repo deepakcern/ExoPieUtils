@@ -236,7 +236,7 @@ def getMulooseBCDEF_lowpT_IDSF(pt,eta):
     binxi=sorted([i for i, j in enumerate(pT_range) if j<=pt])[-1]
     binyj=sorted([i for i, j in enumerate(Eta_range) if j<=eta])[-1]
 
-    return matrix[binxi,binyj]
+    return matrix[binxi,binyj],matrix_SystUp[binxi,binyj],matrix_SystDown[binxi,binyj]
 
 def getMuLooseGH_lowpT_IDSF(pt,eta):
     eta = abs(eta)
@@ -252,7 +252,7 @@ def getMuLooseGH_lowpT_IDSF(pt,eta):
     binxi=sorted([i for i, j in enumerate(pT_range) if j<=pt])[-1]
     binyj=sorted([i for i, j in enumerate(Eta_range) if j<=eta])[-1]
 
-    return matrix[binxi,binyj]
+    return matrix[binxi,binyj],matrix_SystUp[binxi,binyj],matrix_SystDown[binxi,binyj]
 
 
 def getMuLoose_lowpT_IDSF(pt,eta):
