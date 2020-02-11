@@ -76,27 +76,15 @@ reader1.load(calib1, 1,  "comb" )
 reader1.load(calib1, 2,  "incl" )
 
 def btag_weight(nJets,ptList,etalist,flavlist,depCSVlist):
-    P_MC = 1.0;
-    P_Data = 1.0; P_Data_up = 1.0; P_Data_down = 1.0
-    btagweight = 1.0;btagweight_up=1.0;btagweight_down=1.0
+    btagweight = 1.0; btagweight_up=1.0; btagweight_down=1.0
     for i in range(nJets):
         tag_eff    = getBeff(ptList[i],etalist[i],flavlist[i])
+        SF_jet = weightbtag(reader1, jetflav(flavlist[i]), ptList[i], etalist[i],era)
         if depCSVlist[i] >deepCSVMWP:
-            P_MC *= tag_eff
+            btagweight *=  SF_jet[0]
         else:
-            P_MC *= (1-tag_eff)
-        SF_jet = []
-        SF_jet=weightbtag(reader1, jetflav(flavlist[i]), ptList[i], etalist[i],era)
-        if depCSVlist[i] > deepCSVMWP:
-            P_Data *= (SF_jet[0] *tag_eff)
-            P_Data_down *= (SF_jet[1] *tag_eff)
-            P_Data_up *= (SF_jet[2] *tag_eff)
-        else:
-            P_Data *= (1 - SF_jet[0] * tag_eff)
-            P_Data_down *= (1 - SF_jet[1] * tag_eff)
-            P_Data_up *= (1 - SF_jet[2] * tag_eff)
-    if P_MC > 0:
-        btagweight = P_Data/P_MC
-        btagweight_up = P_Data_up/P_MC
-        btagweight_down = P_Data_down/P_MC
+            btagweight *= (1 - (SF_jet[0] * tag_eff)) / (1 - tag_eff);
+        if era=='2016' and abs(etalist[i]) >= 2.4: btagweight = 1.0
+        if (era=='2017' or era=='2018') and abs(etalist[i]) >= 2.5: btagweight = 1.0
+        btagweight_up = sigmaScale_bc*(SF_jet[2] - SF_jet[0]) + SF_jet[0];
     return btagweight,btagweight_up,btagweight_down
