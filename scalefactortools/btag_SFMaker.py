@@ -4,8 +4,6 @@ sys.path.append('../../ExoPieProducer/ExoPieAnalyzer/')
 from Year import era
 
 def weightbtag(reader, flav, pt, eta, era):
-    if era=='2016' and abs(eta) >= 2.4: eta = 2.3999999
-    if (era=='2017' or era=='2018')  and abs(eta) >= 2.5: eta = 2.4999999
     sf_c = reader.eval_auto_bounds('central', flav, eta, pt)
     sf_low = reader.eval_auto_bounds('down', flav, eta, pt)
     sf_up  = reader.eval_auto_bounds('up', flav, eta, pt)
@@ -80,11 +78,21 @@ def btag_weight(nJets,ptList,etalist,flavlist,depCSVlist):
     for i in range(nJets):
         tag_eff    = getBeff(ptList[i],etalist[i],flavlist[i])
         SF_jet = weightbtag(reader1, jetflav(flavlist[i]), ptList[i], etalist[i],era)
-        if depCSVlist[i] >deepCSVMWP:
+        scaleSF =1
+        if ptList[i] > 1000:
+            scaleSF = 2
+            SF_jet = weightbtag(reader1, jetflav(flavlist[i]), 999.9, etalist[i],era)
+        if ptList[i] < 20:
+            scaleSF = 2
+            SF_jet = weightbtag(reader1, jetflav(flavlist[i]), 20.1, etalist[i],era)
+        if depCSVlist[i] > deepCSVMWP:
             btagweight *=  SF_jet[0]
+            btagweight_up *=  SF_jet[2]*scaleSF
+            btagweight_down *=  SF_jet[1]*scaleSF
         else:
             btagweight *= (1 - (SF_jet[0] * tag_eff)) / (1 - tag_eff);
+            btagweight_up *= (1 - (SF_jet[2] * tag_eff)) / (1 - tag_eff);
+            btagweight_down *= (1 - (SF_jet[1] * tag_eff)) / (1 - tag_eff);
         if era=='2016' and abs(etalist[i]) >= 2.4: btagweight = 1.0
         if (era=='2017' or era=='2018') and abs(etalist[i]) >= 2.5: btagweight = 1.0
-        btagweight_up = sigmaScale_bc*(SF_jet[2] - SF_jet[0]) + SF_jet[0];
     return btagweight,btagweight_up,btagweight_down
