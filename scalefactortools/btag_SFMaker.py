@@ -76,15 +76,18 @@ reader1.load(calib1, 2,  "incl" )
 def btag_weight(nJets,ptList,etalist,flavlist,depCSVlist):
     btagweight = 1.0; btagweight_up=1.0; btagweight_down=1.0
     for i in range(nJets):
-        tag_eff    = getBeff(ptList[i],etalist[i],flavlist[i])
-        SF_jet = weightbtag(reader1, jetflav(flavlist[i]), ptList[i], etalist[i],era)
         scaleSF =1
-        if ptList[i] > 1000:
+        if ptList[i] >= 1000:
             scaleSF = 2
             SF_jet = weightbtag(reader1, jetflav(flavlist[i]), 999.9, etalist[i],era)
-        if ptList[i] < 20:
+            tag_eff    = getBeff(999.9,etalist[i],flavlist[i])
+        elif ptList[i] <= 20:
             scaleSF = 2
             SF_jet = weightbtag(reader1, jetflav(flavlist[i]), 20.1, etalist[i],era)
+            tag_eff    = getBeff(20.1,etalist[i],flavlist[i])
+        else:
+            SF_jet = weightbtag(reader1, jetflav(flavlist[i]), ptList[i], etalist[i],era)
+            tag_eff  = getBeff(ptList[i],etalist[i],flavlist[i])
         if depCSVlist[i] > deepCSVMWP:
             btagweight *=  SF_jet[0]
             btagweight_up *=  SF_jet[2]*scaleSF
