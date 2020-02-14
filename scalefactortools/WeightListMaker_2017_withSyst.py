@@ -71,11 +71,11 @@ muonTrackingSFs_EfficienciesAndSF_BCDEFGH = muonTrackingSFsFile.Get('ratio_eff_a
 metTrigEff_zmmfile = TFile('data_2017/TriggerEff_MET2017.root')
 metTrig_firstmethod = metTrigEff_zmmfile.Get('trig_eff')
 
-metTrigEff_secondfile = TFile('data_2017/metTriggerEfficiency_recoil_monojet_TH1F_2016.root')
-metTrig_secondmethod = metTrigEff_secondfile.Get('hden_monojet_recoil_clone_passed')
+# metTrigEff_secondfile = TFile('data_2017/metTriggerEfficiency_recoil_monojet_TH1F_2016.root')
+# metTrig_secondmethod = metTrigEff_secondfile.Get('hden_monojet_recoil_clone_passed')
 
 
-sf_list = [pileup2017histo,eleTrig_hEffEtaPt,eleRecoSF_EGamma_SF2D_ptgt_20,eleRecoSF_EGamma_SF2D_ptlt_20,eleLooseIDSF_EGamma_SF2D,eleTightIDSF_EGamma_SF2D,muonTrigSFs_EfficienciesAndSF_RunBtoF,muonLooseIDSFs_EfficienciesAndSF_BCDEF,muonLooseIDSFs_EfficienciesAndSF_lowpt_BCDEF,muonTightIDSFs_EfficienciesAndSF_BCDEF,muonLooseIsoSFs_EfficienciesAndSF_BCDEF,muonTightIsoSFs_EfficienciesAndSF_BCDEF,muonTrackingSFs_EfficienciesAndSF_BCDEFGH,metTrig_firstmethod,metTrig_secondmethod]
+sf_list = [pileup2017histo,eleTrig_hEffEtaPt,eleRecoSF_EGamma_SF2D_ptgt_20,eleRecoSF_EGamma_SF2D_ptlt_20,eleLooseIDSF_EGamma_SF2D,eleTightIDSF_EGamma_SF2D,muonTrigSFs_EfficienciesAndSF_RunBtoF,muonLooseIDSFs_EfficienciesAndSF_BCDEF,muonLooseIDSFs_EfficienciesAndSF_lowpt_BCDEF,muonTightIDSFs_EfficienciesAndSF_BCDEF,muonLooseIsoSFs_EfficienciesAndSF_BCDEF,muonTightIsoSFs_EfficienciesAndSF_BCDEF,muonTrackingSFs_EfficienciesAndSF_BCDEFGH,metTrig_firstmethod]
 
 sf_list_dict = {pileup2017histo:'pileup2017histo',eleTrig_hEffEtaPt:'eleTrig_hEffEtaPt',eleRecoSF_EGamma_SF2D_ptgt_20:'eleRecoSF_EGamma_SF2D_ptgt_20',eleRecoSF_EGamma_SF2D_ptlt_20:'eleRecoSF_EGamma_SF2D_ptlt_20',eleLooseIDSF_EGamma_SF2D:'eleLooseIDSF_EGamma_SF2D',eleTightIDSF_EGamma_SF2D:'eleTightIDSF_EGamma_SF2D',muonTrigSFs_EfficienciesAndSF_RunBtoF:'muonTrigSFs_EfficienciesAndSF_RunBtoF',muonLooseIDSFs_EfficienciesAndSF_BCDEF:'muonLooseIDSFs_EfficienciesAndSF_BCDEF',muonLooseIDSFs_EfficienciesAndSF_lowpt_BCDEF:'muonLooseIDSFs_EfficienciesAndSF_lowpt_BCDEF',muonTightIDSFs_EfficienciesAndSF_BCDEF:'muonTightIDSFs_EfficienciesAndSF_BCDEF',muonLooseIsoSFs_EfficienciesAndSF_BCDEF:'muonLooseIsoSFs_EfficienciesAndSF_BCDEF',muonTightIsoSFs_EfficienciesAndSF_BCDEF:'muonTightIsoSFs_EfficienciesAndSF_BCDEF',muonTrackingSFs_EfficienciesAndSF_BCDEFGH:'muonTrackingSFs_EfficienciesAndSF_BCDEFGH',metTrig_firstmethod:'metTrig_firstmethod'}
 
@@ -206,28 +206,6 @@ for sf in sf_list:
                     else:pT_range.append(ylow)
                 value.append(sf.GetBinContent(binx,biny)+eleTrig_hEffEtaPtUp.GetBinContent(binx,biny))
             values.append(value)
-    elif (sf_list_dict[sf]=='eleTrig_hEffEtaPt'):
-        for binx in range(1,sf.GetXaxis().GetNbins()+1):
-            xlow  = sf.GetXaxis().GetBinLowEdge(binx)
-            xhigh = sf.GetXaxis().GetBinUpEdge(binx)
-            value=[]
-            if not Eta_rangeDone:
-                if binx == sf.GetXaxis().GetNbins():
-                    Eta_range.append(xlow)
-                    Eta_range.append(xhigh)
-                    Eta_rangeDone=True
-                else:Eta_range.append(xlow)
-            for biny in range(1,sf.GetYaxis().GetNbins()+1):
-                ylow  = sf.GetYaxis().GetBinLowEdge(biny)#+yShift
-                yhigh = sf.GetYaxis().GetBinUpEdge(biny)#-yShift
-                if not pT_rangeDone:
-                    if biny == sf.GetYaxis().GetNbins():
-                        pT_range.append(ylow)
-                        pT_range.append(yhigh)
-                        pT_rangeDone=True
-                    else:pT_range.append(ylow)
-                value.append(sf.GetBinContent(binx,biny)+eleTrig_hEffEtaPtUp.GetBinContent(binx,biny))
-            values.append(value)
     else:
         for binx in range(1,sf.GetXaxis().GetNbins()+1):
             xlow  = sf.GetXaxis().GetBinLowEdge(binx)
@@ -264,7 +242,7 @@ for sf in sf_list:
     print ('\n')
 f_Up.close()
 
-f_Down= open("SFFactorySystUp_2017.py","w+")
+f_Down= open("SFFactorySystDown_2017.py","w+")
 for sf in sf_list:
     ptlist=[];ptlistUp=[];ptlistDown=[]
     Eta_range=[];pT_range=[]
@@ -299,6 +277,28 @@ for sf in sf_list:
                     ptlist.append(sf.GetBinContent(sf.FindBin(xlow)))
                     Eta_range.append(xlow)
 
+    elif (sf_list_dict[sf]=='eleTrig_hEffEtaPt'):
+        for binx in range(1,sf.GetXaxis().GetNbins()+1):
+            xlow  = sf.GetXaxis().GetBinLowEdge(binx)
+            xhigh = sf.GetXaxis().GetBinUpEdge(binx)
+            value=[]
+            if not Eta_rangeDone:
+                if binx == sf.GetXaxis().GetNbins():
+                    Eta_range.append(xlow)
+                    Eta_range.append(xhigh)
+                    Eta_rangeDone=True
+                else:Eta_range.append(xlow)
+            for biny in range(1,sf.GetYaxis().GetNbins()+1):
+                ylow  = sf.GetYaxis().GetBinLowEdge(biny)#+yShift
+                yhigh = sf.GetYaxis().GetBinUpEdge(biny)#-yShift
+                if not pT_rangeDone:
+                    if biny == sf.GetYaxis().GetNbins():
+                        pT_range.append(ylow)
+                        pT_range.append(yhigh)
+                        pT_rangeDone=True
+                    else:pT_range.append(ylow)
+                value.append(sf.GetBinContent(binx,biny)-eleTrig_hEffEtaPtDown.GetBinContent(binx,biny))
+            values.append(value)
     else:
         for binx in range(1,sf.GetXaxis().GetNbins()+1):
             xlow  = sf.GetXaxis().GetBinLowEdge(binx)
