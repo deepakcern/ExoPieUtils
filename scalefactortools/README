@@ -19,7 +19,7 @@ https://twiki.cern.ch/twiki/bin/viewauth/CMS/EgammaIDRecipesRun2#80X_series_80X_
 
 ##To add a new scale factor for the analysis one should follow the following steps:
 
-In the *WeightListMaker.py file* :
+In the *WeightListMaker_201*_withSyst.py file* :
 
     1. Add the the root file in the data_era directory for example
 
@@ -42,3 +42,7 @@ In SFReader_201* file :
 
 In ana_weight.py file:
     1. load the corresponding era file and load the functions by looking at the already written functions
+
+**WorkFlow**
+step1: python WeightListMaker_201*_withSyst.py
+output1: SFFactory_201*.py, SFFactorySystUp_201*.py, SFFactorySystDown_201*.py
