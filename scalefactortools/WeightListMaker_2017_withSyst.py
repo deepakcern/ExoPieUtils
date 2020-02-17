@@ -233,11 +233,11 @@ for sf in sf_list:
     print (sf_list_dict[sf])
     if (sf_list_dict[sf]=='muonTrackingSFs_EfficienciesAndSF_BCDEFGH')or (sf_list_dict[sf]=='pileup2017histo') or (sf_list_dict[sf]=='metTrig_firstmethod'):
         f_Up.write(sf_list_dict[sf]+'_X_range = '+str(Eta_range)+'\n')
-        f_Up.write(str(sf_list_dict[sf])+"="+str(ptlist)+'\n')
+        f_Up.write(str(sf_list_dict[sf])+"_SystUp="+str(ptlist)+'\n')
     else:
         f_Up.write(sf_list_dict[sf]+'_X_range = '+str(Eta_range)+'\n')
         f_Up.write(sf_list_dict[sf]+'_Y_range = '+str(pT_range)+'\n')
-        f_Up.write(str(sf_list_dict[sf])+"="+str(values)+'\n')
+        f_Up.write(str(sf_list_dict[sf])+"_SystUp="+str(values)+'\n')
     f_Up.write ('\n')
     print ('\n')
 f_Up.close()
@@ -326,11 +326,11 @@ for sf in sf_list:
     print (sf_list_dict[sf])
     if (sf_list_dict[sf]=='muonTrackingSFs_EfficienciesAndSF_BCDEFGH')or (sf_list_dict[sf]=='pileup2017histo') or (sf_list_dict[sf]=='metTrig_firstmethod'):
         f_Down.write(sf_list_dict[sf]+'_X_range = '+str(Eta_range)+'\n')
-        f_Down.write(str(sf_list_dict[sf])+"="+str(ptlist)+'\n')
+        f_Down.write(str(sf_list_dict[sf])+"_SystDown="+str(ptlist)+'\n')
     else:
         f_Down.write(sf_list_dict[sf]+'_X_range = '+str(Eta_range)+'\n')
         f_Down.write(sf_list_dict[sf]+'_Y_range = '+str(pT_range)+'\n')
-        f_Down.write(str(sf_list_dict[sf])+"="+str(values)+'\n')
+        f_Down.write(str(sf_list_dict[sf])+"_SystDown="+str(values)+'\n')
     f_Down.write ('\n')
     print ('\n')
 f_Down.close()
