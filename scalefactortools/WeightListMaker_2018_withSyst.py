@@ -10,74 +10,71 @@ import math
 ROOT.gROOT.SetBatch(True)
 
 #pileup reweights
-pileup2017file = TFile('data_2017/PU_Reweight_2017.root')
+pileup2017file = TFile('data_2018/PU_Reweight_2018.root')
 pileup2017histo=pileup2017file.Get('PU_Ratio')
 
 #Electron Trigger reweights
-eleTrigReweightFile = TFile('data_2017/electron_Trigger_eleTrig_2016.root')
+eleTrigReweightFile = TFile('data_2018/electron_Trigger_eleTrig_2016.root')
 eleTrig_hEffEtaPt = eleTrigReweightFile.Get('hEffEtaPt')
 eleTrig_hEffEtaPtUp = eleTrigReweightFile.Get('hErrhEtaPt')
 eleTrig_hEffEtaPtDown = eleTrigReweightFile.Get('hErrlEtaPt')
 
-#Electron Reconstruction efficiency. Scale factors for 80X
-eleRecoSFsFile_ptgt_20 = TFile('data_2017/electron_Reco_SFs_egammaEffi_txt_EGM2D_2017.root')
-eleRecoSF_EGamma_SF2D_ptgt_20 = eleRecoSFsFile_ptgt_20.Get('EGamma_SF2D')
+#Electron Reconstruction efficiency. Scale factors for 10X
+eleRecoSFsFile = TFile('data_2018/egammaEffi.txt_EGM2D_updatedAll.root')
+eleRecoSF_EGamma_SF2D = eleRecoSFsFile_ptgt_20.Get('EGamma_SF2D')
 
-eleRecoSFsFile_ptlt_20 = TFile('data_2017/egammaEffitxt_EGM2D_runBCDEF_passingRECO_lowEt_2017.root')
-eleRecoSF_EGamma_SF2D_ptlt_20 = eleRecoSFsFile_ptlt_20.Get('EGamma_SF2D')
+# eleRecoSFsFile_ptlt_20 = TFile('data_2018/egammaEffitxt_EGM2D_runBCDEF_passingRECO_lowEt_2017.root')
+# eleRecoSF_EGamma_SF2D_ptlt_20 = eleRecoSFsFile_ptlt_20.Get('EGamma_SF2D')
 
 #Loose electron ID SFs
-eleLooseIDSFsFile = TFile('data_2017/electron_Loose_ID_SFs_egammaEffi_txt_EGM2D_2017.root')
+eleLooseIDSFsFile = TFile('data_2018/2018_ElectronLoose.root')
 eleLooseIDSF_EGamma_SF2D = eleLooseIDSFsFile.Get('EGamma_SF2D')
 
 #Tight Electron ID SFs
-eleTightIDSFsFile = TFile('data_2017/electron_Tight_ID_SFs_egammaEffi_txt_EGM2D_2017.root')
+eleTightIDSFsFile = TFile('data_2018/2018_ElectronTight.root')
 eleTightIDSF_EGamma_SF2D = eleTightIDSFsFile.Get('EGamma_SF2D')
 
 #Tight photon ID SFs
-phoTightIDSFsFile = TFile('data_2017/photon_Tight_ID_SFs_egammaEffi_txt_EGM2D_2017.root')
+phoTightIDSFsFile = TFile('data_2018/2018_PhotonsTight.root')
 phoTightIDSF_EGamma_SF2D = phoTightIDSFsFile.Get('EGamma_SF2D')
 
 #Loose photon ID SFs
-phoLooseIDSFsFile = TFile('data_2017/photon_Loose_ID_SFs_egammaEffi_txt_EGM2D_2017.root')
+phoLooseIDSFsFile = TFile('data_2018/2018_PhotonsLoose.root')
 phoLooseIDSF_EGamma_SF2D = phoLooseIDSFsFile.Get('EGamma_SF2D')
 
 #Muon Trigger SFs
-muonTrigSFsRunBCDEFFile = TFile('data_2017/muon_single_lepton_trigger_EfficienciesAndSF_2017.root')
+muonTrigSFsRunBCDEFFile = TFile('data_2018/muon_single_lepton_trigger_EfficienciesAndSF_2017.root')
 muonTrigSFs_EfficienciesAndSF_RunBtoF = muonTrigSFsRunBCDEFFile.Get('IsoMu27_PtEtaBins/abseta_pt_ratio')
 
 #Muon ID SFs
-muonIDSFsBCDEFFile = TFile('data_2017/muon_ID_SFs_EfficienciesAndSF_BCDEF_2017.root')
+muonIDSFsBCDEFFile = TFile('data_2018/EfficienciesStudies_2018_rootfiles_RunABCD_SF_ID.root')
 muonLooseIDSFs_EfficienciesAndSF_BCDEF = muonIDSFsBCDEFFile.Get('NUM_LooseID_DEN_genTracks_pt_abseta')
 muonTightIDSFs_EfficienciesAndSF_BCDEF = muonIDSFsBCDEFFile.Get('NUM_TightID_DEN_genTracks_pt_abseta')
 
 #for low pt muons
-muonIDSFsBCDEFFile_lowpt = TFile('data_2017/Muon_low-pT_RunBCDEF_SF_ID_JPsi_2017.root')
+muonIDSFsBCDEFFile_lowpt = TFile('data_2018/EfficienciesStudies_2018_Jpsi_rootfiles_RunABCD_SF_ID.root')
 muonLooseIDSFs_EfficienciesAndSF_lowpt_BCDEF = muonIDSFsBCDEFFile_lowpt.Get('NUM_LooseID_DEN_genTracks_pt_abseta')
 
 #Muon Iso SFs
-muonIsoSFsBCDEFFile = TFile('data_2017/muon_Iso_SFs_EfficienciesAndSF_BCDEF_2017.root')
+muonIsoSFsBCDEFFile = TFile('data_2018/muon_Iso_SFs_EfficienciesAndSF_BCDEF_2017.root')
 muonLooseIsoSFs_EfficienciesAndSF_BCDEF = muonIsoSFsBCDEFFile.Get('NUM_LooseRelIso_DEN_LooseID_pt_abseta')
 muonTightIsoSFs_EfficienciesAndSF_BCDEF = muonIsoSFsBCDEFFile.Get('NUM_TightRelIso_DEN_TightIDandIPCut_pt_abseta')
 
 #Muon Tracking SFs
-muonTrackingSFsFile = TFile('data_2017/muon_Tracking_SFs_Tracking_EfficienciesAndSF_BCDEF_2016.root')
-muonTrackingSFs_EfficienciesAndSF_BCDEFGH = muonTrackingSFsFile.Get('ratio_eff_aeta_dr030e030_corr')
+# muonTrackingSFsFile = TFile('data_2018/muon_Tracking_SFs_Tracking_EfficienciesAndSF_BCDEF_2016.root')
+# muonTrackingSFs_EfficienciesAndSF_BCDEFGH = muonTrackingSFsFile.Get('ratio_eff_aeta_dr030e030_corr')
 
 
 #MET Trigger reweights
-# metTrigEff_zmmfile = TFile('data_2017/metTriggerEfficiency_zmm_recoil_monojet_TH1F_2016.root')
+# metTrigEff_zmmfile = TFile('data_2018/metTriggerEfficiency_zmm_recoil_monojet_TH1F_2016.root')
 # metTrig_firstmethod = metTrigEff_zmmfile.Get('hden_monojet_recoil_clone_passed')
-metTrigEff_zmmfile = TFile('data_2017/TriggerEff_MET2017.root')
+metTrigEff_zmmfile = TFile('data_2018/TriggerEff_MET2017.root')
 metTrig_firstmethod = metTrigEff_zmmfile.Get('trig_eff')
 
-metTrigEff_secondfile = TFile('data_2017/metTriggerEfficiency_recoil_monojet_TH1F_2016.root')
-metTrig_secondmethod = metTrigEff_secondfile.Get('hden_monojet_recoil_clone_passed')
 
+sf_list = [pileup2017histo,eleTrig_hEffEtaPt,eleRecoSF_EGamma_SF2D_ptgt_20,eleRecoSF_EGamma_SF2D_ptlt_20,eleLooseIDSF_EGamma_SF2D,eleTightIDSF_EGamma_SF2D,muonTrigSFs_EfficienciesAndSF_RunBtoF,muonLooseIDSFs_EfficienciesAndSF_BCDEF,muonLooseIDSFs_EfficienciesAndSF_lowpt_BCDEF,muonTightIDSFs_EfficienciesAndSF_BCDEF,muonLooseIsoSFs_EfficienciesAndSF_BCDEF,muonTightIsoSFs_EfficienciesAndSF_BCDEF,metTrig_firstmethod,metTrig_secondmethod]
 
-sf_list = [pileup2017histo,eleTrig_hEffEtaPt,eleRecoSF_EGamma_SF2D_ptgt_20,eleRecoSF_EGamma_SF2D_ptlt_20,eleLooseIDSF_EGamma_SF2D,eleTightIDSF_EGamma_SF2D,muonTrigSFs_EfficienciesAndSF_RunBtoF,muonLooseIDSFs_EfficienciesAndSF_BCDEF,muonLooseIDSFs_EfficienciesAndSF_lowpt_BCDEF,muonTightIDSFs_EfficienciesAndSF_BCDEF,muonLooseIsoSFs_EfficienciesAndSF_BCDEF,muonTightIsoSFs_EfficienciesAndSF_BCDEF,muonTrackingSFs_EfficienciesAndSF_BCDEFGH,metTrig_firstmethod,metTrig_secondmethod]
-
-sf_list_dict = {pileup2017histo:'pileup2017histo',eleTrig_hEffEtaPt:'eleTrig_hEffEtaPt',eleRecoSF_EGamma_SF2D_ptgt_20:'eleRecoSF_EGamma_SF2D_ptgt_20',eleRecoSF_EGamma_SF2D_ptlt_20:'eleRecoSF_EGamma_SF2D_ptlt_20',eleLooseIDSF_EGamma_SF2D:'eleLooseIDSF_EGamma_SF2D',eleTightIDSF_EGamma_SF2D:'eleTightIDSF_EGamma_SF2D',muonTrigSFs_EfficienciesAndSF_RunBtoF:'muonTrigSFs_EfficienciesAndSF_RunBtoF',muonLooseIDSFs_EfficienciesAndSF_BCDEF:'muonLooseIDSFs_EfficienciesAndSF_BCDEF',muonLooseIDSFs_EfficienciesAndSF_lowpt_BCDEF:'muonLooseIDSFs_EfficienciesAndSF_lowpt_BCDEF',muonTightIDSFs_EfficienciesAndSF_BCDEF:'muonTightIDSFs_EfficienciesAndSF_BCDEF',muonLooseIsoSFs_EfficienciesAndSF_BCDEF:'muonLooseIsoSFs_EfficienciesAndSF_BCDEF',muonTightIsoSFs_EfficienciesAndSF_BCDEF:'muonTightIsoSFs_EfficienciesAndSF_BCDEF',muonTrackingSFs_EfficienciesAndSF_BCDEFGH:'muonTrackingSFs_EfficienciesAndSF_BCDEFGH',metTrig_firstmethod:'metTrig_firstmethod'}
+sf_list_dict = {pileup2017histo:'pileup2017histo',eleTrig_hEffEtaPt:'eleTrig_hEffEtaPt',eleRecoSF_EGamma_SF2D_ptgt_20:'eleRecoSF_EGamma_SF2D_ptgt_20',eleRecoSF_EGamma_SF2D_ptlt_20:'eleRecoSF_EGamma_SF2D_ptlt_20',eleLooseIDSF_EGamma_SF2D:'eleLooseIDSF_EGamma_SF2D',eleTightIDSF_EGamma_SF2D:'eleTightIDSF_EGamma_SF2D',muonTrigSFs_EfficienciesAndSF_RunBtoF:'muonTrigSFs_EfficienciesAndSF_RunBtoF',muonLooseIDSFs_EfficienciesAndSF_BCDEF:'muonLooseIDSFs_EfficienciesAndSF_BCDEF',muonLooseIDSFs_EfficienciesAndSF_lowpt_BCDEF:'muonLooseIDSFs_EfficienciesAndSF_lowpt_BCDEF',muonTightIDSFs_EfficienciesAndSF_BCDEF:'muonTightIDSFs_EfficienciesAndSF_BCDEF',muonLooseIsoSFs_EfficienciesAndSF_BCDEF:'muonLooseIsoSFs_EfficienciesAndSF_BCDEF',muonTightIsoSFs_EfficienciesAndSF_BCDEF:'muonTightIsoSFs_EfficienciesAndSF_BCDEF',metTrig_firstmethod:'metTrig_firstmethod'}
 
 
 f= open("SFFactory_2017.py","w+")

@@ -4,15 +4,17 @@ import SFFactory_2016 as SfF
 import SFFactorySystUp_2016 as SfF_SystUp
 import SFFactorySystDown_2016 as SfF_SystDown
 
+corr_fac=0.0001
 def getEleTrigSF(pt,eta):
     matrix = np.matrix(SfF.eleTrig_hEffEtaPt)
     matrix_SystUp = np.matrix(SfF_SystUp.eleTrig_hEffEtaPt_SystUp)
     matrix_SystDown = np.matrix(SfF_SystDown.eleTrig_hEffEtaPt_SystDown)
     Eta_range=SfF.eleTrig_hEffEtaPt_X_range
     pT_range=SfF.eleTrig_hEffEtaPt_Y_range
-    if pt > pT_range[-1]:pt = pT_range[-1]-1.0
-    if eta >= Eta_range[-1]:eta = Eta_range[-2]
-    if eta <= Eta_range[0]:eta = Eta_range[1]
+    if pt >= pT_range[-1]:pt = pT_range[-1]-corr_fac
+    if pt <= pT_range[0]:pt = pT_range[0]+corr_fac
+    if eta >= Eta_range[-1]:eta = Eta_range[-1]-corr_fac
+    if eta <= Eta_range[0]:eta = Eta_range[0]+corr_fac
 
     binxi=sorted([i for i, j in enumerate(pT_range) if j<=pt])[-1]
     binyj=sorted([i for i, j in enumerate(Eta_range) if j<=eta])[-1]
@@ -25,10 +27,10 @@ def getElelooseIDSF(pt,eta):
     matrix_SystDown = np.matrix(SfF_SystDown.eleLooseIDSF_EGamma_SF2D_SystDown)
     Eta_range = SfF.eleLooseIDSF_EGamma_SF2D_X_range
     pT_range = SfF.eleLooseIDSF_EGamma_SF2D_Y_range
-    if pt > pT_range[-1]:pt = pT_range[-1]-1.0
-
-    if eta >= Eta_range[-1]:eta = Eta_range[-2]
-    if eta <= Eta_range[0]:eta = Eta_range[1]
+    if pt >= pT_range[-1]:pt = pT_range[-1]-corr_fac
+    if pt <= pT_range[0]:pt = pT_range[0]+corr_fac
+    if eta >= Eta_range[-1]:eta = Eta_range[-1]-corr_fac
+    if eta <= Eta_range[0]:eta = Eta_range[0]+corr_fac
 
     binxi=sorted([i for i, j in enumerate(pT_range) if j<=pt])[-1]
     binyj=sorted([i for i, j in enumerate(Eta_range) if j<=eta])[-1]
@@ -42,9 +44,10 @@ def getEleTightIDSF(pt,eta):
     matrix_SystDown = np.matrix(SfF_SystDown.eleTightIDSF_EGamma_SF2D_SystDown)
     Eta_range =  SfF.eleTightIDSF_EGamma_SF2D_X_range
     pT_range =  SfF.eleTightIDSF_EGamma_SF2D_Y_range
-    if pt > pT_range[-1]:pt = pT_range[-1]-1.0
-    if eta >= Eta_range[-1]:eta = Eta_range[-2]
-    if eta <= Eta_range[0]:eta = Eta_range[1]
+    if pt >= pT_range[-1]:pt = pT_range[-1]-corr_fac
+    if pt <= pT_range[0]:pt = pT_range[0]+corr_fac
+    if eta >= Eta_range[-1]:eta = Eta_range[-1]-corr_fac
+    if eta <= Eta_range[0]:eta = Eta_range[0]+corr_fac
 
     binxi=sorted([i for i, j in enumerate(pT_range) if j<=pt])[-1]
     binyj=sorted([i for i, j in enumerate(Eta_range) if j<=eta])[-1]
@@ -58,9 +61,10 @@ def getEleRecoLowSF(pt,eta):
     matrix_SystDown = np.matrix(SfF_SystDown.eleRecoSF_EGamma_SF2D_ptlt_20_SystDown)
     Eta_range =  SfF.eleRecoSF_EGamma_SF2D_ptlt_20_X_range
     pT_range =  SfF.eleRecoSF_EGamma_SF2D_ptlt_20_Y_range
-    if pt > pT_range[-1]:pt = pT_range[-1]-1.0
-    if eta >= Eta_range[-1]:eta = Eta_range[-2]
-    if eta <= Eta_range[0]:eta = Eta_range[1]
+    if pt >= pT_range[-1]:pt = pT_range[-1]-corr_fac
+    if pt <= pT_range[0]:pt = pT_range[0]+corr_fac
+    if eta >= Eta_range[-1]:eta = Eta_range[-1]-corr_fac
+    if eta <= Eta_range[0]:eta = Eta_range[0]+corr_fac
 
     binxi=sorted([i for i, j in enumerate(pT_range) if j<=pt])[-1]
     binyj=sorted([i for i, j in enumerate(Eta_range) if j<=eta])[-1]
@@ -74,9 +78,10 @@ def getEleRecoHighSF(pt,eta):
     matrix_SystDown = np.matrix(SfF_SystDown.eleRecoSF_EGamma_SF2D_ptgt_20_SystDown)
     Eta_range =  SfF.eleRecoSF_EGamma_SF2D_ptgt_20_X_range
     pT_range =  SfF.eleRecoSF_EGamma_SF2D_ptgt_20_Y_range
-    if pt > pT_range[-1]:pt = pT_range[-1]-1.0
-    if eta >= Eta_range[-1]:eta = Eta_range[-2]
-    if eta <= Eta_range[0]:eta = Eta_range[1]
+    if pt >= pT_range[-1]:pt = pT_range[-1]-corr_fac
+    if pt <= pT_range[0]:pt = pT_range[0]+corr_fac
+    if eta >= Eta_range[-1]:eta = Eta_range[-1]-corr_fac
+    if eta <= Eta_range[0]:eta = Eta_range[0]+corr_fac
 
     binxi=sorted([i for i, j in enumerate(pT_range) if j<=pt])[-1]
     binyj=sorted([i for i, j in enumerate(Eta_range) if j<=eta])[-1]
@@ -91,9 +96,10 @@ def getMuTrigRunBCDEF_SF(pt,eta):
     matrix_SystDown = np.matrix(SfF_SystDown.muonTrigSFs_EfficienciesAndSF_RunBtoF_SystDown)
     Eta_range =  SfF.muonTrigSFs_EfficienciesAndSF_RunBtoF_X_range
     pT_range =  SfF.muonTrigSFs_EfficienciesAndSF_RunBtoF_Y_range
-    if pt > pT_range[-1]:pt = pT_range[-1]-1.0
-    if eta >= Eta_range[-1]:eta = Eta_range[-2]
-    if eta <= Eta_range[0]:eta = Eta_range[1]
+    if pt >= pT_range[-1]:pt = pT_range[-1]-corr_fac
+    if pt <= pT_range[0]:pt = pT_range[0]+corr_fac
+    if eta >= Eta_range[-1]:eta = Eta_range[-1]-corr_fac
+    if eta <= Eta_range[0]:eta = Eta_range[0]+corr_fac
 
     binxi=sorted([i for i, j in enumerate(pT_range) if j<=pt])[-1]
     binyj=sorted([i for i, j in enumerate(Eta_range) if j<=eta])[-1]
@@ -108,9 +114,10 @@ def getMuTrigRunGH_SF(pt,eta):
     matrix_SystDown = np.matrix(SfF_SystDown.muonTrigSFs_EfficienciesAndSF_Period4_SystDown)
     Eta_range =  SfF.muonTrigSFs_EfficienciesAndSF_Period4_X_range
     pT_range =  SfF.muonTrigSFs_EfficienciesAndSF_Period4_Y_range
-    if pt > pT_range[-1]:pt = pT_range[-1]-1.0
-    if eta >= Eta_range[-1]:eta = Eta_range[-2]
-    if eta <= Eta_range[0]:eta = Eta_range[1]
+    if pt >= pT_range[-1]:pt = pT_range[-1]-corr_fac
+    if pt <= pT_range[0]:pt = pT_range[0]+corr_fac
+    if eta >= Eta_range[-1]:eta = Eta_range[-1]-corr_fac
+    if eta <= Eta_range[0]:eta = Eta_range[0]+corr_fac
 
     binxi=sorted([i for i, j in enumerate(pT_range) if j<=pt])[-1]
     binyj=sorted([i for i, j in enumerate(Eta_range) if j<=eta])[-1]
@@ -138,9 +145,10 @@ def getMulooseRunBCDEF_IDSF(pt,eta):
     matrix_SystDown = np.matrix(SfF_SystDown.muonLooseIDSFs_EfficienciesAndSF_BCDEF_SystDown)
     Eta_range =  SfF.muonLooseIDSFs_EfficienciesAndSF_BCDEF_X_range
     pT_range =  SfF.muonLooseIDSFs_EfficienciesAndSF_BCDEF_Y_range
-    if pt > pT_range[-1]:pt = pT_range[-1]-1.0
-    if eta >= Eta_range[-1]:eta = Eta_range[-2]
-    if eta <= Eta_range[0]:eta = Eta_range[1]
+    if pt >= pT_range[-1]:pt = pT_range[-1]-corr_fac
+    if pt <= pT_range[0]:pt = pT_range[0]+corr_fac
+    if eta >= Eta_range[-1]:eta = Eta_range[-1]-corr_fac
+    if eta <= Eta_range[0]:eta = Eta_range[0]+corr_fac
 
     binxi=sorted([i for i, j in enumerate(pT_range) if j<=pt])[-1]
     binyj=sorted([i for i, j in enumerate(Eta_range) if j<=eta])[-1]
@@ -153,9 +161,10 @@ def getMulooseGH_IDSF(pt,eta):
     matrix_SystDown = np.matrix(SfF_SystDown.muonLooseIDSFs_EfficienciesAndSF_GH_SystDown)
     Eta_range =  SfF.muonLooseIDSFs_EfficienciesAndSF_GH_X_range
     pT_range =  SfF.muonLooseIDSFs_EfficienciesAndSF_GH_Y_range
-    if pt > pT_range[-1]:pt = pT_range[-1]-1.0
-    if eta >= Eta_range[-1]:eta = Eta_range[-2]
-    if eta <= Eta_range[0]:eta = Eta_range[1]
+    if pt >= pT_range[-1]:pt = pT_range[-1]-corr_fac
+    if pt <= pT_range[0]:pt = pT_range[0]+corr_fac
+    if eta >= Eta_range[-1]:eta = Eta_range[-1]-corr_fac
+    if eta <= Eta_range[0]:eta = Eta_range[0]+corr_fac
 
     binxi=sorted([i for i, j in enumerate(pT_range) if j<=pt])[-1]
     binyj=sorted([i for i, j in enumerate(Eta_range) if j<=eta])[-1]
@@ -183,9 +192,10 @@ def getMuTightRunBCDEF_IDSF(pt,eta):
     matrix_SystDown = np.matrix(SfF_SystDown.muonTightIDSFs_EfficienciesAndSF_BCDEF_SystDown)
     Eta_range =  SfF.muonTightIDSFs_EfficienciesAndSF_BCDEF_X_range
     pT_range =  SfF.muonTightIDSFs_EfficienciesAndSF_BCDEF_Y_range
-    if pt > pT_range[-1]:pt = pT_range[-1]-1.0
-    if eta >= Eta_range[-1]:eta = Eta_range[-2]
-    if eta <= Eta_range[0]:eta = Eta_range[1]
+    if pt >= pT_range[-1]:pt = pT_range[-1]-corr_fac
+    if pt <= pT_range[0]:pt = pT_range[0]+corr_fac
+    if eta >= Eta_range[-1]:eta = Eta_range[-1]-corr_fac
+    if eta <= Eta_range[0]:eta = Eta_range[0]+corr_fac
 
     binxi=sorted([i for i, j in enumerate(pT_range) if j<=pt])[-1]
     binyj=sorted([i for i, j in enumerate(Eta_range) if j<=eta])[-1]
@@ -198,9 +208,10 @@ def getMuTightGH_IDSF(pt,eta):
     matrix_SystDown = np.matrix(SfF_SystDown.muonLooseIDSFs_EfficienciesAndSF_GH_SystDown)
     Eta_range =  SfF.muonLooseIDSFs_EfficienciesAndSF_GH_X_range
     pT_range =  SfF.muonLooseIDSFs_EfficienciesAndSF_GH_Y_range
-    if pt > pT_range[-1]:pt = pT_range[-1]-1.0
-    if eta >= Eta_range[-1]:eta = Eta_range[-2]
-    if eta <= Eta_range[0]:eta = Eta_range[1]
+    if pt >= pT_range[-1]:pt = pT_range[-1]-corr_fac
+    if pt <= pT_range[0]:pt = pT_range[0]+corr_fac
+    if eta >= Eta_range[-1]:eta = Eta_range[-1]-corr_fac
+    if eta <= Eta_range[0]:eta = Eta_range[0]+corr_fac
 
     binxi=sorted([i for i, j in enumerate(pT_range) if j<=pt])[-1]
     binyj=sorted([i for i, j in enumerate(Eta_range) if j<=eta])[-1]
@@ -229,9 +240,10 @@ def getMulooseBCDEF_lowpT_IDSF(pt,eta):
     matrix_SystDown = np.matrix(SfF_SystDown.muonLooseIDSFs_EfficienciesAndSF_lowpt_BCDEF_SystDown)
     Eta_range =  SfF.muonLooseIDSFs_EfficienciesAndSF_lowpt_BCDEF_Y_range
     pT_range =  SfF.muonLooseIDSFs_EfficienciesAndSF_lowpt_BCDEF_X_range
-    if pt > pT_range[-1]:pt = pT_range[-1]-1.0
-    if eta >= Eta_range[-1]:eta = Eta_range[-2]
-    if eta <= Eta_range[0]:eta = Eta_range[1]
+    if pt >= pT_range[-1]:pt = pT_range[-1]-corr_fac
+    if pt <= pT_range[0]:pt = pT_range[0]+corr_fac
+    if eta >= Eta_range[-1]:eta = Eta_range[-1]-corr_fac
+    if eta <= Eta_range[0]:eta = Eta_range[0]+corr_fac
 
     binxi=sorted([i for i, j in enumerate(pT_range) if j<=pt])[-1]
     binyj=sorted([i for i, j in enumerate(Eta_range) if j<=eta])[-1]
@@ -245,9 +257,10 @@ def getMuLooseGH_lowpT_IDSF(pt,eta):
     matrix_SystDown = np.matrix(SfF_SystDown.muonLooseIDSFs_EfficienciesAndSF_lowpt_GH_SystDown)
     Eta_range =  SfF.muonLooseIDSFs_EfficienciesAndSF_lowpt_GH_Y_range
     pT_range =  SfF.muonLooseIDSFs_EfficienciesAndSF_lowpt_GH_X_range
-    if pt > pT_range[-1]:pt = pT_range[-1]-1.0
-    if eta >= Eta_range[-1]:eta = Eta_range[-2]
-    if eta <= Eta_range[0]:eta = Eta_range[1]
+    if pt >= pT_range[-1]:pt = pT_range[-1]-corr_fac
+    if pt <= pT_range[0]:pt = pT_range[0]+corr_fac
+    if eta >= Eta_range[-1]:eta = Eta_range[-1]-corr_fac
+    if eta <= Eta_range[0]:eta = Eta_range[0]+corr_fac
 
     binxi=sorted([i for i, j in enumerate(pT_range) if j<=pt])[-1]
     binyj=sorted([i for i, j in enumerate(Eta_range) if j<=eta])[-1]
@@ -275,10 +288,10 @@ def getMulooseRunBCDEF_ISOSF(pt,eta):
     matrix_SystDown = np.matrix(SfF_SystDown.muonLooseIsoSFs_EfficienciesAndSF_BCDEF_SystDown)
     Eta_range =  SfF.muonLooseIsoSFs_EfficienciesAndSF_BCDEF_X_range
     pT_range =  SfF.muonLooseIsoSFs_EfficienciesAndSF_BCDEF_Y_range
-    if pt > pT_range[-1]:pt = pT_range[-1]-1.0
-    if pt < pT_range[0]:pt = pT_range[0]
-    if eta >= Eta_range[-1]:eta = Eta_range[-2]
-    if eta <= Eta_range[0]:eta = Eta_range[1]
+    if pt >= pT_range[-1]:pt = pT_range[-1]-corr_fac
+    if pt <= pT_range[0]:pt = pT_range[0]+corr_fac
+    if eta >= Eta_range[-1]:eta = Eta_range[-1]-corr_fac
+    if eta <= Eta_range[0]:eta = Eta_range[0]+corr_fac
 
     binxi=sorted([i for i, j in enumerate(pT_range) if j<=pt])[-1]
     binyj=sorted([i for i, j in enumerate(Eta_range) if j<=eta])[-1]
@@ -292,10 +305,10 @@ def getMulooseGH_ISOSF(pt,eta):
     matrix_SystDown = np.matrix(SfF_SystDown.muonLooseIsoSFs_EfficienciesAndSF_GH_SystDown)
     Eta_range =  SfF.muonLooseIsoSFs_EfficienciesAndSF_GH_X_range
     pT_range =  SfF.muonLooseIsoSFs_EfficienciesAndSF_GH_Y_range
-    if pt > pT_range[-1]:pt = pT_range[-1]-1.0
-    if pt < pT_range[0]:pt = pT_range[0]
-    if eta >= Eta_range[-1]:eta = Eta_range[-2]
-    if eta <= Eta_range[0]:eta = Eta_range[1]
+    if pt >= pT_range[-1]:pt = pT_range[-1]-corr_fac
+    if pt <= pT_range[0]:pt = pT_range[0]+corr_fac
+    if eta >= Eta_range[-1]:eta = Eta_range[-1]-corr_fac
+    if eta <= Eta_range[0]:eta = Eta_range[0]+corr_fac
 
     binxi=sorted([i for i, j in enumerate(pT_range) if j<=pt])[-1]
     binyj=sorted([i for i, j in enumerate(Eta_range) if j<=eta])[-1]
@@ -323,10 +336,10 @@ def getMuTightRunBCDEF_ISOSF(pt,eta):
     matrix_SystDown = np.matrix(SfF_SystDown.muonTightIsoSFs_EfficienciesAndSF_BCDEF_SystDown)
     Eta_range =  SfF.muonTightIsoSFs_EfficienciesAndSF_BCDEF_X_range
     pT_range =  SfF.muonTightIsoSFs_EfficienciesAndSF_BCDEF_Y_range
-    if pt > pT_range[-1]:pt = pT_range[-1]-1.0
-    if pt < pT_range[0]:pt = pT_range[0]
-    if eta >= Eta_range[-1]:eta = Eta_range[-2]
-    if eta <= Eta_range[0]:eta = Eta_range[1]
+    if pt >= pT_range[-1]:pt = pT_range[-1]-corr_fac
+    if pt <= pT_range[0]:pt = pT_range[0]+corr_fac
+    if eta >= Eta_range[-1]:eta = Eta_range[-1]-corr_fac
+    if eta <= Eta_range[0]:eta = Eta_range[0]+corr_fac
 
     binxi=sorted([i for i, j in enumerate(pT_range) if j<=pt])[-1]
     binyj=sorted([i for i, j in enumerate(Eta_range) if j<=eta])[-1]
@@ -340,10 +353,10 @@ def getMuTightGH_ISOSF(pt,eta):
     matrix_SystDown = np.matrix(SfF_SystDown.muonTightIsoSFs_EfficienciesAndSF_GH_SystDown)
     Eta_range =  SfF.muonTightIsoSFs_EfficienciesAndSF_GH_X_range
     pT_range =  SfF.muonTightIsoSFs_EfficienciesAndSF_GH_Y_range
-    if pt > pT_range[-1]:pt = pT_range[-1]-1.0
-    if pt < pT_range[0]:pt = pT_range[0]
-    if eta >= Eta_range[-1]:eta = Eta_range[-2]
-    if eta <= Eta_range[0]:eta = Eta_range[1]
+    if pt >= pT_range[-1]:pt = pT_range[-1]-corr_fac
+    if pt <= pT_range[0]:pt = pT_range[0]+corr_fac
+    if eta >= Eta_range[-1]:eta = Eta_range[-1]-corr_fac
+    if eta <= Eta_range[0]:eta = Eta_range[0]+corr_fac
 
     binxi=sorted([i for i, j in enumerate(pT_range) if j<=pt])[-1]
     binyj=sorted([i for i, j in enumerate(Eta_range) if j<=eta])[-1]
@@ -371,11 +384,10 @@ def getMuTrackingSF(eta):
     matrix_SystUp = np.array(SfF_SystUp.muonTrackingSFs_EfficienciesAndSF_BCDEFGH_SystUp)
     matrix_SystDown = np.array(SfF_SystDown.muonTrackingSFs_EfficienciesAndSF_BCDEFGH_SystDown)
     Eta_range =  SfF.muonTrackingSFs_EfficienciesAndSF_BCDEFGH_X_range
-    if eta >= Eta_range[-1]:eta = Eta_range[-2]
-    if eta <= Eta_range[0]:eta = Eta_range[1]
+    if eta >= Eta_range[-1]:eta = Eta_range[-1]
+    if eta <= Eta_range[0]:eta = Eta_range[0]
 
     binyj=sorted([i for i, j in enumerate(Eta_range) if j<=eta])[-1]
-
     return matrix[binyj],matrix_SystUp[binyj],matrix_SystDown[binyj]
 
 
@@ -384,8 +396,8 @@ def puweight(pu):
     matrix_SystUp = np.array(SfF_SystUp.pileup2016histo_SystUp)
     matrix_SystDown = np.array(SfF_SystDown.pileup2016histo_SystDown)
     PU_range =  SfF.pileup2016histo_X_range
-    if pu >= PU_range[-1]:pu = PU_range[-2]
-    if pu <= PU_range[0]:pu = PU_range[1]
+    if pu >= PU_range[-1]:pu = PU_range[-1]
+    if pu <= PU_range[0]:pu = PU_range[0]
 
     binyj=sorted([i for i, j in enumerate(PU_range) if j<=pu])[-1]
     return matrix[binyj],matrix_SystUp[binyj],matrix_SystDown[binyj]
@@ -396,8 +408,8 @@ def getMETtrig_First(met):
     matrix_SystUp = np.array(SfF_SystUp.metTrig_firstmethod_SystUp)
     matrix_SystDown = np.array(SfF_SystDown.metTrig_firstmethod_SystDown)
     met_range =  SfF.metTrig_firstmethod_X_range
-    if met >= met_range[-1]:pu = met_range[-2]
-    if met <= met_range[0]:pu = met_range[1]
+    if met >= met_range[-1]:pu = met_range[-1]
+    if met <= met_range[0]:pu = met_range[0]
 
     binyj=sorted([i for i, j in enumerate(met_range) if j<=met])[-1]
     return matrix[binyj],matrix_SystUp[binyj],matrix_SystDown[binyj]
