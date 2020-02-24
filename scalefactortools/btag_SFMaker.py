@@ -57,13 +57,9 @@ elif era=='2018':
     deepCSVMWP = 0.4184
     deepCSVTWP = 0.7527
 
-b_med_eff = tag_eff_file.Get('efficiency_b_pass')
-c_med_eff = tag_eff_file.Get('efficiency_c_pass')
-udsg_med_eff = tag_eff_file.Get('efficiency_light_pass')
-
-non_b_med_eff = tag_eff_file.Get('efficiency_b_fail')
-non_c_med_eff = tag_eff_file.Get('efficiency_c_fail')
-non_udsg_med_eff = tag_eff_file.Get('efficiency_light_fail')
+b_med_eff = tag_eff_file.Get('efficiency_btag_mwp')
+c_med_eff = tag_eff_file.Get('efficiency_ctag_mwp')
+udsg_med_eff = tag_eff_file.Get('efficiency_lighttag_mwp')
 
 othersys = ROOT.std.vector('string')()
 othersys.push_back('down')

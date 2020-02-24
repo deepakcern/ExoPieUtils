@@ -16,10 +16,13 @@ pileup2017histo_up=pileup2017file.Get('puweight_Up')
 pileup2017histo_down=pileup2017file.Get('puweight_Down')
 
 #Electron Trigger reweights
-eleTrigReweightFile = TFile('data_2017/electron_Trigger_eleTrig_2016.root')
-eleTrig_hEffEtaPt = eleTrigReweightFile.Get('hEffEtaPt')
-eleTrig_hEffEtaPtUp = eleTrigReweightFile.Get('hErrhEtaPt')
-eleTrig_hEffEtaPtDown = eleTrigReweightFile.Get('hErrlEtaPt')
+# eleTrigReweightFile = TFile('data_2017/electron_Trigger_eleTrig_2016.root')
+# eleTrig_hEffEtaPt = eleTrigReweightFile.Get('hEffEtaPt')
+# eleTrig_hEffEtaPtUp = eleTrigReweightFile.Get('hErrhEtaPt')
+# eleTrig_hEffEtaPtDown = eleTrigReweightFile.Get('hErrlEtaPt')
+eleTrigReweightFile = TFile('data_2017/electron_Trigger_eleTrig_2017.root')
+eleTrig_hEffEtaPt = eleTrigReweightFile.Get('EGamma_SF2D')
+
 
 #Electron Reconstruction efficiency. Scale factors for 80X
 eleRecoSFsFile_ptgt_20 = TFile('data_2017/electron_Reco_SFs_egammaEffi_txt_EGM2D_2017.root')
@@ -186,28 +189,6 @@ for sf in sf_list:
                     else:
                         ptlist.append(pileup2017histo_up.GetBinContent(pileup2017histo_up.FindBin(xlow)))
                         Eta_range.append(xlow)
-    elif (sf_list_dict[sf]=='eleTrig_hEffEtaPt'):
-        for binx in range(1,sf.GetXaxis().GetNbins()+1):
-            xlow  = sf.GetXaxis().GetBinLowEdge(binx)
-            xhigh = sf.GetXaxis().GetBinUpEdge(binx)
-            value=[]
-            if not Eta_rangeDone:
-                if binx == sf.GetXaxis().GetNbins():
-                    Eta_range.append(xlow)
-                    Eta_range.append(xhigh)
-                    Eta_rangeDone=True
-                else:Eta_range.append(xlow)
-            for biny in range(1,sf.GetYaxis().GetNbins()+1):
-                ylow  = sf.GetYaxis().GetBinLowEdge(biny)#+yShift
-                yhigh = sf.GetYaxis().GetBinUpEdge(biny)#-yShift
-                if not pT_rangeDone:
-                    if biny == sf.GetYaxis().GetNbins():
-                        pT_range.append(ylow)
-                        pT_range.append(yhigh)
-                        pT_rangeDone=True
-                    else:pT_range.append(ylow)
-                value.append(sf.GetBinContent(binx,biny)+eleTrig_hEffEtaPtUp.GetBinContent(binx,biny))
-            values.append(value)
     else:
         for binx in range(1,sf.GetXaxis().GetNbins()+1):
             xlow  = sf.GetXaxis().GetBinLowEdge(binx)
@@ -278,29 +259,6 @@ for sf in sf_list:
                 else:
                     ptlist.append(pileup2017histo_down.GetBinContent(pileup2017histo_down.FindBin(xlow)))
                     Eta_range.append(xlow)
-
-    elif (sf_list_dict[sf]=='eleTrig_hEffEtaPt'):
-        for binx in range(1,sf.GetXaxis().GetNbins()+1):
-            xlow  = sf.GetXaxis().GetBinLowEdge(binx)
-            xhigh = sf.GetXaxis().GetBinUpEdge(binx)
-            value=[]
-            if not Eta_rangeDone:
-                if binx == sf.GetXaxis().GetNbins():
-                    Eta_range.append(xlow)
-                    Eta_range.append(xhigh)
-                    Eta_rangeDone=True
-                else:Eta_range.append(xlow)
-            for biny in range(1,sf.GetYaxis().GetNbins()+1):
-                ylow  = sf.GetYaxis().GetBinLowEdge(biny)#+yShift
-                yhigh = sf.GetYaxis().GetBinUpEdge(biny)#-yShift
-                if not pT_rangeDone:
-                    if biny == sf.GetYaxis().GetNbins():
-                        pT_range.append(ylow)
-                        pT_range.append(yhigh)
-                        pT_rangeDone=True
-                    else:pT_range.append(ylow)
-                value.append(sf.GetBinContent(binx,biny)-eleTrig_hEffEtaPtDown.GetBinContent(binx,biny))
-            values.append(value)
     else:
         for binx in range(1,sf.GetXaxis().GetNbins()+1):
             xlow  = sf.GetXaxis().GetBinLowEdge(binx)
