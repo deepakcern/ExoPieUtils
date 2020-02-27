@@ -11,7 +11,9 @@ ROOT.gROOT.SetBatch(True)
 
 #pileup reweights
 pileup2016file = TFile('data_2016/PU_Reweight_2016.root')
-pileup2016histo=pileup2016file.Get('pileup')
+pileup2016histo=pileup2016file.Get('puweight')
+pileup2016histo_up=pileup2016file.Get('puweight_Up')
+pileup2016histo_down=pileup2016file.Get('puweight_Down')
 
 #Electron Trigger reweights
 eleTrigReweightFile = TFile('data_2016/electron_Trigger_eleTrig.root')
@@ -200,19 +202,19 @@ for sf in sf_list:
                     ptlist.append(sf.GetBinContent(sf.FindBin(xlow))+(sf.GetBinContent(sf.FindBin(xlow))-metTrig_secondmethod.GetBinContent(sf.FindBin(xlow))))
                     Eta_range.append(xlow)
     elif (sf_list_dict[sf]=='pileup2016histo'):
-        for binx in range(1,sf.GetXaxis().GetNbins()+1):
-            xlow  = sf.GetXaxis().GetBinLowEdge(binx)
-            xhigh = sf.GetXaxis().GetBinUpEdge(binx)
-            if not Eta_rangeDone:
-                if binx == sf.GetXaxis().GetNbins():
-                    ptlist.append(sf.GetBinContent(sf.FindBin(xlow)))
-                    ptlist.append(sf.GetBinContent(sf.FindBin(xhigh)))
-                    Eta_range.append(xlow)
-                    Eta_range.append(xhigh)
-                    Eta_rangeDone=True
-                else:
-                    ptlist.append(sf.GetBinContent(sf.FindBin(xlow)))
-                    Eta_range.append(xlow)
+            for binx in range(1,pileup2016histo_up.GetXaxis().GetNbins()+1):
+                xlow  = pileup2016histo_up.GetXaxis().GetBinLowEdge(binx)
+                xhigh = pileup2016histo_up.GetXaxis().GetBinUpEdge(binx)
+                if not Eta_rangeDone:
+                    if binx == pileup2016histo_up.GetXaxis().GetNbins():
+                        ptlist.append(pileup2016histo_up.GetBinContent(pileup2016histo_up.FindBin(xlow)))
+                        ptlist.append(pileup2016histo_up.GetBinContent(pileup2016histo_up.FindBin(xhigh)))
+                        Eta_range.append(xlow)
+                        Eta_range.append(xhigh)
+                        Eta_rangeDone=True
+                    else:
+                        ptlist.append(pileup2016histo_up.GetBinContent(pileup2016histo_up.FindBin(xlow)))
+                        Eta_range.append(xlow)
     elif (sf_list_dict[sf]=='eleTrig_hEffEtaPt'):
         for binx in range(1,sf.GetXaxis().GetNbins()+1):
             xlow  = sf.GetXaxis().GetBinLowEdge(binx)
@@ -306,18 +308,18 @@ for sf in sf_list:
                     ptlist.append(sf.GetBinContent(sf.FindBin(xlow))-(sf.GetBinContent(sf.FindBin(xlow))-metTrig_secondmethod.GetBinContent(sf.FindBin(xlow))))
                     Eta_range.append(xlow)
     elif (sf_list_dict[sf]=='pileup2016histo'):
-        for binx in range(1,sf.GetXaxis().GetNbins()+1):
-            xlow  = sf.GetXaxis().GetBinLowEdge(binx)
-            xhigh = sf.GetXaxis().GetBinUpEdge(binx)
+        for binx in range(1,pileup2016histo_down.GetXaxis().GetNbins()+1):
+            xlow  = pileup2016histo_down.GetXaxis().GetBinLowEdge(binx)
+            xhigh = pileup2016histo_down.GetXaxis().GetBinUpEdge(binx)
             if not Eta_rangeDone:
-                if binx == sf.GetXaxis().GetNbins():
-                    ptlist.append(sf.GetBinContent(sf.FindBin(xlow)))
-                    ptlist.append(sf.GetBinContent(sf.FindBin(xhigh)))
+                if binx == pileup2016histo_down.GetXaxis().GetNbins():
+                    ptlist.append(pileup2016histo_down.GetBinContent(pileup2016histo_down.FindBin(xlow)))
+                    ptlist.append(pileup2016histo_down.GetBinContent(pileup2016histo_down.FindBin(xhigh)))
                     Eta_range.append(xlow)
                     Eta_range.append(xhigh)
                     Eta_rangeDone=True
                 else:
-                    ptlist.append(sf.GetBinContent(sf.FindBin(xlow)))
+                    ptlist.append(pileup2016histo_down.GetBinContent(pileup2016histo_down.FindBin(xlow)))
                     Eta_range.append(xlow)
     elif (sf_list_dict[sf]=='eleTrig_hEffEtaPt'):
         for binx in range(1,sf.GetXaxis().GetNbins()+1):
