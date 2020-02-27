@@ -74,51 +74,64 @@ muonTrackingSFs_EfficienciesAndSF_BCDEFGH = muonTrackingSFsFile.Get('ratio_eff_a
 # metTrigEff_zmmfile = TFile('data_2017/metTriggerEfficiency_zmm_recoil_monojet_TH1F_2016.root')
 # metTrig_firstmethod = metTrigEff_zmmfile.Get('hden_monojet_recoil_clone_passed')
 metTrigEff_zmmfile = TFile('data_2017/TriggerEff_MET2017.root')
-metTrig_firstmethod = metTrigEff_zmmfile.Get('trig_eff')
+metTrig_firstmethod = metTrigEff_zmmfile.Get('Wmunu')
 
-# metTrigEff_secondfile = TFile('data_2017/metTriggerEfficiency_recoil_monojet_TH1F_2016.root')
-# metTrig_secondmethod = metTrigEff_secondfile.Get('hden_monojet_recoil_clone_passed')
+metTrigEff_secondfile = TFile('data_2017/TriggerEff_MET2017.root')
+metTrig_secondmethod = metTrigEff_secondfile.Get('Zmumu')
 
 
-sf_list = [pileup2017histo,eleTrig_hEffEtaPt,eleRecoSF_EGamma_SF2D_ptgt_20,eleRecoSF_EGamma_SF2D_ptlt_20,eleLooseIDSF_EGamma_SF2D,eleTightIDSF_EGamma_SF2D,muonTrigSFs_EfficienciesAndSF_RunBtoF,muonLooseIDSFs_EfficienciesAndSF_BCDEF,muonLooseIDSFs_EfficienciesAndSF_lowpt_BCDEF,muonTightIDSFs_EfficienciesAndSF_BCDEF,muonLooseIsoSFs_EfficienciesAndSF_BCDEF,muonTightIsoSFs_EfficienciesAndSF_BCDEF,muonTrackingSFs_EfficienciesAndSF_BCDEFGH,metTrig_firstmethod]
+sf_list = [pileup2017histo,eleTrig_hEffEtaPt,eleRecoSF_EGamma_SF2D_ptgt_20,eleRecoSF_EGamma_SF2D_ptlt_20,eleLooseIDSF_EGamma_SF2D,eleTightIDSF_EGamma_SF2D,muonTrigSFs_EfficienciesAndSF_RunBtoF,muonLooseIDSFs_EfficienciesAndSF_BCDEF,muonLooseIDSFs_EfficienciesAndSF_lowpt_BCDEF,muonTightIDSFs_EfficienciesAndSF_BCDEF,muonLooseIsoSFs_EfficienciesAndSF_BCDEF,muonTightIsoSFs_EfficienciesAndSF_BCDEF,muonTrackingSFs_EfficienciesAndSF_BCDEFGH,metTrig_firstmethod,metTrig_secondmethod]
 
-sf_list_dict = {pileup2017histo:'pileup2017histo',eleTrig_hEffEtaPt:'eleTrig_hEffEtaPt',eleRecoSF_EGamma_SF2D_ptgt_20:'eleRecoSF_EGamma_SF2D_ptgt_20',eleRecoSF_EGamma_SF2D_ptlt_20:'eleRecoSF_EGamma_SF2D_ptlt_20',eleLooseIDSF_EGamma_SF2D:'eleLooseIDSF_EGamma_SF2D',eleTightIDSF_EGamma_SF2D:'eleTightIDSF_EGamma_SF2D',muonTrigSFs_EfficienciesAndSF_RunBtoF:'muonTrigSFs_EfficienciesAndSF_RunBtoF',muonLooseIDSFs_EfficienciesAndSF_BCDEF:'muonLooseIDSFs_EfficienciesAndSF_BCDEF',muonLooseIDSFs_EfficienciesAndSF_lowpt_BCDEF:'muonLooseIDSFs_EfficienciesAndSF_lowpt_BCDEF',muonTightIDSFs_EfficienciesAndSF_BCDEF:'muonTightIDSFs_EfficienciesAndSF_BCDEF',muonLooseIsoSFs_EfficienciesAndSF_BCDEF:'muonLooseIsoSFs_EfficienciesAndSF_BCDEF',muonTightIsoSFs_EfficienciesAndSF_BCDEF:'muonTightIsoSFs_EfficienciesAndSF_BCDEF',muonTrackingSFs_EfficienciesAndSF_BCDEFGH:'muonTrackingSFs_EfficienciesAndSF_BCDEFGH',metTrig_firstmethod:'metTrig_firstmethod'}
+sf_list_dict = {pileup2017histo:'pileup2017histo',eleTrig_hEffEtaPt:'eleTrig_hEffEtaPt',eleRecoSF_EGamma_SF2D_ptgt_20:'eleRecoSF_EGamma_SF2D_ptgt_20',eleRecoSF_EGamma_SF2D_ptlt_20:'eleRecoSF_EGamma_SF2D_ptlt_20',eleLooseIDSF_EGamma_SF2D:'eleLooseIDSF_EGamma_SF2D',eleTightIDSF_EGamma_SF2D:'eleTightIDSF_EGamma_SF2D',muonTrigSFs_EfficienciesAndSF_RunBtoF:'muonTrigSFs_EfficienciesAndSF_RunBtoF',muonLooseIDSFs_EfficienciesAndSF_BCDEF:'muonLooseIDSFs_EfficienciesAndSF_BCDEF',muonLooseIDSFs_EfficienciesAndSF_lowpt_BCDEF:'muonLooseIDSFs_EfficienciesAndSF_lowpt_BCDEF',muonTightIDSFs_EfficienciesAndSF_BCDEF:'muonTightIDSFs_EfficienciesAndSF_BCDEF',muonLooseIsoSFs_EfficienciesAndSF_BCDEF:'muonLooseIsoSFs_EfficienciesAndSF_BCDEF',muonTightIsoSFs_EfficienciesAndSF_BCDEF:'muonTightIsoSFs_EfficienciesAndSF_BCDEF',muonTrackingSFs_EfficienciesAndSF_BCDEFGH:'muonTrackingSFs_EfficienciesAndSF_BCDEFGH',metTrig_firstmethod:'metTrig_firstmethod',metTrig_secondmethod:'metTrig_secondmethod'}
 
 
 f= open("SFFactory_2017.py","w+")
 for sf in sf_list:
     ptlist=[];ptlistUp=[];ptlistDown=[]
     Eta_range=[];pT_range=[]
-    Eta_rangeDone=False;pT_rangeDone=False
+    Eta_rangeDone=False;pT_rangeDone=False;X_rangeDone=False
+    X_range =[];Efficiency =[]
     values=[]
-    if sf_list_dict[sf]=='muonTrackingSFs_EfficienciesAndSF_BCDEFGH' or (sf_list_dict[sf]=='metTrig_firstmethod'):
-        for binx in range(1,sf.GetXaxis().GetNbins()+1):
-            xlow  = sf.GetXaxis().GetBinLowEdge(binx)
-            xhigh = sf.GetXaxis().GetBinUpEdge(binx)
-            if not Eta_rangeDone:
-                if binx == sf.GetXaxis().GetNbins():
-                    ptlist.append(sf.Eval(xlow))
-                    ptlist.append(sf.Eval(xhigh))
-                    Eta_range.append(xlow)
-                    Eta_range.append(xhigh)
-                    Eta_rangeDone=True
-                else:
-                    ptlist.append(sf.Eval(xlow))
-                    Eta_range.append(xlow)
+
+    if (sf_list_dict[sf]=='muonTrackingSFs_EfficienciesAndSF_BCDEFGH') or (sf_list_dict[sf]=='metTrig_firstmethod') or (sf_list_dict[sf]=='metTrig_secondmethod'):
+        for point in range(sf.GetN()):
+            x, y = ROOT.Double(0), ROOT.Double(0)
+            sf.GetPoint(point,x,y)
+            X_range.append(x)
+            Efficiency.append(y)
+
+
+    # elif sf_list_dict[sf]=='muonTrackingSFs_EfficienciesAndSF_BCDEFGH':# or (sf_list_dict[sf]=='metTrig_firstmethod') or (sf_list_dict[sf]=='metTrig_secondmethod'):
+    #     for binx in range(1,sf.GetXaxis().GetNbins()+1):
+    #         xlow  = sf.GetXaxis().GetBinLowEdge(binx)
+    #         xhigh = sf.GetXaxis().GetBinUpEdge(binx)
+    #         if not X_rangeDone:
+    #             if binx == sf.GetXaxis().GetNbins():
+    #                 Efficiency.append(sf.Eval(xlow))
+    #                 Efficiency.append(sf.Eval(xhigh))
+    #                 X_range.append(xlow)
+    #                 X_range.append(xhigh)
+    #                 X_rangeDone=True
+    #             else:
+    #                 Efficiency.append(sf.Eval(xlow))
+    #                 X_range.append(xlow)
+
+
     elif (sf_list_dict[sf]=='pileup2017histo'):
+        Efficiency.append(0.0)
         for binx in range(1,sf.GetXaxis().GetNbins()+1):
             xlow  = sf.GetXaxis().GetBinLowEdge(binx)
             xhigh = sf.GetXaxis().GetBinUpEdge(binx)
-            if not Eta_rangeDone:
+            if not X_rangeDone:
                 if binx == sf.GetXaxis().GetNbins():
-                    ptlist.append(sf.GetBinContent(sf.FindBin(xlow)))
-                    ptlist.append(sf.GetBinContent(sf.FindBin(xhigh)))
-                    Eta_range.append(xlow)
-                    Eta_range.append(xhigh)
-                    Eta_rangeDone=True
+                    Efficiency.append(sf.GetBinContent(sf.FindBin(xlow)))
+                    Efficiency.append(sf.GetBinContent(sf.FindBin(xhigh)))
+                    X_range.append(xlow)
+                    X_range.append(xhigh)
+                    X_rangeDone=True
                 else:
-                    ptlist.append(sf.GetBinContent(sf.FindBin(xlow)))
-                    Eta_range.append(xlow)
+                    Efficiency.append(sf.GetBinContent(sf.FindBin(xlow)))
+                    X_range.append(xlow)
     else:
         for binx in range(1,sf.GetXaxis().GetNbins()+1):
             xlow  = sf.GetXaxis().GetBinLowEdge(binx)
@@ -141,54 +154,68 @@ for sf in sf_list:
                     else:pT_range.append(ylow)
                 value.append(sf.GetBinContent(binx,biny))
             values.append(value)
-    print (sf_list_dict[sf]+'_X_range = ', Eta_range)
-    print (sf_list_dict[sf]+'_Y_range = ', pT_range)
-    print (sf_list_dict[sf])
-    if (sf_list_dict[sf]=='muonTrackingSFs_EfficienciesAndSF_BCDEFGH')or (sf_list_dict[sf]=='pileup2017histo') or (sf_list_dict[sf]=='metTrig_firstmethod'):
-        f.write(sf_list_dict[sf]+'_X_range = '+str(Eta_range)+'\n')
-        f.write(str(sf_list_dict[sf])+"="+str(ptlist)+'\n')
+
+    # if (sf_list_dict[sf]=='metTrig_secondmethod'):
+    #     print (sf_list_dict[sf]+'_X_range = ', Eta_range[-1])
+        # print (sf_list_dict[sf]+'_Y_range = ', pT_range[-1])
+        # print (sf_list_dict[sf],'values',str(ptlist[-1]))
+
+    if (sf_list_dict[sf]=='muonTrackingSFs_EfficienciesAndSF_BCDEFGH') or (sf_list_dict[sf]=='pileup2017histo') or (sf_list_dict[sf]=='metTrig_firstmethod') or (sf_list_dict[sf]=='metTrig_secondmethod'):
+        f.write(sf_list_dict[sf]+'_X_range = '+str(X_range)+'\n')
+        f.write(str(sf_list_dict[sf])+"="+str(Efficiency)+'\n')
     else:
         f.write(sf_list_dict[sf]+'_X_range = '+str(Eta_range)+'\n')
         f.write(sf_list_dict[sf]+'_Y_range = '+str(pT_range)+'\n')
         f.write(str(sf_list_dict[sf])+"="+str(values)+'\n')
+        #if (sf_list_dict[sf]=='pileup2017histo'):print (str(sf_list_dict[sf])+"="+str(values))
     f.write ('\n')
-    print ('\n')
+    # print ('\n')
 f.close()
 
 f_Up= open("SFFactorySystUp_2017.py","w+")
 for sf in sf_list:
     ptlist=[];ptlistUp=[];ptlistDown=[]
     Eta_range=[];pT_range=[]
-    Eta_rangeDone=False;pT_rangeDone=False
+    Eta_rangeDone=False;pT_rangeDone=False;X_rangeDone=False
+    X_range =[];Efficiency =[]
     values=[]
-    if sf_list_dict[sf]=='muonTrackingSFs_EfficienciesAndSF_BCDEFGH' or (sf_list_dict[sf]=='metTrig_firstmethod'):
-        for binx in range(1,sf.GetXaxis().GetNbins()+1):
-            xlow  = sf.GetXaxis().GetBinLowEdge(binx)
-            xhigh = sf.GetXaxis().GetBinUpEdge(binx)
-            if not Eta_rangeDone:
-                if binx == sf.GetXaxis().GetNbins():
-                    ptlist.append(sf.Eval(xlow)+sf.GetErrorYhigh(sf.GetYaxis().FindBin(xlow)))
-                    ptlist.append(sf.Eval(xhigh)+sf.GetErrorYhigh(sf.GetYaxis().FindBin(xhigh)))
-                    Eta_range.append(xlow)
-                    Eta_range.append(xhigh)
-                    Eta_rangeDone=True
-                else:
-                    ptlist.append(sf.Eval(xlow)+sf.GetErrorYhigh(sf.GetYaxis().FindBin(xlow)))
-                    Eta_range.append(xlow)
+    if (sf_list_dict[sf]=='muonTrackingSFs_EfficienciesAndSF_BCDEFGH') or (sf_list_dict[sf]=='metTrig_firstmethod') or (sf_list_dict[sf]=='metTrig_secondmethod'):
+        for point in range(sf.GetN()):
+            x, y = ROOT.Double(0), ROOT.Double(0)
+            sf.GetPoint(point,x,y)
+            X_range.append(x)
+            Efficiency.append(y)
+
+    # elif sf_list_dict[sf]=='muonTrackingSFs_EfficienciesAndSF_BCDEFGH':# or (sf_list_dict[sf]=='metTrig_firstmethod') or (sf_list_dict[sf]=='metTrig_secondmethod'):
+    #     for binx in range(1,sf.GetXaxis().GetNbins()+1):
+    #         xlow  = sf.GetXaxis().GetBinLowEdge(binx)
+    #         xhigh = sf.GetXaxis().GetBinUpEdge(binx)
+    #         if not X_rangeDone:
+    #             if binx == sf.GetXaxis().GetNbins():
+    #                 Efficiency.append(sf.Eval(xlow))
+    #                 Efficiency.append(sf.Eval(xhigh))
+    #                 X_range.append(xlow)
+    #                 X_range.append(xhigh)
+    #                 X_rangeDone=True
+    #             else:
+    #                 Efficiency.append(sf.Eval(xlow))
+    #                 X_range.append(xlow)
+
     elif (sf_list_dict[sf]=='pileup2017histo'):
-            for binx in range(1,pileup2017histo_up.GetXaxis().GetNbins()+1):
-                xlow  = pileup2017histo_up.GetXaxis().GetBinLowEdge(binx)
-                xhigh = pileup2017histo_up.GetXaxis().GetBinUpEdge(binx)
-                if not Eta_rangeDone:
-                    if binx == pileup2017histo_up.GetXaxis().GetNbins():
-                        ptlist.append(pileup2017histo_up.GetBinContent(pileup2017histo_up.FindBin(xlow)))
-                        ptlist.append(pileup2017histo_up.GetBinContent(pileup2017histo_up.FindBin(xhigh)))
-                        Eta_range.append(xlow)
-                        Eta_range.append(xhigh)
-                        Eta_rangeDone=True
-                    else:
-                        ptlist.append(pileup2017histo_up.GetBinContent(pileup2017histo_up.FindBin(xlow)))
-                        Eta_range.append(xlow)
+        Efficiency.append(0.0)
+        for binx in range(1,pileup2017histo_up.GetXaxis().GetNbins()+1):
+            xlow  = pileup2017histo_up.GetXaxis().GetBinLowEdge(binx)
+            xhigh = pileup2017histo_up.GetXaxis().GetBinUpEdge(binx)
+            if not X_rangeDone:
+                if binx == sf.GetXaxis().GetNbins():
+                    Efficiency.append(sf.GetBinContent(sf.FindBin(xlow)))
+                    Efficiency.append(sf.GetBinContent(sf.FindBin(xhigh)))
+                    X_range.append(xlow)
+                    X_range.append(xhigh)
+                    X_rangeDone=True
+                else:
+                    Efficiency.append(sf.GetBinContent(sf.FindBin(xlow)))
+                    X_range.append(xlow)
     else:
         for binx in range(1,sf.GetXaxis().GetNbins()+1):
             xlow  = sf.GetXaxis().GetBinLowEdge(binx)
@@ -211,54 +238,68 @@ for sf in sf_list:
                     else:pT_range.append(ylow)
                 value.append(sf.GetBinContent(binx,biny)+sf.GetBinErrorUp(binx,biny))
             values.append(value)
-    print (sf_list_dict[sf]+'_X_range = ', Eta_range)
-    print (sf_list_dict[sf]+'_Y_range = ', pT_range)
-    print (sf_list_dict[sf])
-    if (sf_list_dict[sf]=='muonTrackingSFs_EfficienciesAndSF_BCDEFGH')or (sf_list_dict[sf]=='pileup2017histo') or (sf_list_dict[sf]=='metTrig_firstmethod'):
-        f_Up.write(sf_list_dict[sf]+'_X_range = '+str(Eta_range)+'\n')
-        f_Up.write(str(sf_list_dict[sf])+"_SystUp="+str(ptlist)+'\n')
+
+    # if (sf_list_dict[sf]=='metTrig_secondmethod'):
+    #     print (sf_list_dict[sf]+'_X_range = ', Eta_range[-1])
+        # print (sf_list_dict[sf]+'_Y_range = ', pT_range[-1])
+        # print (sf_list_dict[sf],'values',str(ptlist[-1]))
+
+    if (sf_list_dict[sf]=='muonTrackingSFs_EfficienciesAndSF_BCDEFGH')or (sf_list_dict[sf]=='pileup2017histo') or (sf_list_dict[sf]=='metTrig_firstmethod') or (sf_list_dict[sf]=='metTrig_secondmethod'):
+        f_Up.write(sf_list_dict[sf]+'_X_range = '+str(X_range)+'\n')
+        f_Up.write(str(sf_list_dict[sf])+"_SystUp="+str(Efficiency)+'\n')
     else:
         f_Up.write(sf_list_dict[sf]+'_X_range = '+str(Eta_range)+'\n')
         f_Up.write(sf_list_dict[sf]+'_Y_range = '+str(pT_range)+'\n')
         f_Up.write(str(sf_list_dict[sf])+"_SystUp="+str(values)+'\n')
     f_Up.write ('\n')
-    print ('\n')
+    # print ('\n')
 f_Up.close()
 
 f_Down= open("SFFactorySystDown_2017.py","w+")
 for sf in sf_list:
     ptlist=[];ptlistUp=[];ptlistDown=[]
     Eta_range=[];pT_range=[]
-    Eta_rangeDone=False;pT_rangeDone=False
+    Eta_rangeDone=False;pT_rangeDone=False;X_rangeDone=False
+    X_range =[];Efficiency =[]
     values=[]
-    if sf_list_dict[sf]=='muonTrackingSFs_EfficienciesAndSF_BCDEFGH' or (sf_list_dict[sf]=='metTrig_firstmethod'):
-        for binx in range(1,sf.GetXaxis().GetNbins()+1):
-            xlow  = sf.GetXaxis().GetBinLowEdge(binx)
-            xhigh = sf.GetXaxis().GetBinUpEdge(binx)
-            if not Eta_rangeDone:
-                if binx == sf.GetXaxis().GetNbins():
-                    ptlist.append(sf.Eval(xlow)-sf.GetErrorYlow(sf.GetYaxis().FindBin(xlow)))
-                    ptlist.append(sf.Eval(xhigh)-sf.GetErrorYlow(sf.GetYaxis().FindBin(xhigh)))
-                    Eta_range.append(xlow)
-                    Eta_range.append(xhigh)
-                    Eta_rangeDone=True
-                else:
-                    ptlist.append(sf.Eval(xlow)-sf.GetErrorYlow(sf.GetYaxis().FindBin(xlow)))
-                    Eta_range.append(xlow)
+
+    if (sf_list_dict[sf]=='muonTrackingSFs_EfficienciesAndSF_BCDEFGH') or (sf_list_dict[sf]=='metTrig_firstmethod') or (sf_list_dict[sf]=='metTrig_secondmethod'):
+        for point in range(sf.GetN()):
+            x, y = ROOT.Double(0), ROOT.Double(0)
+            sf.GetPoint(point,x,y)
+            X_range.append(x)
+            Efficiency.append(y)
+
+    # elif sf_list_dict[sf]=='muonTrackingSFs_EfficienciesAndSF_BCDEFGH':# or (sf_list_dict[sf]=='metTrig_firstmethod') or (sf_list_dict[sf]=='metTrig_secondmethod'):
+    #     for binx in range(1,sf.GetXaxis().GetNbins()+1):
+    #         xlow  = sf.GetXaxis().GetBinLowEdge(binx)
+    #         xhigh = sf.GetXaxis().GetBinUpEdge(binx)
+    #         if not X_rangeDone:
+    #             if binx == sf.GetXaxis().GetNbins():
+    #                 Efficiency.append(sf.Eval(xlow))
+    #                 Efficiency.append(sf.Eval(xhigh))
+    #                 X_range.append(xlow)
+    #                 X_range.append(xhigh)
+    #                 X_rangeDone=True
+    #             else:
+    #                 Efficiency.append(sf.Eval(xlow))
+    #                 X_range.append(xlow)
+
     elif (sf_list_dict[sf]=='pileup2017histo'):
+        Efficiency.append(0.0)
         for binx in range(1,pileup2017histo_down.GetXaxis().GetNbins()+1):
             xlow  = pileup2017histo_down.GetXaxis().GetBinLowEdge(binx)
             xhigh = pileup2017histo_down.GetXaxis().GetBinUpEdge(binx)
-            if not Eta_rangeDone:
-                if binx == pileup2017histo_down.GetXaxis().GetNbins():
-                    ptlist.append(pileup2017histo_down.GetBinContent(pileup2017histo_down.FindBin(xlow)))
-                    ptlist.append(pileup2017histo_down.GetBinContent(pileup2017histo_down.FindBin(xhigh)))
-                    Eta_range.append(xlow)
-                    Eta_range.append(xhigh)
-                    Eta_rangeDone=True
+            if not X_rangeDone:
+                if binx == sf.GetXaxis().GetNbins():
+                    Efficiency.append(sf.GetBinContent(sf.FindBin(xlow)))
+                    Efficiency.append(sf.GetBinContent(sf.FindBin(xhigh)))
+                    X_range.append(xlow)
+                    X_range.append(xhigh)
+                    X_rangeDone=True
                 else:
-                    ptlist.append(pileup2017histo_down.GetBinContent(pileup2017histo_down.FindBin(xlow)))
-                    Eta_range.append(xlow)
+                    Efficiency.append(sf.GetBinContent(sf.FindBin(xlow)))
+                    X_range.append(xlow)
     else:
         for binx in range(1,sf.GetXaxis().GetNbins()+1):
             xlow  = sf.GetXaxis().GetBinLowEdge(binx)
@@ -281,16 +322,19 @@ for sf in sf_list:
                     else:pT_range.append(ylow)
                 value.append(sf.GetBinContent(binx,biny)-sf.GetBinErrorLow(binx,biny))
             values.append(value)
-    print (sf_list_dict[sf]+'_X_range = ', Eta_range)
-    print (sf_list_dict[sf]+'_Y_range = ', pT_range)
-    print (sf_list_dict[sf])
-    if (sf_list_dict[sf]=='muonTrackingSFs_EfficienciesAndSF_BCDEFGH')or (sf_list_dict[sf]=='pileup2017histo') or (sf_list_dict[sf]=='metTrig_firstmethod'):
-        f_Down.write(sf_list_dict[sf]+'_X_range = '+str(Eta_range)+'\n')
-        f_Down.write(str(sf_list_dict[sf])+"_SystDown="+str(ptlist)+'\n')
+
+    # if (sf_list_dict[sf]=='metTrig_secondmethod'):
+    #     print (sf_list_dict[sf]+'_X_range = ', Eta_range[-1])
+        # print (sf_list_dict[sf]+'_Y_range = ', pT_range[-1])
+        # print (sf_list_dict[sf],'values',str(ptlist[-1]))
+
+    if (sf_list_dict[sf]=='muonTrackingSFs_EfficienciesAndSF_BCDEFGH')or (sf_list_dict[sf]=='pileup2017histo') or (sf_list_dict[sf]=='metTrig_firstmethod') or (sf_list_dict[sf]=='metTrig_secondmethod'):
+        f_Down.write(sf_list_dict[sf]+'_X_range = '+str(X_range)+'\n')
+        f_Down.write(str(sf_list_dict[sf])+"_SystDown="+str(Efficiency)+'\n')
     else:
         f_Down.write(sf_list_dict[sf]+'_X_range = '+str(Eta_range)+'\n')
         f_Down.write(sf_list_dict[sf]+'_Y_range = '+str(pT_range)+'\n')
         f_Down.write(str(sf_list_dict[sf])+"_SystDown="+str(values)+'\n')
     f_Down.write ('\n')
-    print ('\n')
+    # print ('\n')
 f_Down.close()
