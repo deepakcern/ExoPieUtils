@@ -42,9 +42,14 @@ def ele_weight(pt,eta,ID='None'):
         Reco_w_UP = SFR.getEleRecoHighSF(pt,eta)[1]
         Reco_w_DOWN = SFR.getEleRecoHighSF(pt,eta)[2]
     elif pt < 20.0 :
-        Reco_w = SFR.getEleRecoLowSF(pt,eta)[0]
-        Reco_w_UP = SFR.getEleRecoLowSF(pt,eta)[1]
-        Reco_w_DOWN = SFR.getEleRecoLowSF(pt,eta)[2]
+        if era=='2016' or era=='2017':
+            Reco_w = SFR.getEleRecoLowSF(pt,eta)[0]
+            Reco_w_UP = SFR.getEleRecoLowSF(pt,eta)[1]
+            Reco_w_DOWN = SFR.getEleRecoLowSF(pt,eta)[2]
+        elif era=='2018':
+            Reco_w = SFR.getEleRecoHighSF(pt,eta)[0]
+            Reco_w_UP = SFR.getEleRecoHighSF(pt,eta)[1]
+            Reco_w_DOWN = SFR.getEleRecoHighSF(pt,eta)[2]
     elif ID =='None':
         print ('Please select which ID electron you want(L or T)')
     weight = ID_w*Reco_w

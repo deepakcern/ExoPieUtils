@@ -12,7 +12,7 @@ def getEWKW( pt):
     if pt < 170: weight  = 0.96648144722
     elif (pt >= 170.0 and pt <  200.0): weght  = 0.958350896835
     elif (pt >= 200.0 and pt < 230.0):  weight = 0.94851320982
-    elif (pt >= 230.0 and pt < 260.0:   weight = 0.938303768635
+    elif (pt >= 230.0 and pt < 260.0):   weight = 0.938303768635
     elif (pt >= 260.0 and pt < 290.0):  weight =  0.929393827915
     elif (pt >= 290.0 and pt < 320.0):  weight =  0.919687867165
     elif (pt >= 320.0 and pt < 350.0):  weight =  0.910424590111
@@ -33,8 +33,7 @@ def getEWKW( pt):
     elif (pt >= 1020.0 and pt < 1090.0): weight =    0.74226218462
     elif (pt >= 1090.0 and pt < 1160.0): weight =    0.729250490665
     elif (pt >= 1160.0):  weight =   0.716423392296
-
-  return weight
+    return weight
 
 
 #//--------------------------------------------------------------------------------------
@@ -65,8 +64,7 @@ def getEWKZ(  pt):
     elif (pt >= 1020.0 and pt <   1090.0): weight =    0.798037588596
     elif (pt >= 1090.0 and pt <   1160.0): weight =    0.789693713188
     elif (pt >= 1160.0): weight =    0.781163275242
-
-  return weight
+    return weight
 
 def getEWKG(pt):
     weight = 1.0
