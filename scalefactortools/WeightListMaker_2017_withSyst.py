@@ -171,14 +171,14 @@ for sf in sf_list:
             xlow  = pileup2017histo_up.GetXaxis().GetBinLowEdge(binx)
             xhigh = pileup2017histo_up.GetXaxis().GetBinUpEdge(binx)
             if not X_rangeDone:
-                if binx == sf.GetXaxis().GetNbins():
-                    Efficiency.append(sf.GetBinContent(sf.FindBin(xlow)))
-                    Efficiency.append(sf.GetBinContent(sf.FindBin(xhigh)))
+                if binx == pileup2017histo_up.GetXaxis().GetNbins():
+                    Efficiency.append(pileup2017histo_up.GetBinContent(pileup2017histo_up.FindBin(xlow)))
+                    Efficiency.append(pileup2017histo_up.GetBinContent(pileup2017histo_up.FindBin(xhigh)))
                     X_range.append(xlow)
                     X_range.append(xhigh)
                     X_rangeDone=True
                 else:
-                    Efficiency.append(sf.GetBinContent(sf.FindBin(xlow)))
+                    Efficiency.append(pileup2017histo_up.GetBinContent(sf.FindBin(xlow)))
                     X_range.append(xlow)
     else:
         for binx in range(1,sf.GetXaxis().GetNbins()+1):
@@ -242,14 +242,14 @@ for sf in sf_list:
             xlow  = pileup2017histo_down.GetXaxis().GetBinLowEdge(binx)
             xhigh = pileup2017histo_down.GetXaxis().GetBinUpEdge(binx)
             if not X_rangeDone:
-                if binx == sf.GetXaxis().GetNbins():
-                    Efficiency.append(sf.GetBinContent(sf.FindBin(xlow)))
-                    Efficiency.append(sf.GetBinContent(sf.FindBin(xhigh)))
+                if binx == pileup2017histo_down.GetXaxis().GetNbins():
+                    Efficiency.append(pileup2017histo_down.GetBinContent(pileup2017histo_down.FindBin(xlow)))
+                    Efficiency.append(pileup2017histo_down.GetBinContent(pileup2017histo_down.FindBin(xhigh)))
                     X_range.append(xlow)
                     X_range.append(xhigh)
                     X_rangeDone=True
                 else:
-                    Efficiency.append(sf.GetBinContent(sf.FindBin(xlow)))
+                    Efficiency.append(pileup2017histo_down.GetBinContent(pileup2017histo_down.FindBin(xlow)))
                     X_range.append(xlow)
     else:
         for binx in range(1,sf.GetXaxis().GetNbins()+1):
