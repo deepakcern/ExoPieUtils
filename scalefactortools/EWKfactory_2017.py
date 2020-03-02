@@ -96,9 +96,9 @@ def getEWKG(pt):
     elif (pt >=1160.0): weight =  0.910161197186
 
 
-def getQCDZ(  pt):
+def getQCDZ(pt):
 
-  weight = fitfun(gen_v_pt, 1.434, 2.210e-3, 0.443)
+  weight = fitfun(pt, 1.434, 2.210e-3, 0.443)
   return weight
 
 
