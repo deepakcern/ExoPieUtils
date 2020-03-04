@@ -123,9 +123,9 @@ udsg_med_eff = tag_eff_file.Get('efficiency_lighttag_mwp')
 
 #============= for LWP ============================
 
-b_loose_eff = tag_eff_file.Get('efficiency_btag_mwp')
-c_loose_eff = tag_eff_file.Get('efficiency_ctag_mwp')
-udsg_loose_eff = tag_eff_file.Get('efficiency_lighttag_mwp')
+b_loose_eff = tag_eff_file.Get('efficiency_btag_lwp')
+c_loose_eff = tag_eff_file.Get('efficiency_ctag_lwp')
+udsg_loose_eff = tag_eff_file.Get('efficiency_lighttag_lwp')
 
 
 othersys = ROOT.std.vector('string')()
