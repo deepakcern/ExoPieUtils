@@ -46,3 +46,10 @@ In ana_weight.py file:
 **WorkFlow**
 step1: python WeightListMaker_201*_withSyst.py
 output1: SFFactory_201*.py, SFFactorySystUp_201*.py, SFFactorySystDown_201*.py
+
+
+##pileup:
+2018:
+MC: https://github.com/cms-sw/cmssw/blob/CMSSW_10_4_X/SimGeneral/MixingModule/python/mix_2018_25ns_JuneProjectionFull18_PoissonOOTPU_cfi.py
+2017:
+MC: https://github.com/cms-sw/cmssw/blob/CMSSW_9_4_X/SimGeneral/MixingModule/python/mix_2017_25ns_WinterMC_PUScenarioV1_PoissonOOTPU_cfi.py#L13
