@@ -69,10 +69,10 @@ muonTrackingSFsFile = TFile('data_2018/muon_Tracking_SFs_Tracking_EfficienciesAn
 muonTrackingSFs_EfficienciesAndSF_ABCD = muonTrackingSFsFile.Get('ratio_eff_aeta_dr030e030_corr')
 
 #MET Trigger reweights
-metTrigEff_zmmfile = TFile('data_2018/TriggerEff_MET2017.root')
+metTrigEff_zmmfile = TFile('data_2018/TriggerEff_MET2018.root')
 metTrig_firstmethod = metTrigEff_zmmfile.Get('Wmunu')
 
-metTrigEff_secondfile = TFile('data_2018/TriggerEff_MET2017.root')
+metTrigEff_secondfile = TFile('data_2018/TriggerEff_MET2018.root')
 metTrig_secondmethod = metTrigEff_secondfile.Get('Zmumu')
 sf_list = [pileup2018histo,eleTrig_hEffEtaPt,eleRecoSF_EGamma_SF2D,eleLooseIDSF_EGamma_SF2D,eleTightIDSF_EGamma_SF2D,muonTrigSFs_bHLTupdate,muonTrigSFs_aHLTupdate,muonLooseIDSFs_EfficienciesAndSF_ABCD,muonLooseIDSFs_EfficienciesAndSF_lowpt_ABCD,muonTightIDSFs_EfficienciesAndSF_ABCD,muonLooseIsoSFs_EfficienciesAndSF_ABCD,muonTightIsoSFs_EfficienciesAndSF_ABCD,muonTrackingSFs_EfficienciesAndSF_ABCD,metTrig_firstmethod]
 
