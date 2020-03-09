@@ -1,8 +1,8 @@
 import numpy as np
 import sys
-import SFFactory_2017 as SfF
-import SFFactorySystUp_2017 as SfF_SystUp
-import SFFactorySystDown_2017 as SfF_SystDown
+import SFFactory_2018 as SfF
+import SFFactorySystUp_2018 as SfF_SystUp
+import SFFactorySystDown_2018 as SfF_SystDown
 
 corr_fac=0.0001
 
