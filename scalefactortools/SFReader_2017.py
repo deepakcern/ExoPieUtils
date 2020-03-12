@@ -223,11 +223,22 @@ def puweight(pu):
     return matrix[binyj],matrix_SystUp[binyj],matrix_SystDown[binyj]
 
 
-def getMETtrig_First(met):
-    matrix = np.array(SfF.metTrig_firstmethod)
-    matrix_SystUp = np.array(SfF_SystUp.metTrig_firstmethod_SystUp)
-    matrix_SystDown = np.array(SfF_SystDown.metTrig_firstmethod_SystDown)
-    met_range =  SfF.metTrig_firstmethod_X_range
+def R_getMETtrig_First(met):
+    matrix = np.array(SfF.R_metTrig_firstmethod)
+    matrix_SystUp = np.array(SfF_SystUp.R_metTrig_firstmethod_SystUp)
+    matrix_SystDown = np.array(SfF_SystDown.R_metTrig_firstmethod_SystDown)
+    met_range =  SfF.R_metTrig_firstmethod_X_range
+    if met >= met_range[-1]:pu = met_range[-1]
+    if met <= met_range[0]:pu = met_range[0]
+
+    binyj=sorted([i for i, j in enumerate(met_range) if j<=met])[-1]
+    return matrix[binyj],matrix_SystUp[binyj],matrix_SystDown[binyj]
+
+def B_getMETtrig_First(met):
+    matrix = np.array(SfF.B_metTrig_firstmethod)
+    matrix_SystUp = np.array(SfF_SystUp.B_metTrig_firstmethod_SystUp)
+    matrix_SystDown = np.array(SfF_SystDown.B_metTrig_firstmethod_SystDown)
+    met_range =  SfF.B_metTrig_firstmethod_X_range
     if met >= met_range[-1]:pu = met_range[-1]
     if met <= met_range[0]:pu = met_range[0]
 
