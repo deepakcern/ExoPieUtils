@@ -91,9 +91,11 @@ def mu_weight(pt,eta,ID='None'):
     return weight,weight_UP,weight_DOWN
 
 def getMETtrig_First(met,cat):
-    if cat=='R':
+    if cat=='R' and (era=='2017' or era=='2018'):
         return SFR.R_getMETtrig_First(met)
-    else:return SFR.B_getMETtrig_First(met)
+    elif cat=='B' and (era=='2017' or era=='2018'):
+        return SFR.B_getMETtrig_First(met)
+    else:SFR.getMETtrig_First(met)  # this is for 2016
 
 def puweight(pu):
     return SFR.puweight(pu)
