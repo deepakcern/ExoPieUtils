@@ -93,7 +93,9 @@ def mu_weight(pt,eta,ID='None'):
 def getMETtrig_First(met,cat):
     if cat=='R':
         return SFR.R_getMETtrig_First(met)
-    else:return SFR.B_getMETtrig_First(met)
+    elif cat=='B':
+        return SFR.B_getMETtrig_First(met)
+    else:SFR.getMETtrig_First(met)  # this is for 2016
 
 def puweight(pu):
     return SFR.puweight(pu)
