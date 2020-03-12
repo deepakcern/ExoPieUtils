@@ -90,8 +90,10 @@ def mu_weight(pt,eta,ID='None'):
     weight_DOWN = ID_ISO_w_DOWN*tracking_w_DOWN
     return weight,weight_UP,weight_DOWN
 
-def getMETtrig_First(met):
-    return SFR.getMETtrig_First(met)
+def getMETtrig_First(met,cat=='R'):
+    if cat=='R':
+        return SFR.R_getMETtrig_First(met)
+    else:return SFR.B_getMETtrig_First(met)
 
 def puweight(pu):
     return SFR.puweight(pu)
