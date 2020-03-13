@@ -13,7 +13,7 @@ elif era=='2017':
     import EWKfactory_2017 as ewk
 elif era=='2018':
     import SFReader_2018 as SFR
-    import EWKfactory_2018 as ewk
+    import EWKfactory_2017 as ewk
 else:
     print("Please tell me which year\'s scale factors you would like to apply (2016,2017 or 2018)? ")
 
