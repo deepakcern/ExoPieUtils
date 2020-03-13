@@ -95,7 +95,8 @@ def getMETtrig_First(met,cat):
         return SFR.R_getMETtrig_First(met)
     elif cat=='B' and (era=='2017' or era=='2018'):
         return SFR.B_getMETtrig_First(met)
-    else:SFR.getMETtrig_First(met)  # this is for 2016
+    else:
+        return SFR.getMETtrig_First(met)  # this is for 2016
 
 def puweight(pu):
     return SFR.puweight(pu)
