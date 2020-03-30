@@ -13,7 +13,7 @@ elif era=='2017':
     import EWKfactory_2017 as ewk
 elif era=='2018':
     import SFReader_2018 as SFR
-    import EWKfactory_2018 as ewk
+    import EWKfactory_2017 as ewk
 else:
     print("Please tell me which year\'s scale factors you would like to apply (2016,2017 or 2018)? ")
 
@@ -90,8 +90,13 @@ def mu_weight(pt,eta,ID='None'):
     weight_DOWN = ID_ISO_w_DOWN*tracking_w_DOWN
     return weight,weight_UP,weight_DOWN
 
-def getMETtrig_First(met):
-    return SFR.getMETtrig_First(met)
+def getMETtrig_First(met,cat):
+    if cat=='R' and (era=='2017' or era=='2018'):
+        return SFR.R_getMETtrig_First(met)
+    elif cat=='B' and (era=='2017' or era=='2018'):
+        return SFR.B_getMETtrig_First(met)
+    else:
+        return SFR.getMETtrig_First(met)  # this is for 2016
 
 def puweight(pu):
     return SFR.puweight(pu)

@@ -69,14 +69,21 @@ muonTrackingSFsFile = TFile('data_2018/muon_Tracking_SFs_Tracking_EfficienciesAn
 muonTrackingSFs_EfficienciesAndSF_ABCD = muonTrackingSFsFile.Get('ratio_eff_aeta_dr030e030_corr')
 
 #MET Trigger reweights
-metTrigEff_zmmfile = TFile('data_2018/TriggerEff_MET2018.root')
-metTrig_firstmethod = metTrigEff_zmmfile.Get('Wmunu')
+R_metTrigEff_zmmfile = TFile('data_2018/TriggerEff_MET2018_R.root')
+R_metTrig_firstmethod = R_metTrigEff_zmmfile.Get('Wmunu')
 
-metTrigEff_secondfile = TFile('data_2018/TriggerEff_MET2018.root')
-metTrig_secondmethod = metTrigEff_secondfile.Get('Zmumu')
-sf_list = [pileup2018histo,eleTrig_hEffEtaPt,eleRecoSF_EGamma_SF2D,eleLooseIDSF_EGamma_SF2D,eleTightIDSF_EGamma_SF2D,muonTrigSFs_bHLTupdate,muonTrigSFs_aHLTupdate,muonLooseIDSFs_EfficienciesAndSF_ABCD,muonLooseIDSFs_EfficienciesAndSF_lowpt_ABCD,muonTightIDSFs_EfficienciesAndSF_ABCD,muonLooseIsoSFs_EfficienciesAndSF_ABCD,muonTightIsoSFs_EfficienciesAndSF_ABCD,muonTrackingSFs_EfficienciesAndSF_ABCD,metTrig_firstmethod]
+R_metTrigEff_secondfile = TFile('data_2018/TriggerEff_MET2018_R.root')
+R_metTrig_secondmethod = R_metTrigEff_secondfile.Get('Zmumu')
 
-sf_list_dict = {pileup2018histo:'pileup2018histo',eleTrig_hEffEtaPt:'eleTrig_hEffEtaPt',eleRecoSF_EGamma_SF2D:'eleRecoSF_EGamma_SF2D',eleLooseIDSF_EGamma_SF2D:'eleLooseIDSF_EGamma_SF2D',eleTightIDSF_EGamma_SF2D:'eleTightIDSF_EGamma_SF2D',muonTrigSFs_bHLTupdate:'muonTrigSFs_bHLTupdate',muonTrigSFs_aHLTupdate:'muonTrigSFs_aHLTupdate',muonLooseIDSFs_EfficienciesAndSF_ABCD:'muonLooseIDSFs_EfficienciesAndSF_ABCD',muonLooseIDSFs_EfficienciesAndSF_lowpt_ABCD:'muonLooseIDSFs_EfficienciesAndSF_lowpt_ABCD',muonTightIDSFs_EfficienciesAndSF_ABCD:'muonTightIDSFs_EfficienciesAndSF_ABCD',muonLooseIsoSFs_EfficienciesAndSF_ABCD:'muonLooseIsoSFs_EfficienciesAndSF_ABCD',muonTightIsoSFs_EfficienciesAndSF_ABCD:'muonTightIsoSFs_EfficienciesAndSF_ABCD',muonTrackingSFs_EfficienciesAndSF_ABCD:'muonTrackingSFs_EfficienciesAndSF_ABCD',metTrig_firstmethod:'metTrig_firstmethod'}
+B_metTrigEff_zmmfile = TFile('data_2018/TriggerEff_MET2018_B.root')
+B_metTrig_firstmethod = B_metTrigEff_zmmfile.Get('Wmunu')
+
+B_metTrigEff_secondfile = TFile('data_2018/TriggerEff_MET2018_B.root')
+B_metTrig_secondmethod = B_metTrigEff_secondfile.Get('Zmumu')
+
+sf_list = [pileup2018histo,eleTrig_hEffEtaPt,eleRecoSF_EGamma_SF2D,eleLooseIDSF_EGamma_SF2D,eleTightIDSF_EGamma_SF2D,muonTrigSFs_bHLTupdate,muonTrigSFs_aHLTupdate,muonLooseIDSFs_EfficienciesAndSF_ABCD,muonLooseIDSFs_EfficienciesAndSF_lowpt_ABCD,muonTightIDSFs_EfficienciesAndSF_ABCD,muonLooseIsoSFs_EfficienciesAndSF_ABCD,muonTightIsoSFs_EfficienciesAndSF_ABCD,muonTrackingSFs_EfficienciesAndSF_ABCD,R_metTrig_firstmethod,B_metTrig_firstmethod]
+
+sf_list_dict = {pileup2018histo:'pileup2018histo',eleTrig_hEffEtaPt:'eleTrig_hEffEtaPt',eleRecoSF_EGamma_SF2D:'eleRecoSF_EGamma_SF2D',eleLooseIDSF_EGamma_SF2D:'eleLooseIDSF_EGamma_SF2D',eleTightIDSF_EGamma_SF2D:'eleTightIDSF_EGamma_SF2D',muonTrigSFs_bHLTupdate:'muonTrigSFs_bHLTupdate',muonTrigSFs_aHLTupdate:'muonTrigSFs_aHLTupdate',muonLooseIDSFs_EfficienciesAndSF_ABCD:'muonLooseIDSFs_EfficienciesAndSF_ABCD',muonLooseIDSFs_EfficienciesAndSF_lowpt_ABCD:'muonLooseIDSFs_EfficienciesAndSF_lowpt_ABCD',muonTightIDSFs_EfficienciesAndSF_ABCD:'muonTightIDSFs_EfficienciesAndSF_ABCD',muonLooseIsoSFs_EfficienciesAndSF_ABCD:'muonLooseIsoSFs_EfficienciesAndSF_ABCD',muonTightIsoSFs_EfficienciesAndSF_ABCD:'muonTightIsoSFs_EfficienciesAndSF_ABCD',muonTrackingSFs_EfficienciesAndSF_ABCD:'muonTrackingSFs_EfficienciesAndSF_ABCD',R_metTrig_firstmethod:'R_metTrig_firstmethod',B_metTrig_firstmethod:'B_metTrig_firstmethod'}
 
 
 f= open("SFFactory_2018.py","w+")
@@ -86,7 +93,7 @@ for sf in sf_list:
     Eta_rangeDone=False;pT_rangeDone=False;X_rangeDone=False
     X_range =[];Efficiency =[]
     values=[]
-    if (sf_list_dict[sf]=='muonTrackingSFs_EfficienciesAndSF_ABCD') or (sf_list_dict[sf]=='metTrig_firstmethod'):
+    if (sf_list_dict[sf]=='muonTrackingSFs_EfficienciesAndSF_ABCD') or (sf_list_dict[sf]=='R_metTrig_firstmethod') or (sf_list_dict[sf]=='B_metTrig_firstmethod'):
         for point in range(sf.GetN()):
             x, y = ROOT.Double(0), ROOT.Double(0)
             sf.GetPoint(point,x,y)
@@ -130,7 +137,7 @@ for sf in sf_list:
                     else:pT_range.append(ylow)
                 value.append(sf.GetBinContent(binx,biny))
             values.append(value)
-    if (sf_list_dict[sf]=='muonTrackingSFs_EfficienciesAndSF_ABCD') or (sf_list_dict[sf]=='pileup2018histo') or (sf_list_dict[sf]=='metTrig_firstmethod'):
+    if (sf_list_dict[sf]=='muonTrackingSFs_EfficienciesAndSF_ABCD') or (sf_list_dict[sf]=='pileup2018histo') or (sf_list_dict[sf]=='R_metTrig_firstmethod') or (sf_list_dict[sf]=='B_metTrig_firstmethod'):
         f.write(sf_list_dict[sf]+'_X_range = '+str(X_range)+'\n')
         f.write(str(sf_list_dict[sf])+"="+str(Efficiency)+'\n')
     else:
@@ -154,11 +161,19 @@ for sf in sf_list:
             X_range.append(x)
             Efficiency.append(y+sf.GetErrorYhigh(point))
 
-    elif (sf_list_dict[sf]=='metTrig_firstmethod'):
+    elif (sf_list_dict[sf]=='R_metTrig_firstmethod'):
         for point in range(sf.GetN()):
             x, y = ROOT.Double(0), ROOT.Double(0)
             x1, y1 = ROOT.Double(0), ROOT.Double(0)
-            sf.GetPoint(point,x,y); metTrig_secondmethod.GetPoint(point,x1,y1)
+            sf.GetPoint(point,x,y); R_metTrig_secondmethod.GetPoint(point,x1,y1)
+            X_range.append(x)
+            Efficiency.append(y+abs(y-y1))
+
+    elif (sf_list_dict[sf]=='B_metTrig_firstmethod'):
+        for point in range(sf.GetN()):
+            x, y = ROOT.Double(0), ROOT.Double(0)
+            x1, y1 = ROOT.Double(0), ROOT.Double(0)
+            sf.GetPoint(point,x,y); B_metTrig_secondmethod.GetPoint(point,x1,y1)
             X_range.append(x)
             Efficiency.append(y+abs(y-y1))
 
@@ -199,7 +214,7 @@ for sf in sf_list:
                     else:pT_range.append(ylow)
                 value.append(sf.GetBinContent(binx,biny)+sf.GetBinErrorUp(binx,biny))
             values.append(value)
-    if (sf_list_dict[sf]=='muonTrackingSFs_EfficienciesAndSF_ABCD')or (sf_list_dict[sf]=='pileup2018histo') or (sf_list_dict[sf]=='metTrig_firstmethod'):
+    if (sf_list_dict[sf]=='muonTrackingSFs_EfficienciesAndSF_ABCD')or (sf_list_dict[sf]=='pileup2018histo') or (sf_list_dict[sf]=='R_metTrig_firstmethod') or (sf_list_dict[sf]=='B_metTrig_firstmethod'):
         f_Up.write(sf_list_dict[sf]+'_X_range = '+str(X_range)+'\n')
         f_Up.write(str(sf_list_dict[sf])+"_SystUp="+str(Efficiency)+'\n')
     else:
@@ -223,11 +238,19 @@ for sf in sf_list:
             X_range.append(x)
             Efficiency.append(y-sf.GetErrorYlow(point))
 
-    elif (sf_list_dict[sf]=='metTrig_firstmethod'):
+    elif (sf_list_dict[sf]=='R_metTrig_firstmethod'):
         for point in range(sf.GetN()):
             x, y = ROOT.Double(0), ROOT.Double(0)
             x1, y1 = ROOT.Double(0), ROOT.Double(0)
-            sf.GetPoint(point,x,y); metTrig_secondmethod.GetPoint(point,x1,y1)
+            sf.GetPoint(point,x,y); R_metTrig_secondmethod.GetPoint(point,x1,y1)
+            X_range.append(x)
+            Efficiency.append(y-abs(y-y1))
+
+    elif (sf_list_dict[sf]=='B_metTrig_firstmethod'):
+        for point in range(sf.GetN()):
+            x, y = ROOT.Double(0), ROOT.Double(0)
+            x1, y1 = ROOT.Double(0), ROOT.Double(0)
+            sf.GetPoint(point,x,y); B_metTrig_secondmethod.GetPoint(point,x1,y1)
             X_range.append(x)
             Efficiency.append(y-abs(y-y1))
 
@@ -268,7 +291,7 @@ for sf in sf_list:
                     else:pT_range.append(ylow)
                 value.append(sf.GetBinContent(binx,biny)-sf.GetBinErrorLow(binx,biny))
             values.append(value)
-    if (sf_list_dict[sf]=='muonTrackingSFs_EfficienciesAndSF_ABCD')or (sf_list_dict[sf]=='pileup2018histo') or (sf_list_dict[sf]=='metTrig_firstmethod'):
+    if (sf_list_dict[sf]=='muonTrackingSFs_EfficienciesAndSF_ABCD')or (sf_list_dict[sf]=='pileup2018histo') or (sf_list_dict[sf]=='R_metTrig_firstmethod') or (sf_list_dict[sf]=='B_metTrig_firstmethod'):
         f_Down.write(sf_list_dict[sf]+'_X_range = '+str(X_range)+'\n')
         f_Down.write(str(sf_list_dict[sf])+"_SystDown="+str(Efficiency)+'\n')
     else:
