@@ -50,3 +50,21 @@ def WhereIsTrue(testList_, nCut_=0):
 
 
 
+
+def logical_and2(a,b):
+    return (numpy.logical_and(a,b))
+
+def logical_and3(a,b,c):
+    return (numpy.logical_and(numpy.logical_and(a,b), c) )
+
+def logical_and4(a,b,c,d):
+    return (numpy.logical_and(  numpy.logical_and(a,b), numpy.logical_and( c,d) ) )
+
+def logical_and5(a,b,c,d,e):
+    return (numpy.logical_and (logical_and4(a,b,c,d), e))
+
+def logical_and6(a,b,c,d,e,f):
+    return (numpy.logical_and (logical_and5(a,b,c,d,e), f))
+
+def logical_and7(a,b,c,d,e,f,g):
+    return (numpy.logical_and (logical_and5(a,b,c,d,e,f), g))
