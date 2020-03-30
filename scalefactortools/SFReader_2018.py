@@ -1,8 +1,8 @@
 import numpy as np
 import sys
-import SFFactory_2017 as SfF
-import SFFactorySystUp_2017 as SfF_SystUp
-import SFFactorySystDown_2017 as SfF_SystDown
+import SFFactory_2018 as SfF
+import SFFactorySystUp_2018 as SfF_SystUp
+import SFFactorySystDown_2018 as SfF_SystDown
 
 corr_fac=0.0001
 
@@ -56,12 +56,12 @@ def getEleTightIDSF(pt,eta):
     return matrix[binyj,binxi],matrix_SystUp[binyj,binxi],matrix_SystDown[binyj,binxi]
 
 
-def getEleRecoLowSF(pt,eta):
-    matrix = np.matrix(SfF.eleRecoSF_EGamma_SF2D_ptlt_20)
-    matrix_SystUp = np.matrix(SfF_SystUp.eleRecoSF_EGamma_SF2D_ptlt_20_SystUp)
-    matrix_SystDown = np.matrix(SfF_SystDown.eleRecoSF_EGamma_SF2D_ptlt_20_SystDown)
-    Eta_range =  SfF.eleRecoSF_EGamma_SF2D_ptlt_20_X_range
-    pT_range =  SfF.eleRecoSF_EGamma_SF2D_ptlt_20_Y_range
+def getEleRecoHighSF(pt,eta):
+    matrix = np.matrix(SfF.eleRecoSF_EGamma_SF2D)
+    matrix_SystUp = np.matrix(SfF_SystUp.eleRecoSF_EGamma_SF2D_SystUp)
+    matrix_SystDown = np.matrix(SfF_SystDown.eleRecoSF_EGamma_SF2D_SystDown)
+    Eta_range =  SfF.eleRecoSF_EGamma_SF2D_X_range
+    pT_range =  SfF.eleRecoSF_EGamma_SF2D_Y_range
     if pt >= pT_range[-1]:pt = pT_range[-1]-corr_fac
     if pt <= pT_range[0]:pt = pT_range[0]+corr_fac
     if eta >= Eta_range[-1]:eta = Eta_range[-1]-corr_fac
@@ -73,12 +73,31 @@ def getEleRecoLowSF(pt,eta):
     return matrix[binyj,binxi],matrix_SystUp[binyj,binxi],matrix_SystDown[binyj,binxi]
 
 
-def getEleRecoHighSF(pt,eta):
-    matrix = np.matrix(SfF.eleRecoSF_EGamma_SF2D_ptgt_20)
-    matrix_SystUp = np.matrix(SfF_SystUp.eleRecoSF_EGamma_SF2D_ptgt_20_SystUp)
-    matrix_SystDown = np.matrix(SfF_SystDown.eleRecoSF_EGamma_SF2D_ptgt_20_SystDown)
-    Eta_range =  SfF.eleRecoSF_EGamma_SF2D_ptgt_20_X_range
-    pT_range =  SfF.eleRecoSF_EGamma_SF2D_ptgt_20_Y_range
+def getMuTrig_bHLTupdate(pt,eta):
+    eta = abs(eta)
+    matrix = np.matrix(SfF.muonTrigSFs_bHLTupdate)
+    matrix_SystUp = np.matrix(SfF_SystUp.muonTrigSFs_bHLTupdate_SystUp)
+    matrix_SystDown = np.matrix(SfF_SystDown.muonTrigSFs_bHLTupdate_SystDown)
+    Eta_range =  SfF.muonTrigSFs_bHLTupdate_X_range
+    pT_range =  SfF.muonTrigSFs_bHLTupdate_Y_range
+    if pt >= pT_range[-1]:pt = pT_range[-1]-corr_fac
+    if pt <= pT_range[0]:pt = pT_range[0]+corr_fac
+    if eta >= Eta_range[-1]:eta = Eta_range[-1]-corr_fac
+    if eta <= Eta_range[0]:eta = Eta_range[0]+corr_fac
+
+    binxi=sorted([i for i, j in enumerate(pT_range) if j<=pt])[-1]
+    binyj=sorted([i for i, j in enumerate(Eta_range) if j<=eta])[-1]
+
+    return matrix[binyj,binxi],matrix_SystUp[binyj,binxi],matrix_SystDown[binyj,binxi]
+
+
+def getMuTrig_aHLTupdate(pt,eta):
+    eta = abs(eta)
+    matrix = np.matrix(SfF.muonTrigSFs_aHLTupdate)
+    matrix_SystUp = np.matrix(SfF_SystUp.muonTrigSFs_aHLTupdate_SystUp)
+    matrix_SystDown = np.matrix(SfF_SystDown.muonTrigSFs_aHLTupdate_SystDown)
+    Eta_range =  SfF.muonTrigSFs_aHLTupdate_X_range
+    pT_range =  SfF.muonTrigSFs_aHLTupdate_Y_range
     if pt >= pT_range[-1]:pt = pT_range[-1]-corr_fac
     if pt <= pT_range[0]:pt = pT_range[0]+corr_fac
     if eta >= Eta_range[-1]:eta = Eta_range[-1]-corr_fac
@@ -91,30 +110,26 @@ def getEleRecoHighSF(pt,eta):
 
 
 def getMuTrig_SF(pt,eta):
-    eta = abs(eta)
-    matrix = np.matrix(SfF.muonTrigSFs_EfficienciesAndSF_RunBtoF)
-    matrix_SystUp = np.matrix(SfF_SystUp.muonTrigSFs_EfficienciesAndSF_RunBtoF_SystUp)
-    matrix_SystDown = np.matrix(SfF_SystDown.muonTrigSFs_EfficienciesAndSF_RunBtoF_SystDown)
-    Eta_range =  SfF.muonTrigSFs_EfficienciesAndSF_RunBtoF_X_range
-    pT_range =  SfF.muonTrigSFs_EfficienciesAndSF_RunBtoF_Y_range
-    if pt >= pT_range[-1]:pt = pT_range[-1]-corr_fac
-    if pt <= pT_range[0]:pt = pT_range[0]+corr_fac
-    if eta >= Eta_range[-1]:eta = Eta_range[-1]-corr_fac
-    if eta <= Eta_range[0]:eta = Eta_range[0]+corr_fac
-
-    binxi=sorted([i for i, j in enumerate(pT_range) if j<=pt])[-1]
-    binyj=sorted([i for i, j in enumerate(Eta_range) if j<=eta])[-1]
-
-    return matrix[binyj,binxi],matrix_SystUp[binyj,binxi],matrix_SystDown[binyj,binxi]
+    lumi_bHLTupdate=8.98;lumi_aHLTupdate=50.66;lumi_tot=59.64
+    bHLTupdate_weight = lumi_bHLTupdate*getMuTrig_bHLTupdate(pt,eta)[0]
+    bHLTupdate_weight_SystUp = lumi_bHLTupdate*getMuTrig_bHLTupdate(pt,eta)[1]
+    bHLTupdate_weight_SystDown = lumi_bHLTupdate*getMuTrig_bHLTupdate(pt,eta)[2]
+    aHLTupdate_weight = lumi_aHLTupdate*getMuTrig_aHLTupdate(pt,eta)[0]
+    aHLTupdate_weight_SystUp = lumi_aHLTupdate*getMuTrig_aHLTupdate(pt,eta)[1]
+    aHLTupdate_weight_SystDown = lumi_aHLTupdate*getMuTrig_aHLTupdate(pt,eta)[2]
+    weight = (bHLTupdate_weight + aHLTupdate_weight)/lumi_tot
+    weight_SystUp = (bHLTupdate_weight_SystUp + aHLTupdate_weight_SystUp)/lumi_tot
+    weight_SystDown = (bHLTupdate_weight_SystDown + aHLTupdate_weight_SystDown)/lumi_tot
+    return weight,weight_SystUp,weight_SystDown
 
 
 def getMuloose_IDSF(pt,eta):
     eta = abs(eta)
-    matrix = np.matrix(SfF.muonLooseIDSFs_EfficienciesAndSF_BCDEF)
-    matrix_SystUp = np.matrix(SfF_SystUp.muonLooseIDSFs_EfficienciesAndSF_BCDEF_SystUp)
-    matrix_SystDown = np.matrix(SfF_SystDown.muonLooseIDSFs_EfficienciesAndSF_BCDEF_SystDown)
-    Eta_range =  SfF.muonLooseIDSFs_EfficienciesAndSF_BCDEF_Y_range
-    pT_range =  SfF.muonLooseIDSFs_EfficienciesAndSF_BCDEF_X_range
+    matrix = np.matrix(SfF.muonLooseIDSFs_EfficienciesAndSF_ABCD)
+    matrix_SystUp = np.matrix(SfF_SystUp.muonLooseIDSFs_EfficienciesAndSF_ABCD_SystUp)
+    matrix_SystDown = np.matrix(SfF_SystDown.muonLooseIDSFs_EfficienciesAndSF_ABCD_SystDown)
+    Eta_range =  SfF.muonLooseIDSFs_EfficienciesAndSF_ABCD_Y_range
+    pT_range =  SfF.muonLooseIDSFs_EfficienciesAndSF_ABCD_X_range
     if pt >= pT_range[-1]:pt = pT_range[-1]-corr_fac
     if pt <= pT_range[0]:pt = pT_range[0]+corr_fac
     if eta >= Eta_range[-1]:eta = Eta_range[-1]-corr_fac
@@ -128,11 +143,11 @@ def getMuloose_IDSF(pt,eta):
 
 def getMuTight_IDSF(pt,eta):
     eta = abs(eta)
-    matrix = np.matrix(SfF.muonTightIDSFs_EfficienciesAndSF_BCDEF)
-    matrix_SystUp = np.matrix(SfF_SystUp.muonTightIDSFs_EfficienciesAndSF_BCDEF_SystUp)
-    matrix_SystDown = np.matrix(SfF_SystDown.muonTightIDSFs_EfficienciesAndSF_BCDEF_SystDown)
-    Eta_range =  SfF.muonTightIDSFs_EfficienciesAndSF_BCDEF_Y_range
-    pT_range =  SfF.muonTightIDSFs_EfficienciesAndSF_BCDEF_X_range
+    matrix = np.matrix(SfF.muonTightIDSFs_EfficienciesAndSF_ABCD)
+    matrix_SystUp = np.matrix(SfF_SystUp.muonTightIDSFs_EfficienciesAndSF_ABCD_SystUp)
+    matrix_SystDown = np.matrix(SfF_SystDown.muonTightIDSFs_EfficienciesAndSF_ABCD_SystDown)
+    Eta_range =  SfF.muonTightIDSFs_EfficienciesAndSF_ABCD_Y_range
+    pT_range =  SfF.muonTightIDSFs_EfficienciesAndSF_ABCD_X_range
     if pt >= pT_range[-1]:pt = pT_range[-1]-corr_fac
     if pt <= pT_range[0]:pt = pT_range[0]+corr_fac
     if eta >= Eta_range[-1]:eta = Eta_range[-1]-corr_fac
@@ -146,11 +161,11 @@ def getMuTight_IDSF(pt,eta):
 
 def getMuLoose_lowpT_IDSF(pt,eta):
     eta = abs(eta)
-    matrix = np.matrix(SfF.muonLooseIDSFs_EfficienciesAndSF_lowpt_BCDEF)
-    matrix_SystUp = np.matrix(SfF_SystUp.muonLooseIDSFs_EfficienciesAndSF_lowpt_BCDEF_SystUp)
-    matrix_SystDown = np.matrix(SfF_SystDown.muonLooseIDSFs_EfficienciesAndSF_lowpt_BCDEF_SystDown)
-    Eta_range = SfF.muonLooseIDSFs_EfficienciesAndSF_lowpt_BCDEF_Y_range
-    pT_range =  SfF.muonLooseIDSFs_EfficienciesAndSF_lowpt_BCDEF_X_range
+    matrix = np.matrix(SfF.muonLooseIDSFs_EfficienciesAndSF_lowpt_ABCD)
+    matrix_SystUp = np.matrix(SfF_SystUp.muonLooseIDSFs_EfficienciesAndSF_lowpt_ABCD_SystUp)
+    matrix_SystDown = np.matrix(SfF_SystDown.muonLooseIDSFs_EfficienciesAndSF_lowpt_ABCD_SystDown)
+    Eta_range = SfF.muonLooseIDSFs_EfficienciesAndSF_lowpt_ABCD_Y_range
+    pT_range =  SfF.muonLooseIDSFs_EfficienciesAndSF_lowpt_ABCD_X_range
     if pt >= pT_range[-1]:pt = pT_range[-1]-corr_fac
     if pt <= pT_range[0]:pt = pT_range[0]+corr_fac
     if eta >= Eta_range[-1]:eta = Eta_range[-1]-corr_fac
@@ -164,11 +179,11 @@ def getMuLoose_lowpT_IDSF(pt,eta):
 
 def getMuLoose_ISOSF(pt,eta):
     eta = abs(eta)
-    matrix = np.matrix(SfF.muonLooseIsoSFs_EfficienciesAndSF_BCDEF)
-    matrix_SystUp = np.matrix(SfF_SystUp.muonLooseIsoSFs_EfficienciesAndSF_BCDEF_SystUp)
-    matrix_SystDown = np.matrix(SfF_SystDown.muonLooseIsoSFs_EfficienciesAndSF_BCDEF_SystDown)
-    Eta_range =  SfF.muonLooseIsoSFs_EfficienciesAndSF_BCDEF_Y_range
-    pT_range =  SfF.muonLooseIsoSFs_EfficienciesAndSF_BCDEF_X_range
+    matrix = np.matrix(SfF.muonLooseIsoSFs_EfficienciesAndSF_ABCD)
+    matrix_SystUp = np.matrix(SfF_SystUp.muonLooseIsoSFs_EfficienciesAndSF_ABCD_SystUp)
+    matrix_SystDown = np.matrix(SfF_SystDown.muonLooseIsoSFs_EfficienciesAndSF_ABCD_SystDown)
+    Eta_range =  SfF.muonLooseIsoSFs_EfficienciesAndSF_ABCD_Y_range
+    pT_range =  SfF.muonLooseIsoSFs_EfficienciesAndSF_ABCD_X_range
     if pt >= pT_range[-1]:pt = pT_range[-1]-corr_fac
     if pt <= pT_range[0]:pt = pT_range[0]+corr_fac
     if eta >= Eta_range[-1]:eta = Eta_range[-1]-corr_fac
@@ -182,11 +197,11 @@ def getMuLoose_ISOSF(pt,eta):
 
 def getMuTight_ISOSF(pt,eta):
     eta = abs(eta)
-    matrix = np.matrix(SfF.muonTightIsoSFs_EfficienciesAndSF_BCDEF)
-    matrix_SystUp = np.matrix(SfF_SystUp.muonTightIsoSFs_EfficienciesAndSF_BCDEF_SystUp)
-    matrix_SystDown = np.matrix(SfF_SystDown.muonTightIsoSFs_EfficienciesAndSF_BCDEF_SystDown)
-    Eta_range =  SfF.muonTightIsoSFs_EfficienciesAndSF_BCDEF_Y_range
-    pT_range =  SfF.muonTightIsoSFs_EfficienciesAndSF_BCDEF_X_range
+    matrix = np.matrix(SfF.muonTightIsoSFs_EfficienciesAndSF_ABCD)
+    matrix_SystUp = np.matrix(SfF_SystUp.muonTightIsoSFs_EfficienciesAndSF_ABCD_SystUp)
+    matrix_SystDown = np.matrix(SfF_SystDown.muonTightIsoSFs_EfficienciesAndSF_ABCD_SystDown)
+    Eta_range =  SfF.muonTightIsoSFs_EfficienciesAndSF_ABCD_Y_range
+    pT_range =  SfF.muonTightIsoSFs_EfficienciesAndSF_ABCD_X_range
     if pt >= pT_range[-1]:pt = pT_range[-1]-corr_fac
     if pt <= pT_range[0]:pt = pT_range[0]+corr_fac
     if eta >= Eta_range[-1]:eta = Eta_range[-1]-corr_fac
@@ -200,10 +215,10 @@ def getMuTight_ISOSF(pt,eta):
 
 def getMuTrackingSF(eta):
     eta = abs(eta)
-    matrix = np.array(SfF.muonTrackingSFs_EfficienciesAndSF_BCDEFGH)
-    matrix_SystUp = np.array(SfF_SystUp.muonTrackingSFs_EfficienciesAndSF_BCDEFGH_SystUp)
-    matrix_SystDown = np.array(SfF_SystDown.muonTrackingSFs_EfficienciesAndSF_BCDEFGH_SystDown)
-    Eta_range =  SfF.muonTrackingSFs_EfficienciesAndSF_BCDEFGH_X_range
+    matrix = np.array(SfF.muonTrackingSFs_EfficienciesAndSF_ABCD)
+    matrix_SystUp = np.array(SfF_SystUp.muonTrackingSFs_EfficienciesAndSF_ABCD_SystUp)
+    matrix_SystDown = np.array(SfF_SystDown.muonTrackingSFs_EfficienciesAndSF_ABCD_SystDown)
+    Eta_range =  SfF.muonTrackingSFs_EfficienciesAndSF_ABCD_X_range
     if eta >= Eta_range[-1]:eta = Eta_range[-1]
     if eta <= Eta_range[0]:eta = Eta_range[0]
 
@@ -212,10 +227,10 @@ def getMuTrackingSF(eta):
 
 
 def puweight(pu):
-    matrix = np.array(SfF.pileup2017histo)
-    matrix_SystUp = np.array(SfF_SystUp.pileup2017histo_SystUp)
-    matrix_SystDown = np.array(SfF_SystDown.pileup2017histo_SystDown)
-    PU_range =  SfF.pileup2017histo_X_range
+    matrix = np.array(SfF.pileup2018histo)
+    matrix_SystUp = np.array(SfF_SystUp.pileup2018histo_SystUp)
+    matrix_SystDown = np.array(SfF_SystDown.pileup2018histo_SystDown)
+    PU_range =  SfF.pileup2018histo_X_range
     if pu >= PU_range[-1]:pu = PU_range[-1]
     if pu <= PU_range[0]:pu = PU_range[0]
 
