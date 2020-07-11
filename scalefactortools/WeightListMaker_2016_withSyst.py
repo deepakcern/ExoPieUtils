@@ -29,11 +29,13 @@ eleRecoSFsFile_ptlt_20 = TFile('data_2016/EGM2D_BtoH_low_RecoSF_Legacy2016.root'
 eleRecoSF_EGamma_SF2D_ptlt_20 = eleRecoSFsFile_ptlt_20.Get('EGamma_SF2D')
 
 #Loose electron ID SFs
-eleLooseIDSFsFile = TFile('data_2016/2016LegacyReReco_ElectronLoose.root')
+eleLooseIDSFsFile = TFile(
+    'data_2016/2016LegacyReReco_ElectronLoose_Fall17V2.root')
 eleLooseIDSF_EGamma_SF2D = eleLooseIDSFsFile.Get('EGamma_SF2D')
 
 #Tight Electron ID SFs
-eleTightIDSFsFile = TFile('data_2016/2016LegacyReReco_ElectronTight.root')
+eleTightIDSFsFile = TFile(
+    'data_2016/2016LegacyReReco_ElectronTight_Fall17V2.root')
 eleTightIDSF_EGamma_SF2D = eleTightIDSFsFile.Get('EGamma_SF2D')
 
 #Tight photon ID SFs
