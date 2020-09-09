@@ -114,7 +114,6 @@ for sf in sf_list:
             Efficiency.append(y)
 
     elif (sf_list_dict[sf]=='pileup2016histo')or (sf_list_dict[sf]=='metTrig_firstmethod') or (sf_list_dict[sf]=='metTrig_secondmethod'):
-        Efficiency.append(0.0)
         for binx in range(1,sf.GetXaxis().GetNbins()+1):
             xlow  = sf.GetXaxis().GetBinLowEdge(binx)
             xhigh = sf.GetXaxis().GetBinUpEdge(binx)
@@ -174,8 +173,7 @@ for sf in sf_list:
             sf.GetPoint(point,x,y)
             X_range.append(x)
             Efficiency.append(y+sf.GetErrorYhigh(point))
-    elif (sf_list_dict[sf]=='pileup2016histo'):
-        Efficiency.append(0.0)
+    elif (sf_list_dict[sf]=='pileup2016histo'): 
         for binx in range(1,pileup2016histo_up.GetXaxis().GetNbins()+1):
             xlow  = pileup2016histo_up.GetXaxis().GetBinLowEdge(binx)
             xhigh = pileup2016histo_up.GetXaxis().GetBinUpEdge(binx)
@@ -251,7 +249,6 @@ for sf in sf_list:
             Efficiency.append(y-sf.GetErrorYlow(point))
 
     elif (sf_list_dict[sf]=='pileup2016histo'):
-        Efficiency.append(0.0)
         for binx in range(1,pileup2016histo_down.GetXaxis().GetNbins()+1):
             xlow  = pileup2016histo_down.GetXaxis().GetBinLowEdge(binx)
             xhigh = pileup2016histo_down.GetXaxis().GetBinUpEdge(binx)
