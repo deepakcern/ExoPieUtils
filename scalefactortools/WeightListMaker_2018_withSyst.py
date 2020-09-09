@@ -101,7 +101,6 @@ for sf in sf_list:
             Efficiency.append(y)
 
     elif (sf_list_dict[sf]=='pileup2018histo'):
-        Efficiency.append(0.0)
         for binx in range(1,sf.GetXaxis().GetNbins()+1):
             xlow  = sf.GetXaxis().GetBinLowEdge(binx)
             xhigh = sf.GetXaxis().GetBinUpEdge(binx)
@@ -178,7 +177,6 @@ for sf in sf_list:
             Efficiency.append(y+abs(y-y1))
 
     elif (sf_list_dict[sf]=='pileup2018histo'):
-        Efficiency.append(0.0)
         for binx in range(1,pileup2018histo_up.GetXaxis().GetNbins()+1):
             xlow  = pileup2018histo_up.GetXaxis().GetBinLowEdge(binx)
             xhigh = pileup2018histo_up.GetXaxis().GetBinUpEdge(binx)
@@ -255,7 +253,6 @@ for sf in sf_list:
             Efficiency.append(y-abs(y-y1))
 
     elif (sf_list_dict[sf]=='pileup2018histo'):
-        Efficiency.append(0.0)
         for binx in range(1,pileup2018histo_down.GetXaxis().GetNbins()+1):
             xlow  = pileup2018histo_down.GetXaxis().GetBinLowEdge(binx)
             xhigh = pileup2018histo_down.GetXaxis().GetBinUpEdge(binx)

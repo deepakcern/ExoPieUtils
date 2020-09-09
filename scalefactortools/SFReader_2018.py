@@ -234,7 +234,8 @@ def puweight(pu):
     if pu >= PU_range[-1]:pu = PU_range[-1]
     if pu <= PU_range[0]:pu = PU_range[0]
 
-    binyj=sorted([i for i, j in enumerate(PU_range) if j<=pu])[-1]
+    # binyj=sorted([i for i, j in enumerate(PU_range) if j<=pu])[-1]
+    binyj = int(pu)
     return matrix[binyj],matrix_SystUp[binyj],matrix_SystDown[binyj]
 
 
