@@ -67,6 +67,15 @@ def getBeff_LWP(pt,eta,flav):
         return lighttag_eff
 
 def getJetWeight(pt,eta,flavor,csv,WP,era):
+    if era == '2016':
+        maxEta = 2.4
+    else:
+        maxEta = 2.5
+    if abs(eta) > maxEta:
+        if eta > 0:
+            eta = maxEta - 0.001
+        else:
+            eta = -1*maxEta + 0.001
     if WP == 'MWP':
         deepcsvWP = deepCSVMWP
         tag_eff    = getBeff_MWP(pt,eta,flavor)
@@ -74,13 +83,12 @@ def getJetWeight(pt,eta,flavor,csv,WP,era):
         deepcsvWP = deepCSVLWP
         tag_eff    = getBeff_LWP(pt,eta,flavor)
     SF_jet = jetSF(reader1, jetflav(flavor),pt,abs(eta))
-    if era=='2016':maxEta = 2.4
-    else:maxEta = 2.5
-    if abs(eta) > maxEta:
-        jetweight = 1.0
-        jetweight_up = 1.15
-        jetweight_down = 0.85
-    elif csv > deepcsvWP:
+    
+    # if abs(eta) > maxEta:
+    #     jetweight = 1.0
+    #     jetweight_up = 1.15
+    #     jetweight_down = 0.85
+    if csv > deepcsvWP:
         jetweight =  SF_jet[0]
         jetweight_up =  SF_jet[2]
         jetweight_down =  SF_jet[1]
