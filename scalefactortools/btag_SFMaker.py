@@ -75,7 +75,7 @@ def getJetWeight(pt,eta,flavor,csv,WP,era):
         if eta > 0:
             eta = maxEta - 0.001
         else:
-            eta = maxEta + 0.001
+            eta = -1*maxEta + 0.001
     if WP == 'MWP':
         deepcsvWP = deepCSVMWP
         tag_eff    = getBeff_MWP(pt,eta,flavor)
