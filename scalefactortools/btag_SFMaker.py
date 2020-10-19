@@ -70,16 +70,18 @@ def getJetWeight(pt,eta,flavor,csv,WP,era):
     if WP == 'MWP':
         deepcsvWP = deepCSVMWP
         tag_eff    = getBeff_MWP(pt,eta,flavor)
+        SF_jet = jetSF(reader1, jetflav(flavor),pt,abs(eta))
     else:
         deepcsvWP = deepCSVLWP
         tag_eff    = getBeff_LWP(pt,eta,flavor)
-    SF_jet = jetSF(reader1, jetflav(flavor),pt,abs(eta))
+        SF_jet = jetSF(reader0, jetflav(flavor),pt,abs(eta))
+
     if era=='2016':maxEta = 2.4
     else:maxEta = 2.5
     if abs(eta) > maxEta:
         jetweight = 1.0
-        jetweight_up = 1.15
-        jetweight_down = 0.85
+        jetweight_up = 1.0
+        jetweight_down = 1.0
     elif csv > deepcsvWP:
         jetweight =  SF_jet[0]
         jetweight_up =  SF_jet[2]
@@ -92,19 +94,19 @@ def getJetWeight(pt,eta,flavor,csv,WP,era):
 
 ROOT.gROOT.ProcessLine('.L '+os.path.dirname(__file__)+'/btagSF_Files/BTagCalibrationStandalone.cpp+')
 if era=='2016':
-    calib1 = ROOT.BTagCalibrationStandalone('deepcsv', os.path.dirname(__file__)+'/btagSF_Files/DeepCSV_Moriond17_B_H.csv')
+    calib1 = ROOT.BTagCalibrationStandalone('deepcsv', os.path.dirname(__file__)+'/btagSF_Files/DeepCSV_2016LegacySF_V1.csv')
     tag_eff_file = ROOT.TFile(os.path.dirname(__file__)+'/btagSF_Files/bTagEffs_2016.root')
     deepCSVLWP = 0.2217
     deepCSVMWP = 0.6321
     deepCSVTWP = 0.8953
 elif era=='2017':
-    calib1 = ROOT.BTagCalibrationStandalone('deepcsv', os.path.dirname(__file__)+'/btagSF_Files/DeepCSV_94XSF_V4_B_F.csv')
+    calib1 = ROOT.BTagCalibrationStandalone('deepcsv', os.path.dirname(__file__)+'/btagSF_Files/DeepCSV_94XSF_V5_B_F.csv')
     tag_eff_file = ROOT.TFile(os.path.dirname(__file__)+'/btagSF_Files/bTagEffs_2017.root')
     deepCSVLWP = 0.1522
     deepCSVMWP = 0.4941
     deepCSVTWP = 0.8001
 elif era=='2018':
-    calib1 = ROOT.BTagCalibrationStandalone('deepcsv', os.path.dirname(__file__)+'/btagSF_Files/DeepCSV_102XSF_V1.csv')
+    calib1 = ROOT.BTagCalibrationStandalone('deepcsv', os.path.dirname(__file__)+'/btagSF_Files/DeepCSV_102XSF_V2.csv')
     tag_eff_file = ROOT.TFile(os.path.dirname(__file__)+'/btagSF_Files/bTagEffs_2018.root')
     deepCSVLWP = 0.1241
     deepCSVMWP = 0.4184
@@ -125,7 +127,13 @@ udsg_loose_eff = tag_eff_file.Get('efficiency_lighttag_lwp')
 othersys = ROOT.std.vector('string')()
 othersys.push_back('down')
 othersys.push_back('up')
-reader1 = ROOT.BTagCalibrationStandaloneReader( 0, "central", othersys)
+
+reader0 = ROOT.BTagCalibrationStandaloneReader( 0, "central", othersys)
+reader0.load(calib1, 0,  "comb" )
+reader0.load(calib1, 1,  "comb" )
+reader0.load(calib1, 2,  "incl" )
+
+reader1 = ROOT.BTagCalibrationStandaloneReader( 1, "central", othersys)
 reader1.load(calib1, 0,  "comb" )
 reader1.load(calib1, 1,  "comb" )
 reader1.load(calib1, 2,  "incl" )
