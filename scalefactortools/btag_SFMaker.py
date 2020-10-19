@@ -74,28 +74,24 @@ def getBeff_LWP(pt, eta, flav):
 
 
 def getJetWeight(pt, eta, flavor, csv, WP, era):
+    if WP == 'MWP':
+        deepcsvWP = deepCSVMWP
+        tag_eff = getBeff_MWP(pt, eta, flavor)
+        SF_jet = jetSF(reader1, jetflav(flavor), pt, abs(eta))
+    else:
+        deepcsvWP = deepCSVLWP
+        tag_eff = getBeff_LWP(pt, eta, flavor)
+        SF_jet = jetSF(reader0, jetflav(flavor), pt, abs(eta))
+
     if era == '2016':
         maxEta = 2.4
     else:
         maxEta = 2.5
     if abs(eta) > maxEta:
-        if eta > 0:
-            eta = maxEta - 0.001
-        else:
-            eta = -1*maxEta + 0.001
-    if WP == 'MWP':
-        deepcsvWP = deepCSVMWP
-        tag_eff = getBeff_MWP(pt, eta, flavor)
-    else:
-        deepcsvWP = deepCSVLWP
-        tag_eff = getBeff_LWP(pt, eta, flavor)
-    SF_jet = jetSF(reader1, jetflav(flavor), pt, abs(eta))
-
-    # if abs(eta) > maxEta:
-    #     jetweight = 1.0
-    #     jetweight_up = 1.15
-    #     jetweight_down = 0.85
-    if csv > deepcsvWP:
+        jetweight = 1.0
+        jetweight_up = 1.0
+        jetweight_down = 1.0
+    elif csv > deepcsvWP:
         jetweight = SF_jet[0]
         jetweight_up = SF_jet[2]
         jetweight_down = SF_jet[1]
@@ -147,11 +143,15 @@ udsg_loose_eff = tag_eff_file.Get('efficiency_lighttag_lwp')
 othersys = ROOT.std.vector('string')()
 othersys.push_back('down')
 othersys.push_back('up')
+reader0 = ROOT.BTagCalibrationStandaloneReader( 0, "central", othersys)
+reader0.load(calib1, 0,  "comb" )
+reader0.load(calib1, 1,  "comb" )
+reader0.load(calib1, 2,  "incl" )
+
 reader1 = ROOT.BTagCalibrationStandaloneReader(1, "central", othersys)
 reader1.load(calib1, 0,  "comb")
 reader1.load(calib1, 1,  "comb")
 reader1.load(calib1, 2,  "incl")
-
 
 def btag_weight(nJets, ptList, etalist, flavlist, depCSVlist, WP, index=False):
     btagweight = 1.0
