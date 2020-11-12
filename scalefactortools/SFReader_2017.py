@@ -223,6 +223,17 @@ def puweight(pu):
     binyj = int(pu)
     return matrix[binyj],matrix_SystUp[binyj],matrix_SystDown[binyj]
 
+def PerSamlpuweight(pu):
+    matrix = np.array(SfF.perSamplepileup2017_TTTo2L2Nu)
+    matrix_SystUp = np.array(SfF_SystUp.pileup2017histo_SystUp)
+    matrix_SystDown = np.array(SfF_SystDown.pileup2017histo_SystDown)
+    PU_range =  SfF.pileup2017histo_X_range
+    if pu >= PU_range[-1]:pu = PU_range[-1]
+    if pu <= PU_range[0]:pu = PU_range[0]
+
+    binyj = int(pu)
+    return matrix[binyj],matrix_SystUp[binyj],matrix_SystDown[binyj]
+
 
 def R_getMETtrig_First(met):
     matrix = np.array(SfF.R_metTrig_firstmethod)

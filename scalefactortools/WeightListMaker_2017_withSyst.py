@@ -16,6 +16,10 @@ pileup2017histo=pileup2017file.Get('puweight')
 pileup2017histo_up=pileup2017file.Get('puweight_Up')
 pileup2017histo_down=pileup2017file.Get('puweight_Down')
 
+#pileup reweights per sample (tt2l for now)
+pileup2017_TTTo2L2Nufile = TFile('data_2017/TTTo2L2Nu_pu_nTrueInt_ratio.root')
+perSamplepileup2017_TTTo2L2Nu=pileup2017_TTTo2L2Nufile.Get('pileup')
+
 #Electron Trigger reweights
 eleTrigReweightFile = TFile('data_2017/electron_Trigger_eleTrig_2017.root')
 eleTrig_hEffEtaPt = eleTrigReweightFile.Get('EGamma_SF2D')
@@ -83,9 +87,9 @@ B_metTrig_secondmethod = B_metTrigEff_secondfile.Get('Zmumu')
 
 
 
-sf_list = [pileup2017histo,eleTrig_hEffEtaPt,eleRecoSF_EGamma_SF2D_ptgt_20,eleRecoSF_EGamma_SF2D_ptlt_20,eleLooseIDSF_EGamma_SF2D,eleTightIDSF_EGamma_SF2D,muonTrigSFs_EfficienciesAndSF_RunBtoF,muonLooseIDSFs_EfficienciesAndSF_BCDEF,muonLooseIDSFs_EfficienciesAndSF_lowpt_BCDEF,muonTightIDSFs_EfficienciesAndSF_BCDEF,muonLooseIsoSFs_EfficienciesAndSF_BCDEF,muonTightIsoSFs_EfficienciesAndSF_BCDEF,muonTrackingSFs_EfficienciesAndSF_BCDEFGH,R_metTrig_firstmethod,B_metTrig_firstmethod]
+sf_list = [pileup2017histo,perSamplepileup2017_TTTo2L2Nu,eleTrig_hEffEtaPt,eleRecoSF_EGamma_SF2D_ptgt_20,eleRecoSF_EGamma_SF2D_ptlt_20,eleLooseIDSF_EGamma_SF2D,eleTightIDSF_EGamma_SF2D,muonTrigSFs_EfficienciesAndSF_RunBtoF,muonLooseIDSFs_EfficienciesAndSF_BCDEF,muonLooseIDSFs_EfficienciesAndSF_lowpt_BCDEF,muonTightIDSFs_EfficienciesAndSF_BCDEF,muonLooseIsoSFs_EfficienciesAndSF_BCDEF,muonTightIsoSFs_EfficienciesAndSF_BCDEF,muonTrackingSFs_EfficienciesAndSF_BCDEFGH,R_metTrig_firstmethod,B_metTrig_firstmethod]
 
-sf_list_dict = {pileup2017histo:'pileup2017histo',eleTrig_hEffEtaPt:'eleTrig_hEffEtaPt',eleRecoSF_EGamma_SF2D_ptgt_20:'eleRecoSF_EGamma_SF2D_ptgt_20',eleRecoSF_EGamma_SF2D_ptlt_20:'eleRecoSF_EGamma_SF2D_ptlt_20',eleLooseIDSF_EGamma_SF2D:'eleLooseIDSF_EGamma_SF2D',eleTightIDSF_EGamma_SF2D:'eleTightIDSF_EGamma_SF2D',muonTrigSFs_EfficienciesAndSF_RunBtoF:'muonTrigSFs_EfficienciesAndSF_RunBtoF',muonLooseIDSFs_EfficienciesAndSF_BCDEF:'muonLooseIDSFs_EfficienciesAndSF_BCDEF',muonLooseIDSFs_EfficienciesAndSF_lowpt_BCDEF:'muonLooseIDSFs_EfficienciesAndSF_lowpt_BCDEF',muonTightIDSFs_EfficienciesAndSF_BCDEF:'muonTightIDSFs_EfficienciesAndSF_BCDEF',muonLooseIsoSFs_EfficienciesAndSF_BCDEF:'muonLooseIsoSFs_EfficienciesAndSF_BCDEF',muonTightIsoSFs_EfficienciesAndSF_BCDEF:'muonTightIsoSFs_EfficienciesAndSF_BCDEF',muonTrackingSFs_EfficienciesAndSF_BCDEFGH:'muonTrackingSFs_EfficienciesAndSF_BCDEFGH',R_metTrig_firstmethod:'R_metTrig_firstmethod',B_metTrig_firstmethod:'B_metTrig_firstmethod'}
+sf_list_dict = {pileup2017histo:'pileup2017histo',perSamplepileup2017_TTTo2L2Nu:'perSamplepileup2017_TTTo2L2Nu',eleTrig_hEffEtaPt:'eleTrig_hEffEtaPt',eleRecoSF_EGamma_SF2D_ptgt_20:'eleRecoSF_EGamma_SF2D_ptgt_20',eleRecoSF_EGamma_SF2D_ptlt_20:'eleRecoSF_EGamma_SF2D_ptlt_20',eleLooseIDSF_EGamma_SF2D:'eleLooseIDSF_EGamma_SF2D',eleTightIDSF_EGamma_SF2D:'eleTightIDSF_EGamma_SF2D',muonTrigSFs_EfficienciesAndSF_RunBtoF:'muonTrigSFs_EfficienciesAndSF_RunBtoF',muonLooseIDSFs_EfficienciesAndSF_BCDEF:'muonLooseIDSFs_EfficienciesAndSF_BCDEF',muonLooseIDSFs_EfficienciesAndSF_lowpt_BCDEF:'muonLooseIDSFs_EfficienciesAndSF_lowpt_BCDEF',muonTightIDSFs_EfficienciesAndSF_BCDEF:'muonTightIDSFs_EfficienciesAndSF_BCDEF',muonLooseIsoSFs_EfficienciesAndSF_BCDEF:'muonLooseIsoSFs_EfficienciesAndSF_BCDEF',muonTightIsoSFs_EfficienciesAndSF_BCDEF:'muonTightIsoSFs_EfficienciesAndSF_BCDEF',muonTrackingSFs_EfficienciesAndSF_BCDEFGH:'muonTrackingSFs_EfficienciesAndSF_BCDEFGH',R_metTrig_firstmethod:'R_metTrig_firstmethod',B_metTrig_firstmethod:'B_metTrig_firstmethod'}
 
 
 f= open("SFFactory_2017.py","w+")
@@ -103,7 +107,8 @@ for sf in sf_list:
             X_range.append(x)
             Efficiency.append(y)
 
-    elif (sf_list_dict[sf]=='pileup2017histo') or (sf_list_dict[sf]=='R_metTrig_firstmethod') or (sf_list_dict[sf]=='B_metTrig_firstmethod'):
+    elif (sf_list_dict[sf]=='pileup2017histo') or (sf_list_dict[sf]=='R_metTrig_firstmethod') or (sf_list_dict[sf]=='B_metTrig_firstmethod') or (sf_list_dict[sf]=='perSamplepileup2017_TTTo2L2Nu'):
+	print sf_list_dict[sf]
         for binx in range(1,sf.GetXaxis().GetNbins()+1):
             xlow  = sf.GetXaxis().GetBinLowEdge(binx)
             xhigh = sf.GetXaxis().GetBinUpEdge(binx)
@@ -141,7 +146,7 @@ for sf in sf_list:
             values.append(value)
 
 
-    if (sf_list_dict[sf]=='muonTrackingSFs_EfficienciesAndSF_BCDEFGH') or (sf_list_dict[sf]=='pileup2017histo') or (sf_list_dict[sf]=='R_metTrig_firstmethod') or (sf_list_dict[sf]=='B_metTrig_firstmethod'):
+    if (sf_list_dict[sf]=='muonTrackingSFs_EfficienciesAndSF_BCDEFGH') or (sf_list_dict[sf]=='pileup2017histo') or (sf_list_dict[sf]=='R_metTrig_firstmethod') or (sf_list_dict[sf]=='B_metTrig_firstmethod') or (sf_list_dict[sf]=='perSamplepileup2017_TTTo2L2Nu'):
         f.write(sf_list_dict[sf]+'_X_range = '+str(X_range)+'\n')
         f.write(str(sf_list_dict[sf])+"="+str(Efficiency)+'\n')
     else:
@@ -158,6 +163,7 @@ for sf in sf_list:
     Eta_rangeDone=False;pT_rangeDone=False;X_rangeDone=False
     X_range =[];Efficiency =[]
     values=[]
+    if 'perSamplepileup' in sf_list_dict[sf]:continue
     if (sf_list_dict[sf]=='muonTrackingSFs_EfficienciesAndSF_BCDEFGH'):
         for point in range(sf.GetN()):
             x, y = ROOT.Double(0), ROOT.Double(0)
@@ -250,7 +256,7 @@ for sf in sf_list:
     Eta_rangeDone=False;pT_rangeDone=False;X_rangeDone=False
     X_range =[];Efficiency =[]
     values=[]
-
+    if 'perSamplepileup' in sf_list_dict[sf]:continue
     if (sf_list_dict[sf]=='muonTrackingSFs_EfficienciesAndSF_BCDEFGH'):
         for point in range(sf.GetN()):
             x, y = ROOT.Double(0), ROOT.Double(0)
