@@ -102,7 +102,7 @@ def puweight(pu):
     return SFR.puweight(pu)
 
 def PerSamlpuweight(pu):
-    return SRF.PerSamlpuweight(pu)
+    return SFR.PerSamlpuweight(pu)
 
 def getEWKW(pt):
     return ewk.getEWKW(pt)
