@@ -101,8 +101,8 @@ def getMETtrig_First(met,cat):
 def puweight(pu):
     return SFR.puweight(pu)
 
-def PerSamlpuweight(pu):
-    return SFR.PerSamlpuweight(pu)
+def PerSamlpuweight(pu,sampleName=''):
+    return SFR.PerSamlpuweight(pu,sampleName)
 
 def getEWKW(pt):
     return ewk.getEWKW(pt)
