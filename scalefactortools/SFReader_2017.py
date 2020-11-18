@@ -223,8 +223,32 @@ def puweight(pu):
     binyj = int(pu)
     return matrix[binyj],matrix_SystUp[binyj],matrix_SystDown[binyj]
 
-def PerSamlpuweight(pu):
-    matrix = np.array(SfF.perSamplepileup2017_TTTo2L2Nu)
+def PerSamlpuweight(pu,samplName=''):
+    if 'TTTo2L2Nu' in samplName: 
+        matrix = np.array(SfF.perSamplepileup2017_TTTo2L2Nu)
+    elif 'TTToHadronic' in samplName:
+        matrix = np.array(SfF.perSamplepileup2017_TTToHadronic)
+    elif 'TTToSemiLeptonic' in samplName:
+        matrix = np.array(SfF.perSamplepileup2017_TTToSemiLeptonic)
+    elif 'WJetsToLNu' in samplName:
+        matrix = np.array(SfF.perSamplepileup2017_WJetsToLNu)
+    elif 'DYJetsToLL' in samplName:
+        matrix = np.array(SfF.perSamplepileup2017_DYJetsToLL)
+    elif 'ZJetsToNuNu' in samplName:
+        matrix = np.array(SfF.perSamplepileup2017_ZJetsToNuNu)
+    elif 'GJets' in samplName:
+        matrix = np.array(SfF.perSamplepileup2017_GJets)
+    elif 'ST_s-channel' in samplName:
+        matrix = np.array(SfF.perSamplepileup2017_ST_s_channel)
+    elif 'ST_t-channel' in samplName:
+        matrix = np.array(SfF.perSamplepileup2017_ST_t_channel)
+    elif 'ST_tW' in samplName:
+        matrix = np.array(SfF.perSamplepileup2017_ST_tW)
+    elif 'QCD' in samplName:
+        matrix = np.array(SfF.perSamplepileup2017_QCD_HT)
+    else:
+        matrix = np.array(SfF.pileup2017histo)
+
     matrix_SystUp = np.array(SfF_SystUp.pileup2017histo_SystUp)
     matrix_SystDown = np.array(SfF_SystDown.pileup2017histo_SystDown)
     PU_range =  SfF.pileup2017histo_X_range

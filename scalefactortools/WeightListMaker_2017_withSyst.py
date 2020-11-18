@@ -20,6 +20,37 @@ pileup2017histo_down=pileup2017file.Get('puweight_Down')
 pileup2017_TTTo2L2Nufile = TFile('data_2017/TTTo2L2Nu_pu_nTrueInt_ratio.root')
 perSamplepileup2017_TTTo2L2Nu=pileup2017_TTTo2L2Nufile.Get('pileup')
 
+pileup2017_TTToHadronicfile = TFile('data_2017/TTToHadronic_pu_nTrueInt_ratio.root')
+perSamplepileup2017_TTToHadronic=pileup2017_TTToHadronicfile.Get('pileup')
+
+pileup2017_TTToSemiLeptonicfile = TFile('data_2017/TTToSemiLeptonic_pu_nTrueInt_ratio.root')
+perSamplepileup2017_TTToSemiLeptonic=pileup2017_TTToSemiLeptonicfile.Get('pileup')
+
+pileup2017_WJetsToLNufile = TFile('data_2017/WJetsToLNu_pu_nTrueInt_ratio.root')
+perSamplepileup2017_WJetsToLNu=pileup2017_WJetsToLNufile.Get('pileup')
+
+pileup2017_DYJetsToLLfile = TFile('data_2017/DYJetsToLL_pu_nTrueInt_ratio.root')
+perSamplepileup2017_DYJetsToLL=pileup2017_DYJetsToLLfile.Get('pileup')
+
+pileup2017_ZJetsToNuNufile = TFile('data_2017/ZJetsToNuNu_pu_nTrueInt_ratio.root')
+perSamplepileup2017_ZJetsToNuNu=pileup2017_ZJetsToNuNufile.Get('pileup')
+
+pileup2017_GJetsfile = TFile('data_2017/GJets_pu_nTrueInt_ratio.root')
+perSamplepileup2017_GJets=pileup2017_GJetsfile.Get('pileup')
+
+
+pileup2017_ST_s_channelfile = TFile('data_2017/ST_s_channel_pu_nTrueInt_ratio.root')
+perSamplepileup2017_ST_s_channel=pileup2017_ST_s_channelfile.Get('pileup')
+
+pileup2017_ST_t_channelfile = TFile('data_2017/ST_t_channel_pu_nTrueInt_ratio.root')
+perSamplepileup2017_ST_t_channel=pileup2017_ST_t_channelfile.Get('pileup')
+
+pileup2017_ST_tWfile = TFile('data_2017/ST_tW_pu_nTrueInt_ratio.root')
+perSamplepileup2017_ST_tW=pileup2017_ST_tWfile.Get('pileup')
+
+pileup2017_QCD_HTfile = TFile('data_2017/QCD_HT_pu_nTrueInt_ratio.root')
+perSamplepileup2017_QCD_HT=pileup2017_QCD_HTfile.Get('pileup')
+
 #Electron Trigger reweights
 eleTrigReweightFile = TFile('data_2017/electron_Trigger_eleTrig_2017.root')
 eleTrig_hEffEtaPt = eleTrigReweightFile.Get('EGamma_SF2D')
@@ -87,9 +118,9 @@ B_metTrig_secondmethod = B_metTrigEff_secondfile.Get('Zmumu')
 
 
 
-sf_list = [pileup2017histo,perSamplepileup2017_TTTo2L2Nu,eleTrig_hEffEtaPt,eleRecoSF_EGamma_SF2D_ptgt_20,eleRecoSF_EGamma_SF2D_ptlt_20,eleLooseIDSF_EGamma_SF2D,eleTightIDSF_EGamma_SF2D,muonTrigSFs_EfficienciesAndSF_RunBtoF,muonLooseIDSFs_EfficienciesAndSF_BCDEF,muonLooseIDSFs_EfficienciesAndSF_lowpt_BCDEF,muonTightIDSFs_EfficienciesAndSF_BCDEF,muonLooseIsoSFs_EfficienciesAndSF_BCDEF,muonTightIsoSFs_EfficienciesAndSF_BCDEF,muonTrackingSFs_EfficienciesAndSF_BCDEFGH,R_metTrig_firstmethod,B_metTrig_firstmethod]
+sf_list = [pileup2017histo,perSamplepileup2017_TTTo2L2Nu,perSamplepileup2017_TTToHadronic,perSamplepileup2017_TTToSemiLeptonic,perSamplepileup2017_WJetsToLNu,perSamplepileup2017_DYJetsToLL,perSamplepileup2017_ZJetsToNuNu,perSamplepileup2017_GJets,perSamplepileup2017_ST_s_channel,perSamplepileup2017_ST_t_channel,perSamplepileup2017_ST_tW,perSamplepileup2017_QCD_HT,eleTrig_hEffEtaPt,eleRecoSF_EGamma_SF2D_ptgt_20,eleRecoSF_EGamma_SF2D_ptlt_20,eleLooseIDSF_EGamma_SF2D,eleTightIDSF_EGamma_SF2D,muonTrigSFs_EfficienciesAndSF_RunBtoF,muonLooseIDSFs_EfficienciesAndSF_BCDEF,muonLooseIDSFs_EfficienciesAndSF_lowpt_BCDEF,muonTightIDSFs_EfficienciesAndSF_BCDEF,muonLooseIsoSFs_EfficienciesAndSF_BCDEF,muonTightIsoSFs_EfficienciesAndSF_BCDEF,muonTrackingSFs_EfficienciesAndSF_BCDEFGH,R_metTrig_firstmethod,B_metTrig_firstmethod]
 
-sf_list_dict = {pileup2017histo:'pileup2017histo',perSamplepileup2017_TTTo2L2Nu:'perSamplepileup2017_TTTo2L2Nu',eleTrig_hEffEtaPt:'eleTrig_hEffEtaPt',eleRecoSF_EGamma_SF2D_ptgt_20:'eleRecoSF_EGamma_SF2D_ptgt_20',eleRecoSF_EGamma_SF2D_ptlt_20:'eleRecoSF_EGamma_SF2D_ptlt_20',eleLooseIDSF_EGamma_SF2D:'eleLooseIDSF_EGamma_SF2D',eleTightIDSF_EGamma_SF2D:'eleTightIDSF_EGamma_SF2D',muonTrigSFs_EfficienciesAndSF_RunBtoF:'muonTrigSFs_EfficienciesAndSF_RunBtoF',muonLooseIDSFs_EfficienciesAndSF_BCDEF:'muonLooseIDSFs_EfficienciesAndSF_BCDEF',muonLooseIDSFs_EfficienciesAndSF_lowpt_BCDEF:'muonLooseIDSFs_EfficienciesAndSF_lowpt_BCDEF',muonTightIDSFs_EfficienciesAndSF_BCDEF:'muonTightIDSFs_EfficienciesAndSF_BCDEF',muonLooseIsoSFs_EfficienciesAndSF_BCDEF:'muonLooseIsoSFs_EfficienciesAndSF_BCDEF',muonTightIsoSFs_EfficienciesAndSF_BCDEF:'muonTightIsoSFs_EfficienciesAndSF_BCDEF',muonTrackingSFs_EfficienciesAndSF_BCDEFGH:'muonTrackingSFs_EfficienciesAndSF_BCDEFGH',R_metTrig_firstmethod:'R_metTrig_firstmethod',B_metTrig_firstmethod:'B_metTrig_firstmethod'}
+sf_list_dict = {pileup2017histo:'pileup2017histo',perSamplepileup2017_TTTo2L2Nu:'perSamplepileup2017_TTTo2L2Nu',perSamplepileup2017_TTToHadronic:'perSamplepileup2017_TTToHadronic', perSamplepileup2017_TTToSemiLeptonic:'perSamplepileup2017_TTToSemiLeptonic', perSamplepileup2017_WJetsToLNu:'perSamplepileup2017_WJetsToLNu', perSamplepileup2017_DYJetsToLL:'perSamplepileup2017_DYJetsToLL', perSamplepileup2017_ZJetsToNuNu:'perSamplepileup2017_ZJetsToNuNu', perSamplepileup2017_GJets:'perSamplepileup2017_GJets', perSamplepileup2017_ST_s_channel:'perSamplepileup2017_ST_s_channel', perSamplepileup2017_ST_t_channel:'perSamplepileup2017_ST_t_channel', perSamplepileup2017_ST_tW:'perSamplepileup2017_ST_tW', perSamplepileup2017_QCD_HT:'perSamplepileup2017_QCD_HT',eleTrig_hEffEtaPt:'eleTrig_hEffEtaPt',eleRecoSF_EGamma_SF2D_ptgt_20:'eleRecoSF_EGamma_SF2D_ptgt_20',eleRecoSF_EGamma_SF2D_ptlt_20:'eleRecoSF_EGamma_SF2D_ptlt_20',eleLooseIDSF_EGamma_SF2D:'eleLooseIDSF_EGamma_SF2D',eleTightIDSF_EGamma_SF2D:'eleTightIDSF_EGamma_SF2D',muonTrigSFs_EfficienciesAndSF_RunBtoF:'muonTrigSFs_EfficienciesAndSF_RunBtoF',muonLooseIDSFs_EfficienciesAndSF_BCDEF:'muonLooseIDSFs_EfficienciesAndSF_BCDEF',muonLooseIDSFs_EfficienciesAndSF_lowpt_BCDEF:'muonLooseIDSFs_EfficienciesAndSF_lowpt_BCDEF',muonTightIDSFs_EfficienciesAndSF_BCDEF:'muonTightIDSFs_EfficienciesAndSF_BCDEF',muonLooseIsoSFs_EfficienciesAndSF_BCDEF:'muonLooseIsoSFs_EfficienciesAndSF_BCDEF',muonTightIsoSFs_EfficienciesAndSF_BCDEF:'muonTightIsoSFs_EfficienciesAndSF_BCDEF',muonTrackingSFs_EfficienciesAndSF_BCDEFGH:'muonTrackingSFs_EfficienciesAndSF_BCDEFGH',R_metTrig_firstmethod:'R_metTrig_firstmethod',B_metTrig_firstmethod:'B_metTrig_firstmethod'}
 
 
 f= open("SFFactory_2017.py","w+")
@@ -107,8 +138,7 @@ for sf in sf_list:
             X_range.append(x)
             Efficiency.append(y)
 
-    elif (sf_list_dict[sf]=='pileup2017histo') or (sf_list_dict[sf]=='R_metTrig_firstmethod') or (sf_list_dict[sf]=='B_metTrig_firstmethod') or (sf_list_dict[sf]=='perSamplepileup2017_TTTo2L2Nu'):
-	print sf_list_dict[sf]
+    elif (sf_list_dict[sf]=='pileup2017histo') or (sf_list_dict[sf]=='R_metTrig_firstmethod') or (sf_list_dict[sf]=='B_metTrig_firstmethod') or (sf_list_dict[sf]=='perSamplepileup2017_TTTo2L2Nu') or (sf_list_dict[sf]=='perSamplepileup2017_TTToHadronic') or (sf_list_dict[sf]=='perSamplepileup2017_TTToSemiLeptonic') or (sf_list_dict[sf]=='perSamplepileup2017_WJetsToLNu') or (sf_list_dict[sf]=='perSamplepileup2017_DYJetsToLL') or (sf_list_dict[sf]=='perSamplepileup2017_ZJetsToNuNu') or (sf_list_dict[sf]=='perSamplepileup2017_GJets') or (sf_list_dict[sf]=='perSamplepileup2017_ST_s_channel') or (sf_list_dict[sf]=='perSamplepileup2017_ST_t_channel') or (sf_list_dict[sf]=='perSamplepileup2017_ST_tW') or (sf_list_dict[sf]=='perSamplepileup2017_QCD_HT'):
         for binx in range(1,sf.GetXaxis().GetNbins()+1):
             xlow  = sf.GetXaxis().GetBinLowEdge(binx)
             xhigh = sf.GetXaxis().GetBinUpEdge(binx)
@@ -146,7 +176,7 @@ for sf in sf_list:
             values.append(value)
 
 
-    if (sf_list_dict[sf]=='muonTrackingSFs_EfficienciesAndSF_BCDEFGH') or (sf_list_dict[sf]=='pileup2017histo') or (sf_list_dict[sf]=='R_metTrig_firstmethod') or (sf_list_dict[sf]=='B_metTrig_firstmethod') or (sf_list_dict[sf]=='perSamplepileup2017_TTTo2L2Nu'):
+    if (sf_list_dict[sf]=='muonTrackingSFs_EfficienciesAndSF_BCDEFGH') or (sf_list_dict[sf]=='pileup2017histo') or (sf_list_dict[sf]=='R_metTrig_firstmethod') or (sf_list_dict[sf]=='B_metTrig_firstmethod') or (sf_list_dict[sf]=='perSamplepileup2017_TTTo2L2Nu') or (sf_list_dict[sf]=='perSamplepileup2017_TTToHadronic') or (sf_list_dict[sf]=='perSamplepileup2017_TTToSemiLeptonic') or (sf_list_dict[sf]=='perSamplepileup2017_WJetsToLNu') or (sf_list_dict[sf]=='perSamplepileup2017_DYJetsToLL') or (sf_list_dict[sf]=='perSamplepileup2017_ZJetsToNuNu') or (sf_list_dict[sf]=='perSamplepileup2017_GJets') or (sf_list_dict[sf]=='perSamplepileup2017_ST_s_channel') or (sf_list_dict[sf]=='perSamplepileup2017_ST_t_channel') or (sf_list_dict[sf]=='perSamplepileup2017_ST_tW') or (sf_list_dict[sf]=='perSamplepileup2017_QCD_HT'):
         f.write(sf_list_dict[sf]+'_X_range = '+str(X_range)+'\n')
         f.write(str(sf_list_dict[sf])+"="+str(Efficiency)+'\n')
     else:
