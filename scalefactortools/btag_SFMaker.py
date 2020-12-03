@@ -4,7 +4,6 @@ import sys
 import glob
 sys.path.append('../../ExoPieProducer/ExoPieAnalyzer/')
 from Year import era
-from SampleName import samp_name
 
 def jetSF(reader, flav, pt, eta):
     maxPt = 999.99
@@ -107,8 +106,8 @@ ROOT.gROOT.ProcessLine('.L '+os.path.dirname(__file__) +'/btagSF_Files/BTagCalib
 if era == '2016':
     calib1 = ROOT.BTagCalibrationStandalone('deepcsv', os.path.dirname(
         __file__)+'/btagSF_Files/DeepCSV_2016LegacySF_V1.csv')
-    tag_eff_file = ROOT.TFile(glob.glob(os.path.dirname(
-        __file__)+'/btagSF_Files/analysis_histo_eff_v16_07-04/*'+samp_name+'*.root')[0])
+    tag_eff_file = ROOT.TFile(os.path.dirname(
+        __file__)+'/btagSF_Files/bTagEffs_2016.root')
     deepCSVLWP = 0.2217
     deepCSVMWP = 0.6321
     deepCSVTWP = 0.8953
