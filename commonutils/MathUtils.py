@@ -181,4 +181,14 @@ def InvMass(px1,py1,pz1,pe1,px2,py2,pz2,pe2):
     inv_mass = (p1+p2).M()
     return inv_mass
 
+def dijetPt(px1,py1,pz1,pe1,px2,py2,pz2,pe2):
+    p1 = TLorentzVector(px1, py1, pz1, pe1)
+    p2 = TLorentzVector(px2, py2, pz2, pe2)
+    dijet_pt = (p1+p2).Pt()
+    return dijet_pt
 
+def dijetPhi(px1,py1,pz1,pe1,px2,py2,pz2,pe2):
+    p1 = TLorentzVector(px1, py1, pz1, pe1)
+    p2 = TLorentzVector(px2, py2, pz2, pe2)
+    dijet_phi = (p1+p2).Phi()
+    return dijet_phi
