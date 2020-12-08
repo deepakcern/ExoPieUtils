@@ -192,3 +192,9 @@ def dijetPhi(px1,py1,pz1,pe1,px2,py2,pz2,pe2):
     p2 = TLorentzVector(px2, py2, pz2, pe2)
     dijet_phi = (p1+p2).Phi()
     return dijet_phi
+
+def dijetEta(px1,py1,pz1,pe1,px2,py2,pz2,pe2):
+    p1 = TLorentzVector(px1, py1, pz1, pe1)
+    p2 = TLorentzVector(px2, py2, pz2, pe2)
+    dijet_eta = (p1+p2).Eta()
+    return dijet_eta
