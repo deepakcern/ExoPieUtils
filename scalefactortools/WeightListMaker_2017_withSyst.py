@@ -7,6 +7,7 @@ import random
 import sys, optparse
 from array import array
 import math
+import ctypes
 
 ROOT.gROOT.SetBatch(True)
 
@@ -98,10 +99,10 @@ for sf in sf_list:
 
     if (sf_list_dict[sf]=='muonTrackingSFs_EfficienciesAndSF_BCDEFGH'):
         for point in range(sf.GetN()):
-            x, y = ROOT.Double(0), ROOT.Double(0)
+            x, y = ctypes.c_double(0), ctypes.c_double(0)
             sf.GetPoint(point,x,y)
-            X_range.append(x)
-            Efficiency.append(y)
+            X_range.append(x.value)
+            Efficiency.append(y.value)
 
     elif (sf_list_dict[sf]=='pileup2017histo') or (sf_list_dict[sf]=='R_metTrig_firstmethod') or (sf_list_dict[sf]=='B_metTrig_firstmethod'):
         for binx in range(1,sf.GetXaxis().GetNbins()+1):
@@ -160,10 +161,10 @@ for sf in sf_list:
     values=[]
     if (sf_list_dict[sf]=='muonTrackingSFs_EfficienciesAndSF_BCDEFGH'):
         for point in range(sf.GetN()):
-            x, y = ROOT.Double(0), ROOT.Double(0)
+            x, y = ctypes.c_double(0), ctypes.c_double(0)
             sf.GetPoint(point,x,y)
-            X_range.append(x)
-            Efficiency.append(y+sf.GetErrorYhigh(point))
+            X_range.append(x.value)
+            Efficiency.append(y.value+sf.GetErrorYhigh(point))
 
     elif (sf_list_dict[sf]=='R_metTrig_firstmethod'):
         for binx in range(1,sf.GetXaxis().GetNbins()+1):
@@ -253,10 +254,10 @@ for sf in sf_list:
 
     if (sf_list_dict[sf]=='muonTrackingSFs_EfficienciesAndSF_BCDEFGH'):
         for point in range(sf.GetN()):
-            x, y = ROOT.Double(0), ROOT.Double(0)
+            x, y = ctypes.c_double(0), ctypes.c_double(0)
             sf.GetPoint(point,x,y)
-            X_range.append(x)
-            Efficiency.append(y-sf.GetErrorYlow(point))
+            X_range.append(x.value)
+            Efficiency.append(y.value-sf.GetErrorYlow(point))
 
     elif (sf_list_dict[sf]=='R_metTrig_firstmethod'):
         for binx in range(1,sf.GetXaxis().GetNbins()+1):
