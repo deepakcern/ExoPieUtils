@@ -52,9 +52,9 @@ def ele_weight(pt,eta,ID='None'):
             Reco_w_DOWN = SFR.getEleRecoHighSF(pt,eta)[2]
     elif ID =='None':
         print ('Please select which ID electron you want(L or T)')
-    weight = ID_w*Reco_w
-    weight_UP = ID_w_UP*Reco_w_UP
-    weight_DOWN = ID_w_DOWN*Reco_w_DOWN
+    weight = [ID_w*Reco_w, ID_w, Reco_w]
+    weight_UP = [ID_w_UP*Reco_w_UP, ID_w_UP, Reco_w_UP]
+    weight_DOWN = [ID_w_DOWN*Reco_w_DOWN, ID_w_DOWN, Reco_w_DOWN]
     return weight,weight_UP,weight_DOWN
 
 def mutrig_weight(pt,eta):
@@ -85,9 +85,9 @@ def mu_weight(pt,eta,ID='None'):
         print ('Please select which ID muon you want(L or T)')
     if era=='2016':
         tracking_w,tracking_w_UP,tracking_w_DOWN = SFR.getMuTrackingSF(eta)
-    weight = ID_ISO_w*tracking_w
-    weight_UP = ID_ISO_w_UP*tracking_w_UP
-    weight_DOWN = ID_ISO_w_DOWN*tracking_w_DOWN
+    weight = [ID_ISO_w*tracking_w, ID_ISO_w, tracking_w]
+    weight_UP = [ID_ISO_w_UP*tracking_w_UP, ID_ISO_w_UP, tracking_w_UP]
+    weight_DOWN = [ID_ISO_w_DOWN*tracking_w_DOWN, ID_ISO_w_DOWN, tracking_w_DOWN]
     return weight,weight_UP,weight_DOWN
 
 def getMETtrig_First(met,cat):
@@ -140,8 +140,10 @@ def getFacDownZ(pt):
 def getTopPtReWgt(pt1, pt2):
     if pt1 >= 500.0: pt1 = 500.0
     if pt2 >= 500.0: pt2 = 500.0
-    w1 = rt.TMath.Exp(0.0615 - 0.0005*pt1);
-    w2 = rt.TMath.Exp(0.0615 - 0.0005*pt2);
+    # w1 = rt.TMath.Exp(0.0615 - 0.0005*pt1)
+    # w2 = rt.TMath.Exp(0.0615 - 0.0005*pt2)
+    w1 = 0.103*(rt.TMath.Exp(-0.0118*pt1)) - 0.000134*pt1 + 0.973
+    w2 = 0.103*(rt.TMath.Exp(-0.0118*pt2)) - 0.000134*pt2 + 0.973
     k2 = rt.TMath.Sqrt(w1*w2)
     return k2,1.5*k2,0.5*k2
 
