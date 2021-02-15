@@ -93,14 +93,14 @@ for sf in sf_list:
     Eta_rangeDone=False;pT_rangeDone=False;X_rangeDone=False
     X_range =[];Efficiency =[]
     values=[]
-    if (sf_list_dict[sf]=='muonTrackingSFs_EfficienciesAndSF_ABCD') or (sf_list_dict[sf]=='R_metTrig_firstmethod') or (sf_list_dict[sf]=='B_metTrig_firstmethod'):
+    if (sf_list_dict[sf]=='muonTrackingSFs_EfficienciesAndSF_ABCD'):
         for point in range(sf.GetN()):
             x, y = ROOT.Double(0), ROOT.Double(0)
             sf.GetPoint(point,x,y)
             X_range.append(x)
             Efficiency.append(y)
 
-    elif (sf_list_dict[sf]=='pileup2018histo'):
+    elif (sf_list_dict[sf]=='pileup2018histo') or (sf_list_dict[sf]=='R_metTrig_firstmethod') or (sf_list_dict[sf]=='B_metTrig_firstmethod'):
         for binx in range(1,sf.GetXaxis().GetNbins()+1):
             xlow  = sf.GetXaxis().GetBinLowEdge(binx)
             xhigh = sf.GetXaxis().GetBinUpEdge(binx)
@@ -161,20 +161,35 @@ for sf in sf_list:
             Efficiency.append(y+sf.GetErrorYhigh(point))
 
     elif (sf_list_dict[sf]=='R_metTrig_firstmethod'):
-        for point in range(sf.GetN()):
-            x, y = ROOT.Double(0), ROOT.Double(0)
-            x1, y1 = ROOT.Double(0), ROOT.Double(0)
-            sf.GetPoint(point,x,y); R_metTrig_secondmethod.GetPoint(point,x1,y1)
-            X_range.append(x)
-            Efficiency.append(y+abs(y-y1))
+        for binx in range(1,sf.GetXaxis().GetNbins()+1):
+            xlow  = sf.GetXaxis().GetBinLowEdge(binx)
+            xhigh = sf.GetXaxis().GetBinUpEdge(binx)
+            if not X_rangeDone:
+                if binx == sf.GetXaxis().GetNbins():
+                    Efficiency.append(sf.GetBinContent(sf.FindBin(xlow))+abs(sf.GetBinContent(sf.FindBin(xlow))-R_metTrig_secondmethod.GetBinContent(sf.FindBin(xlow))))
+                    Efficiency.append(sf.GetBinContent(sf.FindBin(xhigh))+abs(sf.GetBinContent(sf.FindBin(xlow))-R_metTrig_secondmethod.GetBinContent(sf.FindBin(xlow))))
+                    X_range.append(xlow)
+                    X_range.append(xhigh)
+                    X_rangeDone=True
+                else:
+                    Efficiency.append(sf.GetBinContent(sf.FindBin(xlow))+abs(sf.GetBinContent(sf.FindBin(xlow))-R_metTrig_secondmethod.GetBinContent(sf.FindBin(xlow))))
+                    X_range.append(xlow)
 
     elif (sf_list_dict[sf]=='B_metTrig_firstmethod'):
-        for point in range(sf.GetN()):
-            x, y = ROOT.Double(0), ROOT.Double(0)
-            x1, y1 = ROOT.Double(0), ROOT.Double(0)
-            sf.GetPoint(point,x,y); B_metTrig_secondmethod.GetPoint(point,x1,y1)
-            X_range.append(x)
-            Efficiency.append(y+abs(y-y1))
+        for binx in range(1,sf.GetXaxis().GetNbins()+1):
+            xlow  = sf.GetXaxis().GetBinLowEdge(binx)
+            xhigh = sf.GetXaxis().GetBinUpEdge(binx)
+            if not X_rangeDone:
+                if binx == sf.GetXaxis().GetNbins():
+                    Efficiency.append(sf.GetBinContent(sf.FindBin(xlow))+abs(sf.GetBinContent(sf.FindBin(xlow))-B_metTrig_secondmethod.GetBinContent(sf.FindBin(xlow))))
+                    Efficiency.append(sf.GetBinContent(sf.FindBin(xhigh))+abs(sf.GetBinContent(sf.FindBin(xlow))-B_metTrig_secondmethod.GetBinContent(sf.FindBin(xlow))))
+                    X_range.append(xlow)
+                    X_range.append(xhigh)
+                    X_rangeDone=True
+                else:
+                    Efficiency.append(sf.GetBinContent(sf.FindBin(xlow))+abs(sf.GetBinContent(sf.FindBin(xlow))-B_metTrig_secondmethod.GetBinContent(sf.FindBin(xlow))))
+                    X_range.append(xlow)
+
 
     elif (sf_list_dict[sf]=='pileup2018histo'):
         for binx in range(1,pileup2018histo_up.GetXaxis().GetNbins()+1):
@@ -237,20 +252,35 @@ for sf in sf_list:
             Efficiency.append(y-sf.GetErrorYlow(point))
 
     elif (sf_list_dict[sf]=='R_metTrig_firstmethod'):
-        for point in range(sf.GetN()):
-            x, y = ROOT.Double(0), ROOT.Double(0)
-            x1, y1 = ROOT.Double(0), ROOT.Double(0)
-            sf.GetPoint(point,x,y); R_metTrig_secondmethod.GetPoint(point,x1,y1)
-            X_range.append(x)
-            Efficiency.append(y-abs(y-y1))
+        for binx in range(1,sf.GetXaxis().GetNbins()+1):
+            xlow  = sf.GetXaxis().GetBinLowEdge(binx)
+            xhigh = sf.GetXaxis().GetBinUpEdge(binx)
+            if not X_rangeDone:
+                if binx == sf.GetXaxis().GetNbins():
+                    Efficiency.append(sf.GetBinContent(sf.FindBin(xlow))-abs(sf.GetBinContent(sf.FindBin(xlow))-R_metTrig_secondmethod.GetBinContent(sf.FindBin(xlow))))
+                    Efficiency.append(sf.GetBinContent(sf.FindBin(xhigh))-abs(sf.GetBinContent(sf.FindBin(xlow))-R_metTrig_secondmethod.GetBinContent(sf.FindBin(xlow))))
+                    X_range.append(xlow)
+                    X_range.append(xhigh)
+                    X_rangeDone=True
+                else:
+                    Efficiency.append(sf.GetBinContent(sf.FindBin(xlow))-abs(sf.GetBinContent(sf.FindBin(xlow))-R_metTrig_secondmethod.GetBinContent(sf.FindBin(xlow))))
+                    X_range.append(xlow)
 
     elif (sf_list_dict[sf]=='B_metTrig_firstmethod'):
-        for point in range(sf.GetN()):
-            x, y = ROOT.Double(0), ROOT.Double(0)
-            x1, y1 = ROOT.Double(0), ROOT.Double(0)
-            sf.GetPoint(point,x,y); B_metTrig_secondmethod.GetPoint(point,x1,y1)
-            X_range.append(x)
-            Efficiency.append(y-abs(y-y1))
+        for binx in range(1,sf.GetXaxis().GetNbins()+1):
+            xlow  = sf.GetXaxis().GetBinLowEdge(binx)
+            xhigh = sf.GetXaxis().GetBinUpEdge(binx)
+            if not X_rangeDone:
+                if binx == sf.GetXaxis().GetNbins():
+                    Efficiency.append(sf.GetBinContent(sf.FindBin(xlow))-abs(sf.GetBinContent(sf.FindBin(xlow))-B_metTrig_secondmethod.GetBinContent(sf.FindBin(xlow))))
+                    Efficiency.append(sf.GetBinContent(sf.FindBin(xhigh))-abs(sf.GetBinContent(sf.FindBin(xlow))-B_metTrig_secondmethod.GetBinContent(sf.FindBin(xlow))))
+                    X_range.append(xlow)
+                    X_range.append(xhigh)
+                    X_rangeDone=True
+                else:
+                    Efficiency.append(sf.GetBinContent(sf.FindBin(xlow))-abs(sf.GetBinContent(sf.FindBin(xlow))-B_metTrig_secondmethod.GetBinContent(sf.FindBin(xlow))))
+                    X_range.append(xlow)
+
 
     elif (sf_list_dict[sf]=='pileup2018histo'):
         for binx in range(1,pileup2018histo_down.GetXaxis().GetNbins()+1):
