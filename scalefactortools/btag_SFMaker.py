@@ -172,4 +172,4 @@ def btag_weight(nJets, ptList, etalist, flavlist, depCSVlist, WP, index=False):
             fakebWgt *= jweight
             fakebWgt_up *= jweight_up
             fakebWgt_down *= jweight_down
-    return [bWgt*fakebWgt, bWgt, fakebWgt], [bWgt_up*fakebWgt_up, bWgt_up, fakebWgt_up], [bWgt_down*fakebWgt_down, bWgt_down, fakebWgt_down]
+    return [bWgt, fakebWgt], [bWgt_up, fakebWgt_up], [bWgt_down, fakebWgt_down]
