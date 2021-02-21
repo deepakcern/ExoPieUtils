@@ -6,6 +6,7 @@ import random
 import sys, optparse
 from array import array
 import math
+import ctypes
 
 ROOT.gROOT.SetBatch(True)
 
@@ -95,10 +96,10 @@ for sf in sf_list:
     values=[]
     if (sf_list_dict[sf]=='muonTrackingSFs_EfficienciesAndSF_ABCD'):
         for point in range(sf.GetN()):
-            x, y = ROOT.Double(0), ROOT.Double(0)
+            x, y = ctypes.c_double(0), ctypes.c_double(0)
             sf.GetPoint(point,x,y)
-            X_range.append(x)
-            Efficiency.append(y)
+            X_range.append(x.value)
+            Efficiency.append(y.value)
 
     elif (sf_list_dict[sf]=='pileup2018histo') or (sf_list_dict[sf]=='R_metTrig_firstmethod') or (sf_list_dict[sf]=='B_metTrig_firstmethod'):
         for binx in range(1,sf.GetXaxis().GetNbins()+1):
@@ -155,12 +156,13 @@ for sf in sf_list:
     values=[]
     if (sf_list_dict[sf]=='muonTrackingSFs_EfficienciesAndSF_ABCD'):
         for point in range(sf.GetN()):
-            x, y = ROOT.Double(0), ROOT.Double(0)
+            x, y = ctypes.c_double(0), ctypes.c_double(0)
             sf.GetPoint(point,x,y)
-            X_range.append(x)
-            Efficiency.append(y+sf.GetErrorYhigh(point))
+            X_range.append(x.value)
+            Efficiency.append(y.value+sf.GetErrorYhigh(point))
 
     elif (sf_list_dict[sf]=='R_metTrig_firstmethod'):
+<<<<<<< HEAD
         for binx in range(1,sf.GetXaxis().GetNbins()+1):
             xlow  = sf.GetXaxis().GetBinLowEdge(binx)
             xhigh = sf.GetXaxis().GetBinUpEdge(binx)
@@ -190,6 +192,22 @@ for sf in sf_list:
                     Efficiency.append(sf.GetBinContent(sf.FindBin(xlow))+abs(sf.GetBinContent(sf.FindBin(xlow))-B_metTrig_secondmethod.GetBinContent(sf.FindBin(xlow))))
                     X_range.append(xlow)
 
+=======
+        for point in range(sf.GetN()):
+            x, y = ctypes.c_double(0), ctypes.c_double(0)
+            x1, y1 = ctypes.c_double(0), ctypes.c_double(0)
+            sf.GetPoint(point,x,y); R_metTrig_secondmethod.GetPoint(point,x1,y1)
+            X_range.append(x.value)
+            Efficiency.append(y.value+abs(y.value-y1.value))
+
+    elif (sf_list_dict[sf]=='B_metTrig_firstmethod'):
+        for point in range(sf.GetN()):
+            x, y = ctypes.c_double(0), ctypes.c_double(0)
+            x1, y1 = ctypes.c_double(0), ctypes.c_double(0)
+            sf.GetPoint(point,x,y); B_metTrig_secondmethod.GetPoint(point,x1,y1)
+            X_range.append(x.value)
+            Efficiency.append(y.value+abs(y.value-y1.value))
+>>>>>>> upstream/test_systematics
 
     elif (sf_list_dict[sf]=='pileup2018histo'):
         for binx in range(1,pileup2018histo_up.GetXaxis().GetNbins()+1):
@@ -246,12 +264,13 @@ for sf in sf_list:
     values=[]
     if (sf_list_dict[sf]=='muonTrackingSFs_EfficienciesAndSF_ABCD'):
         for point in range(sf.GetN()):
-            x, y = ROOT.Double(0), ROOT.Double(0)
+            x, y = ctypes.c_double(0), ctypes.c_double(0)
             sf.GetPoint(point,x,y)
-            X_range.append(x)
-            Efficiency.append(y-sf.GetErrorYlow(point))
+            X_range.append(x.value)
+            Efficiency.append(y.value-sf.GetErrorYlow(point))
 
     elif (sf_list_dict[sf]=='R_metTrig_firstmethod'):
+<<<<<<< HEAD
         for binx in range(1,sf.GetXaxis().GetNbins()+1):
             xlow  = sf.GetXaxis().GetBinLowEdge(binx)
             xhigh = sf.GetXaxis().GetBinUpEdge(binx)
@@ -281,6 +300,22 @@ for sf in sf_list:
                     Efficiency.append(sf.GetBinContent(sf.FindBin(xlow))-abs(sf.GetBinContent(sf.FindBin(xlow))-B_metTrig_secondmethod.GetBinContent(sf.FindBin(xlow))))
                     X_range.append(xlow)
 
+=======
+        for point in range(sf.GetN()):
+            x, y = ctypes.c_double(0), ctypes.c_double(0)
+            x1, y1 = ctypes.c_double(0), ctypes.c_double(0)
+            sf.GetPoint(point,x,y); R_metTrig_secondmethod.GetPoint(point,x1,y1)
+            X_range.append(x.value)
+            Efficiency.append(y.value-abs(y.value-y1.value))
+
+    elif (sf_list_dict[sf]=='B_metTrig_firstmethod'):
+        for point in range(sf.GetN()):
+            x, y = ctypes.c_double(0), ctypes.c_double(0)
+            x1, y1 = ctypes.c_double(0), ctypes.c_double(0)
+            sf.GetPoint(point,x,y); B_metTrig_secondmethod.GetPoint(point,x1,y1)
+            X_range.append(x.value)
+            Efficiency.append(y.value-abs(y.value-y1.value))
+>>>>>>> upstream/test_systematics
 
     elif (sf_list_dict[sf]=='pileup2018histo'):
         for binx in range(1,pileup2018histo_down.GetXaxis().GetNbins()+1):
