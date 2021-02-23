@@ -164,12 +164,14 @@ def btag_weight(nJets, ptList, etalist, flavlist, depCSVlist, WP, index=False):
     for i in runOn:
         jweight, jweight_up, jweight_down = getJetWeight(
             ptList[i], etalist[i], flavlist[i], depCSVlist[i], WP, era)
-        if depCSVlist[i] > deepcsvWP:
-            bWgt *= jweight
-            bWgt_up *= jweight_up
-            bWgt_down *= jweight_down
-        else:
+        if depCSVlist[i] > deepcsvWP and flavlist[i] != 5:
             fakebWgt *= jweight
             fakebWgt_up *= jweight_up
             fakebWgt_down *= jweight_down
+        else:
+            bWgt *= jweight
+            bWgt_up *= jweight_up
+            bWgt_down *= jweight_down
     return [bWgt, fakebWgt], [bWgt_up, fakebWgt_up], [bWgt_down, fakebWgt_down]
+
+
