@@ -52,9 +52,9 @@ def ele_weight(pt,eta,ID='None'):
             Reco_w_DOWN = SFR.getEleRecoHighSF(pt,eta)[2]
     elif ID =='None':
         print ('Please select which ID electron you want(L or T)')
-    weight = ID_w*Reco_w
-    weight_UP = ID_w_UP*Reco_w_UP
-    weight_DOWN = ID_w_DOWN*Reco_w_DOWN
+    weight = [ID_w*Reco_w, ID_w, Reco_w]
+    weight_UP = [ID_w_UP*Reco_w_UP, ID_w_UP, Reco_w_UP]
+    weight_DOWN = [ID_w_DOWN*Reco_w_DOWN, ID_w_DOWN, Reco_w_DOWN]
     return weight,weight_UP,weight_DOWN
 
 def mutrig_weight(pt,eta):
@@ -66,28 +66,30 @@ def mutrig_weight(pt,eta):
     return trig_w,trig_w_UP,trig_w_DOWN
 
 def mu_weight(pt,eta,ID='None'):
-    ID_ISO_w=1.0; tracking_w = 1.0
-    ID_ISO_w_UP=1.0; tracking_w_UP = 1.0
-    ID_ISO_w_DOWN=1.0; tracking_w_DOWN   = 1.0
+    ID_w = 1.0; ISO_w=1.0;tracking_w = 1.0
+    ID_w_UP =1.0; ISO_w_UP=1.0 ;tracking_w_UP = 1.0
+    ID_w_DOWN =1.0; ISO_w_DOWN=1.0 ;tracking_w_DOWN   = 1.0
     if ID=="T" and pt>20.0:
-        ID_ISO_w = SFR.getMuTight_ISOSF(pt,eta)[0]*SFR.getMuTight_IDSF(pt,eta)[0]
-        ID_ISO_w_UP = SFR.getMuTight_ISOSF(pt,eta)[1]*SFR.getMuTight_IDSF(pt,eta)[1]
-        ID_ISO_w_DOWN = SFR.getMuTight_ISOSF(pt,eta)[2]*SFR.getMuTight_IDSF(pt,eta)[2]
+        ID_w, ID_w_UP, ID_w_DOWN     = SFR.getMuTight_IDSF(pt,eta)
+        ISO_w, ISO_w_UP, ISO_w_DOWN  = SFR.getMuTight_ISOSF(pt,eta)
+        
     if ID=="L" and pt>20.0:
-        ID_ISO_w = SFR.getMuLoose_ISOSF(pt,eta)[0]*SFR.getMuloose_IDSF(pt,eta)[0]
-        ID_ISO_w_UP = SFR.getMuLoose_ISOSF(pt,eta)[1]*SFR.getMuloose_IDSF(pt,eta)[1]
-        ID_ISO_w_DOWN = SFR.getMuLoose_ISOSF(pt,eta)[2]*SFR.getMuloose_IDSF(pt,eta)[2]
+        ID_w, ID_w_UP, ID_w_DOWN     = SFR.getMuloose_IDSF(pt,eta)
+        ISO_w, ISO_w_UP, ISO_w_DOWN  = SFR.getMuLoose_ISOSF(pt,eta)
+        #ID_ISO_w_UP = SFR.getMuLoose_ISOSF(pt,eta)[1]*SFR.getMuloose_IDSF(pt,eta)[1]
+        #ID_ISO_w_DOWN = SFR.getMuLoose_ISOSF(pt,eta)[2]*SFR.getMuloose_IDSF(pt,eta)[2]
     if pt<=20.0 and ID=="L":
-        ID_ISO_w = SFR.getMuLoose_lowpT_IDSF(pt,eta)[0]*SFR.getMuLoose_ISOSF(pt,eta)[0]
-        ID_ISO_w_UP = SFR.getMuLoose_lowpT_IDSF(pt,eta)[1]*SFR.getMuLoose_ISOSF(pt,eta)[1]
-        ID_ISO_w_DOWN = SFR.getMuLoose_lowpT_IDSF(pt,eta)[2]*SFR.getMuLoose_ISOSF(pt,eta)[2]
+        ID_w, ID_w_UP, ID_w_DOWN     = SFR.getMuLoose_ISOSF(pt,eta)
+        ISO_w, ISO_w_UP, ISO_w_DOWN  = SFR.getMuLoose_lowpT_IDSF(pt,eta)
+        #ID_ISO_w_UP = SFR.getMuLoose_lowpT_IDSF(pt,eta)[1]*SFR.getMuLoose_ISOSF(pt,eta)[1]
+        #ID_ISO_w_DOWN = SFR.getMuLoose_lowpT_IDSF(pt,eta)[2]*SFR.getMuLoose_ISOSF(pt,eta)[2]
     elif ID =='None':
         print ('Please select which ID muon you want(L or T)')
     if era=='2016':
         tracking_w,tracking_w_UP,tracking_w_DOWN = SFR.getMuTrackingSF(eta)
-    weight = ID_ISO_w*tracking_w
-    weight_UP = ID_ISO_w_UP*tracking_w_UP
-    weight_DOWN = ID_ISO_w_DOWN*tracking_w_DOWN
+    weight = [ID_w*ISO_w*tracking_w, ID_w, ISO_w, tracking_w]
+    weight_UP = [ID_w_UP*ISO_w_UP*tracking_w_UP, ID_w_UP, ISO_w_UP, tracking_w_UP]
+    weight_DOWN = [ID_w_DOWN*ISO_w_DOWN*tracking_w_DOWN, ID_w_DOWN, ISO_w_DOWN, tracking_w_DOWN]
     return weight,weight_UP,weight_DOWN
 
 def getMETtrig_First(met,cat):
@@ -100,9 +102,6 @@ def getMETtrig_First(met,cat):
 
 def puweight(pu):
     return SFR.puweight(pu)
-
-def PerSamlpuweight(pu,sampleName=''):
-    return SFR.PerSamlpuweight(pu,sampleName)
 
 def getEWKW(pt):
     return ewk.getEWKW(pt)
@@ -141,8 +140,12 @@ def getFacDownZ(pt):
     return ewk.getFacDownZ(pt)
 
 def getTopPtReWgt(pt1, pt2):
-    w1 = rt.TMath.Exp(0.0615 - 0.0005*pt1);
-    w2 = rt.TMath.Exp(0.0615 - 0.0005*pt2);
+    if pt1 >= 500.0: pt1 = 500.0
+    if pt2 >= 500.0: pt2 = 500.0
+    # w1 = rt.TMath.Exp(0.0615 - 0.0005*pt1)
+    # w2 = rt.TMath.Exp(0.0615 - 0.0005*pt2)
+    w1 = 0.103*(rt.TMath.Exp(-0.0118*pt1)) - 0.000134*pt1 + 0.973
+    w2 = 0.103*(rt.TMath.Exp(-0.0118*pt2)) - 0.000134*pt2 + 0.973
     k2 = rt.TMath.Sqrt(w1*w2)
     return k2,1.5*k2,0.5*k2
 
