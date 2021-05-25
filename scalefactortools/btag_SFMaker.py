@@ -134,11 +134,9 @@ c_med_eff = tag_eff_file.Get('efficiency_ctag_mwp')
 udsg_med_eff = tag_eff_file.Get('efficiency_lighttag_mwp')
 
 #============= for LWP ============================
-
 b_loose_eff = tag_eff_file.Get('efficiency_btag_lwp')
 c_loose_eff = tag_eff_file.Get('efficiency_ctag_lwp')
 udsg_loose_eff = tag_eff_file.Get('efficiency_lighttag_lwp')
-
 
 othersys = ROOT.std.vector('string')()
 othersys.push_back('down')
@@ -154,18 +152,26 @@ reader1.load(calib1, 1,  "comb")
 reader1.load(calib1, 2,  "incl")
 
 def btag_weight(nJets, ptList, etalist, flavlist, depCSVlist, WP, index=False):
-    btagweight = 1.0
-    btagweight_up = 1.0
-    btagweight_down = 1.0
+    bWgt = bWgt_up = bWgt_down = 1.0
+    fakebWgt = fakebWgt_up  = fakebWgt_down = 1.0
     if index:
         runOn = nJets
     if not index:
         runOn = range(nJets)
     # jet weight calculation
+    if WP == 'MWP': deepcsvWP = deepCSVMWP
+    else: deepcsvWP = deepCSVLWP
     for i in runOn:
-        jetweight, jetweight_up, jetweight_down = getJetWeight(
+        jweight, jweight_up, jweight_down = getJetWeight(
             ptList[i], etalist[i], flavlist[i], depCSVlist[i], WP, era)
-        btagweight *= jetweight
-        btagweight_up *= jetweight_up
-        btagweight_down *= jetweight_down
-    return btagweight, btagweight_up, btagweight_down
+        if depCSVlist[i] > deepcsvWP and flavlist[i] != 5:
+            fakebWgt *= jweight
+            fakebWgt_up *= jweight_up
+            fakebWgt_down *= jweight_down
+        else:
+            bWgt *= jweight
+            bWgt_up *= jweight_up
+            bWgt_down *= jweight_down
+    return [bWgt, fakebWgt], [bWgt_up, fakebWgt_up], [bWgt_down, fakebWgt_down]
+
+
